@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yuzawa Visitor Services</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --card-bg: #1e293b;
+      --border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --btn-bg: #273549;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      padding: 16px;
+      line-height: 1.5;
+    }
+    .container { max-width: 620px; margin: 0 auto; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 12px;
+    }
+    h1 { font-size: 1.25rem; font-weight: 700; color: var(--accent); }
+    select {
+      background: var(--card-bg);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 6px 12px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      outline: none;
+    }
+    .section-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+      margin-bottom: 20px;
+    }
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #fff;
+    }
+    .action-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .action-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--btn-bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 16px;
+      border-radius: 10px;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .action-btn:active {
+      background: var(--accent-hover);
+      border-color: var(--accent);
+    }
+    .btn-main {
+      font-weight: 600;
+      font-size: 0.95rem;
+    }
+    .btn-desc {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+    .btn-icon {
+      font-size: 1.25rem;
+      margin-left: 10px;
+      color: var(--accent);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin: 10px 0;
+    }
+    td, th {
+      padding: 8px 6px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+    th { color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; }
+    .fare { text-align: right; font-weight: 700; color: var(--accent); }
+    .footer-note {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+      margin-top: 30px;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <header>
+    <h1 id="pageTitle">ℹ️ Visitor Services</h1>
+    <select id="langSelect">
+      <option value="en">English</option>
+      <option value="jp">日本語</option>
+      <option value="zh_tr">繁體中文</option>
+      <option value="zh_si">简体中文</option>
+      <option value="ko">한국어</option>
+    </select>
+  </header>
+
+  <!-- 1. Kiyotsu & Local Tours -->
+  <div class="section-card" id="tours">
+    <div class="section-title">
+      <span>🏞️</span>
+      <span data-i18n="sec_kiyotsu_title">Kiyotsu Gorge & Activities</span>
+    </div>
+    <div class="action-grid">
+      <a class="action-btn" href="https://nakasato-kiyotsu.com/" target="_blank" rel="noopener">
+        <div>
+          <div class="btn-main" data-i18n="btn_kiyotsu_tix">Official Admission & Reservations</div>
+          <div class="btn-desc" data-i18n="desc_kiyotsu_tix">Advance timed-entry reservation portal</div>
+        </div>
+        <span class="btn-icon">↗</span>
+      </a>
+      <a class="action-btn" href="./?mode=public&route=KIYOTSUKYO&dir=INBOUND">
+        <div>
+          <div class="btn-main" data-i18n="btn_kiyotsu_bus">Return Bus Timetable</div>
+          <div class="btn-desc" data-i18n="desc_kiyotsu_bus">Public bus departures from Kiyotsukyo to Station</div>
+        </div>
+        <span class="btn-icon">🚍</span>
+      </a>
+    </div>
+
+    <!-- Rental Bikes Table -->
+    <div style="margin-top: 16px;">
+      <div style="font-size: 0.85rem; font-weight: 600; color: var(--text-muted);" data-i18n="lbl_bike_rates">
+        🚲 Rental E-Bikes (Snow Country Tourism Center, West Exit)
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th data-i18n="th_plan">Duration</th>
+            <th style="text-align: right;" data-i18n="th_fee">Rate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td data-i18n="bike_2h">Up to 2 Hours</td><td class="fare">¥1,000</td></tr>
+          <tr><td data-i18n="bike_4h">Up to 4 Hours</td><td class="fare">¥1,500</td></tr>
+          <tr><td data-i18n="bike_1d">1 Day (until 17:00)</td><td class="fare">¥2,500</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 2. Luggage & Station Convenience -->
+  <div class="section-card" id="luggage">
+    <div class="section-title">
+      <span>🧳</span>
+      <span data-i18n="sec_luggage_title">Luggage & Station Facilities</span>
+    </div>
+    <div class="action-grid">
+      <a class="action-btn" href="https://www.jreast.co.jp/e/stations/e285.html" target="_blank" rel="noopener">
+        <div>
+          <div class="btn-main" data-i18n="btn_lockers">Coin Locker & Station Map</div>
+          <div class="btn-desc" data-i18n="desc_lockers">JR East official 1F/2F floor plan</div>
+        </div>
+        <span class="btn-icon">↗</span>
+      </a>
+      <a class="action-btn" href="https://chargespot.jp/" target="_blank" rel="noopener">
+        <div>
+          <div class="btn-main" data-i18n="btn_battery">Mobile Battery Rental (ChargeSPOT)</div>
+          <div class="btn-desc" data-i18n="desc_battery">Find available power bank stations nearby</div>
+        </div>
+        <span class="btn-icon">↗</span>
+      </a>
+      <a class="action-btn" href="https://yukigunijapan.com/" target="_blank" rel="noopener">
+        <div>
+          <div class="btn-main" data-i18n="btn_cowork">Coworking Space & Free WiFi</div>
+          <div class="btn-desc" data-i18n="desc_cowork">Yukiguni Tourism Center lounge facilities</div>
+        </div>
+        <span class="btn-icon">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- 3. Taxi Rates -->
+  <div class="section-card" id="taxi">
+    <div class="section-title">
+      <span>🚕</span>
+      <span data-i18n="sec_taxi_title">Estimated Taxi Fares (Station East/West Exit)</span>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th data-i18n="th_dest">Destination</th>
+          <th style="text-align: right;" data-i18n="th_fare">Approx. Fare</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td data-i18n="tx_gala">GALA / NASPA / Yuzawa Kogen</td><td class="fare">~¥1,000 – ¥1,400</td></tr>
+        <tr><td data-i18n="tx_ishiuchi">Ishiuchi Maruyama / Iwappara</td><td class="fare">~¥2,000 – ¥2,600</td></tr>
+        <tr><td data-i18n="tx_kagura">Kagura Mitsumata Ropeway</td><td class="fare">~¥3,500 – ¥4,200</td></tr>
+        <tr><td data-i18n="tx_kiyotsu">Kiyotsukyo Gorge Entrance</td><td class="fare">~¥6,000 – ¥7,000</td></tr>
+        <tr><td data-i18n="tx_naeba">Naeba Prince Hotel</td><td class="fare">~¥8,500 – ¥10,000</td></tr>
+      </tbody>
+    </table>
+    <div style="font-size:0.75rem; color:var(--text-muted); margin-top:6px;" data-i18n="taxi_note">
+      * Approximate metered fares. Fares may vary with winter road delays and night surcharges.
+    </div>
+  </div>
+
+  <!-- 4. Onsen & Local Foods -->
+  <div class="section-card" id="onsen">
+    <div class="section-title">
+      <span>♨️</span>
+      <span data-i18n="sec_onsen_title">Onsen & Local Foods</span>
+    </div>
+    <div class="action-grid">
+      <a class="action-btn" href="https://maps.google.com/?q=Echigo+Yuzawa+day+use+onsen" target="_blank" rel="noopener">
+        <div>
+          <div class="btn-main" data-i18n="btn_onsen_map">Walking-Distance Day Onsens</div>
+          <div class="btn-desc" data-i18n="desc_onsen_map">Komako no Yu, Yuzawa Kogen spa, public baths</div>
+        </div>
+        <span class="btn-icon">📍</span>
+      </a>
+      <a class="action-btn" href="https://www.e-yuzawa.gr.jp/" target="_blank" rel="noopener">
+        <div>
+          <div class="btn-main" data-i18n="btn_dining">Local Dining & Sake Guide</div>
+          <div class="btn-desc" data-i18n="desc_dining">Official Yuzawa Onsen Tourism dining directory</div>
+        </div>
+        <span class="btn-icon">↗</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="footer-note" data-i18n="footer_back">
+    <a href="./" style="color:var(--accent); text-decoration:none;">← Back to Bus Timetables</a>
+  </div>
+</div>
+
+<script>
+  const I18N = {
+    title: {
+      en: "ℹ️ Visitor Services",
+      jp: "ℹ️ 本日のお問い合わせ・ご案内",
+      zh_tr: "ℹ️ 旅客服務與旅遊指南",
+      zh_si: "ℹ️ 旅客服务与旅游指南",
+      ko: "ℹ️ 관광 안내 및 편의시설"
+    },
+    sec_kiyotsu_title: {
+      en: "Kiyotsu Gorge & Activities",
+      jp: "清津峡・アクティビティ",
+      zh_tr: "清津峽・戶外活動",
+      zh_si: "清津峡・户外活动",
+      ko: "키요츠쿄 협곡・액티비티"
+    },
+    btn_kiyotsu_tix: {
+      en: "Official Admission & Reservations",
+      jp: "清津峡 事前予約・入場券枠",
+      zh_tr: "清津峽 官方預約與門票",
+      zh_si: "清津峡 官方预约与门票",
+      ko: "키요츠쿄 공식 예약 및 입장권"
+    },
+    desc_kiyotsu_tix: {
+      en: "Advance timed-entry reservation portal",
+      jp: "混雑期の当日・事前入場枠の確認",
+      zh_tr: "熱門時段入場梯次預約與確認",
+      zh_si: "热门时段入场批次预约与确认",
+      ko: "성수기 사전 예약 및 티켓 예매"
+    },
+    btn_kiyotsu_bus: {
+      en: "Return Bus Timetable",
+      jp: "復路 直行・路線バス時刻表",
+      zh_tr: "回程公車時刻表",
+      zh_si: "回程公交时刻表",
+      ko: "복귀 버스 시간표"
+    },
+    desc_kiyotsu_bus: {
+      en: "Public bus departures from Kiyotsukyo to Station",
+      jp: "清津峡入口から越後湯沢駅行きの運行情報",
+      zh_tr: "清津峽入口往越後湯澤站班次",
+      zh_si: "清津峡入口往越后汤泽站班次",
+      ko: "키요츠쿄 입구에서 유자와역행 버스"
+    },
+    lbl_bike_rates: {
+      en: "🚲 Rental E-Bikes (Snow Country Tourism Center, West Exit)",
+      jp: "🚲 レンタサイクル料金（雪国観光舎 西口）",
+      zh_tr: "🚲 電動自行車租借費率（西口 雪國觀光舍）",
+      zh_si: "🚲 电动自行车租借费率（西口 雪国观光舍）",
+      ko: "🚲 전기 자전거 대여 요금 (서쪽 출구 유키구니 관광사)"
+    },
+    th_plan: { en: "Duration", jp: "利用区分", zh_tr: "方案", zh_si: "方案", ko: "이용 시간" },
+    th_fee: { en: "Rate", jp: "料金", zh_tr: "費用", zh_si: "费用", ko: "요금" },
+    bike_2h: { en: "Up to 2 Hours", jp: "2時間以内", zh_tr: "2小時以內", zh_si: "2小时以内", ko: "2시간 이내" },
+    bike_4h: { en: "Up to 4 Hours", jp: "4時間以内", zh_tr: "4小時以內", zh_si: "4小时以内", ko: "4시간 이내" },
+    bike_1d: { en: "1 Day (until 17:00)", jp: "1日利用（17:00まで返却）", zh_tr: "全日（17:00前歸還）", zh_si: "全天（17:00前归还）", ko: "종일 (17:00까지)" },
+
+    sec_luggage_title: {
+      en: "Luggage & Station Facilities",
+      jp: "手荷物預かり・駅構内設備",
+      zh_tr: "行李寄放與車站設施",
+      zh_si: "行李寄存与车站设施",
+      ko: "수하물 보관 및 역내 편의시설"
+    },
+    btn_lockers: {
+      en: "Coin Locker & Station Floor Map",
+      jp: "コインロッカー・駅構内マップ",
+      zh_tr: "置物櫃位置與車站平面圖",
+      zh_si: "置物柜位置与车站平面图",
+      ko: "코인 로커 및 역내 안내도"
+    },
+    desc_lockers: {
+      en: "JR East official 1F/2F floor plan",
+      jp: "JR東日本 公式フロアマップ",
+      zh_tr: "JR東日本 官方各樓層設施導覽",
+      zh_si: "JR东日本 官方各楼层设施导览",
+      ko: "JR 동일본 공식 층별 안내도"
+    },
+    btn_battery: {
+      en: "Mobile Battery Rental (ChargeSPOT)",
+      jp: "モバイルバッテリーレンタル",
+      zh_tr: "共享行動電源（ChargeSPOT）",
+      zh_si: "共享充电宝（ChargeSPOT）",
+      ko: "보조배터리 대여 (ChargeSPOT)"
+    },
+    desc_battery: {
+      en: "Find available power bank stations nearby",
+      jp: "周辺の空き状況とスタンド位置",
+      zh_tr: "即時查詢車站周邊可借還機台",
+      zh_si: "即时查询车站周边可借还机柜",
+      ko: "주변 대여 가능 위치 확인"
+    },
+    btn_cowork: {
+      en: "Coworking Space & Free WiFi",
+      jp: "コワーキングスペース・Wi-Fi",
+      zh_tr: "共享工作空間與免費 WiFi",
+      zh_si: "共享工作空间与免费 WiFi",
+      ko: "코워킹 스페이스 & 무료 Wi-Fi"
+    },
+    desc_cowork: {
+      en: "Yukiguni Tourism Center lounge facilities",
+      jp: "雪国観光舎内のワークスペース案内",
+      zh_tr: "雪國觀光舍休息與辦公空間",
+      zh_si: "雪国观光舍休息与办公空间",
+      ko: "유키구니 관광사 업무 및 휴게 공간"
+    },
+
+    sec_taxi_title: {
+      en: "Estimated Taxi Fares (From Station)",
+      jp: "タクシー概算運賃（駅発）",
+      zh_tr: "計程車預估車資（車站出發）",
+      zh_si: "出租车预估车费（车站出发）",
+      ko: "택시 예상 요금 (역 출발)"
+    },
+    th_dest: { en: "Destination", jp: "目的地", zh_tr: "目的地", zh_si: "目的地", ko: "목적지" },
+    th_fare: { en: "Approx. Fare", jp: "概算運賃", zh_tr: "預估費用", zh_si: "预估费用", ko: "예상 요금" },
+    tx_gala: { en: "GALA / NASPA / Yuzawa Kogen", jp: "GALA・NASPA・湯沢高原", zh_tr: "GALA / NASPA / 湯澤高原", zh_si: "GALA / NASPA / 汤泽高原", ko: "GALA / NASPA / 유자와 고원" },
+    tx_ishiuchi: { en: "Ishiuchi Maruyama / Iwappara", jp: "石打丸山・岩原スキー場", zh_tr: "石打丸山 / 岩原滑雪場", zh_si: "石打丸山 / 岩原滑雪场", ko: "이시우치 마루야마 / 이와하라" },
+    tx_kagura: { en: "Kagura Mitsumata Ropeway", jp: "かぐら（みつまたロープウェイ）", zh_tr: "神樂滑雪場（三俁纜車）", zh_si: "神乐滑雪场（三俣缆车）", ko: "카구라 (미츠마타 로프웨이)" },
+    tx_kiyotsu: { en: "Kiyotsukyo Gorge Entrance", jp: "清津峡入口", zh_tr: "清津峽入口", zh_si: "清津峡入口", ko: "키요츠쿄 입구" },
+    tx_naeba: { en: "Naeba Prince Hotel", jp: "苗場プリンスホテル", zh_tr: "苗場王子大飯店", zh_si: "苗场王子大饭店", ko: "나에바 프린스 호텔" },
+    taxi_note: {
+      en: "* Approximate metered fares. Fares may vary with winter road delays and night surcharges.",
+      jp: "※ 概算メーター運賃です。冬期の積雪、渋滞、深夜割増等により変動します。",
+      zh_tr: "※ 預估跳錶車資。實際金額可能因冬季積雪、塞車或夜間加成而變動。",
+      zh_si: "※ 预估打表车费。实际金额可能因冬季积雪、堵车或夜间加价而变动。",
+      ko: "* 예상 미터 요금입니다. 겨울철 적설, 도로 정체, 야간 할증에 따라 달라질 수 있습니다."
+    },
+
+    sec_onsen_title: {
+      en: "Onsen & Local Foods",
+      jp: "日帰り温泉・周辺グルメ",
+      zh_tr: "當日溫泉與周邊美食",
+      zh_si: "日归温泉与周边美食",
+      ko: "당일 온천 및 주변 맛집"
+    },
+    btn_onsen_map: {
+      en: "Walking-Distance Day Onsens",
+      jp: "徒歩圏内の日帰り温泉マップ",
+      zh_tr: "步行可達日歸溫泉地圖",
+      zh_si: "步行可达日归温泉地图",
+      ko: "도보 이동 가능한 당일 온천 지도"
+    },
+    desc_onsen_map: {
+      en: "Komako no Yu, Yuzawa Kogen spa, public baths",
+      jp: "駒子の湯、山の湯、足湯などの位置案内",
+      zh_tr: "駒子之湯、江神溫泉與免費足湯資訊",
+      zh_si: "驹子之汤、江神温泉与免费足汤信息",
+      ko: "코마코노유, 야마노유 및 무료 족욕탕"
+    },
+    btn_dining: {
+      en: "Local Dining & Sake Guide",
+      jp: "周辺飲食店・地酒案内",
+      zh_tr: "周邊餐廳與地酒指南",
+      zh_si: "周边餐厅与地酒指南",
+      ko: "주변 맛집 및 사케 안내"
+    },
+    desc_dining: {
+      en: "Official Yuzawa Onsen Tourism dining directory",
+      jp: "湯沢温泉観光協会 グルメポータル",
+      zh_tr: "湯澤溫泉觀光協會 官方餐飲指南",
+      zh_si: "汤泽温泉观光协会 官方餐饮指南",
+      ko: "유자와 온천 관광협회 맛집 포털"
+    },
+    footer_back: {
+      en: '<a href="./" style="color:var(--accent); text-decoration:none;">← Back to Bus Timetables</a>',
+      jp: '<a href="./" style="color:var(--accent); text-decoration:none;">← バス時刻表に戻る</a>',
+      zh_tr: '<a href="./" style="color:var(--accent); text-decoration:none;">← 返回巴士時刻表</a>',
+      zh_si: '<a href="./" style="color:var(--accent); text-decoration:none;">← 返回公交时刻表</a>',
+      ko: '<a href="./" style="color:var(--accent); text-decoration:none;">← 버스 시간표로 돌아가기</a>'
+    }
+  };
+
+  function applyLanguage(lang) {
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.getAttribute('data-i18n');
+      if (I18N[key] && I18N[key][lang]) {
+        if (key === 'footer_back') {
+          el.innerHTML = I18N[key][lang];
+        } else {
+          el.textContent = I18N[key][lang];
+        }
+      }
+    });
+    document.getElementById('pageTitle').textContent = I18N.title[lang] || I18N.title.en;
+    document.getElementById('langSelect').value = lang;
+  }
+
+  // URL language parameter (?lang=zh_tr) or storage
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialLang = urlParams.get('lang') || 'en';
+  applyLanguage(initialLang);
+
+  document.getElementById('langSelect').addEventListener('change', (e) => {
+    applyLanguage(e.target.value);
+  });
+</script>
+</body>
+</html>
