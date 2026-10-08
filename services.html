@@ -343,7 +343,7 @@
     </div>
   </div>
 
-  <!-- 3. Local Railway Guide -->
+  <!-- 3. Local Railway Guide (Embedded Schedule + Google Maps Transit) -->
   <div class="section-card" id="trains">
     <div class="section-title">
       <span>🚃</span>
@@ -360,9 +360,47 @@
       </div>
     </div>
 
-    <p class="section-desc" data-i18n="train_freq_desc">
-      Local train service is limited (approx. 1 train every 60–90 min). Please verify departures in advance.
-    </p>
+    <!-- Embedded Departure Schedule -->
+    <div class="table-container" style="max-height: 260px; overflow-y: auto;">
+      <div style="font-weight: 700; font-size: 0.84rem; color: #fff; margin-bottom: 6px;" data-i18n="lbl_train_table_title">
+        🕒 Daily Departures (Northbound toward Ishiuchi, Jōkoku & Muikamachi)
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 25%;" data-i18n="th_train_time">Time</th>
+            <th style="width: 45%;" data-i18n="th_train_line">Line & Bound For</th>
+            <th style="width: 30%; text-align: right;" data-i18n="th_train_ski">Ski Stops</th>
+          </tr>
+        </thead>
+        <tbody style="font-size: 0.76rem;">
+          <tr><td><strong>06:34</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>07:09</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>08:02</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>08:20</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>09:03</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>09:14</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>10:30</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>10:41</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>11:41</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>12:14</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>13:14</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>13:26</strong></td><td>Hokuhoku (Saigata)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>14:16</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>15:12</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>16:10</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>17:10</strong></td><td>Hokuhoku (Saigata)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>17:18</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>18:06</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>18:51</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>20:06</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>20:33</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>21:01</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>21:34</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+          <tr><td><strong>22:31</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
+        </tbody>
+      </table>
+    </div>
 
     <div class="action-grid">
       <a class="action-btn" href="docs/train_info.pdf" target="_blank" rel="noopener">
@@ -372,11 +410,10 @@
         </div>
         <span class="btn-icon">↗</span>
       </a>
-      <!-- Dynamic Multilingual NAVITIME Departure Board -->
-      <a class="action-btn" id="navitimeLink" href="https://japantravel.navitime.com/en/area/jp/timetable/00000702/00000150?direction=down" target="_blank" rel="noopener">
+      <a class="action-btn" href="https://www.google.com/maps/search/?api=1&query=Echigo-Yuzawa+Station+trains" target="_blank" rel="noopener">
         <div>
-          <div class="btn-main" data-i18n="btn_train_navitime">Live Train Departures (Joetsu & Hokuhoku) ↗</div>
-          <div class="btn-desc" data-i18n="desc_train_navitime">Combined departures for Ishiuchi, Joetsu-Kokusai & Tokamachi</div>
+          <div class="btn-main" data-i18n="btn_train_live">Live Departures (Google Maps) ↗</div>
+          <div class="btn-desc" data-i18n="desc_train_live">Real-time platform departures in your phone's native language</div>
         </div>
         <span class="btn-icon">🕒</span>
       </a>
@@ -582,14 +619,6 @@
 </div>
 
 <script>
-  const NAVITIME_URLS = {
-    en: "https://japantravel.navitime.com/en/area/jp/timetable/00000702/00000150?direction=down",
-    jp: "https://www.navitime.co.jp/timetable/00000702/",
-    zh_tr: "https://japantravel.navitime.com/zh-tw/area/jp/timetable/00000702/00000150?direction=down",
-    zh_si: "https://japantravel.navitime.com/zh-cn/area/jp/timetable/00000702/00000150?direction=down",
-    ko: "https://japantravel.navitime.com/ko/area/jp/timetable/00000702/00000150?direction=down"
-  };
-
   const I18N = {
     nav_back: {
       en: "Bus & Train Schedules",
@@ -701,7 +730,7 @@
       ko: "키요츠쿄 공식 대절 택시 플랜"
     },
     desc_taxi_plan: {
-      en: "Fixed-rate round-trip charter including wait time. Inquire at our West Exit counter or call 025-785-5353.",
+      en: "Fixed-rate round-trip charter including wait time. Book at the Snow Country Tourism counter (West Exit) or call 025-785-5353.",
       jp: "滞在待機時間を含む安心の往復定額制。駅西口の雪国観光舎カウンターまたはお電話（025-785-5353）で受付中。",
       zh_tr: "包含峽谷停留等候時間之往返定額包車。可於車站西口雪國觀光舍櫃台洽詢或致電（025-785-5353）。",
       zh_si: "包含峡谷停留等候时间之往返定额包车。可于车站西口雪国观光舍柜台洽询或致电（025-785-5353）。",
@@ -758,13 +787,16 @@
       zh_si: "石打、大泽、上越国际滑雪场前等无人车站未设有IC卡感应机。乘车前请务必在自动售票机购买实体纸本车票。",
       ko: "이시우치, 오사와, 조에츠코쿠사이 등 무인역에는 IC 단말기가 없습니다. 탑승 전 자동발매기에서 반드시 종이 승차권을 구입해 주세요."
     },
-    train_freq_desc: {
-      en: "Local train service is limited (approx. 1 train every 60–90 min). Please verify departures in advance.",
-      jp: "普通列車の運行本数は限られています（約60〜90分に1本）。事前に時刻をご確認ください。",
-      zh_tr: "普通列車班次較少（約每 60〜90 分鐘一班）。請預先確認時刻表。",
-      zh_si: "普通列车班次较少（约每 60〜90 分钟一班）。请预先确认时刻表。",
-      ko: "일반 열차 운행 편수가 적습니다 (약 60~90분 간격). 사전에 출발 시각을 확인하세요."
+    lbl_train_table_title: {
+      en: "🕒 Daily Departures (Northbound toward Ishiuchi, Jōkoku & Muikamachi)",
+      jp: "🕒 普通列車時刻表（下り：石打・上越国際・六日町・長岡方面）",
+      zh_tr: "🕒 普通區間列車發車時刻表（往石打・上越國際・六日町・長岡）",
+      zh_si: "🕒 普通区间列车发车时刻表（往石打・上越国际・六日町・长冈）",
+      ko: "🕒 일반 열차 시간표 (이시우치・조에츠코쿠사이・무이카마치 방면)"
     },
+    th_train_time: { en: "Time", jp: "発車時刻", zh_tr: "發車時間", zh_si: "发车时间", ko: "시간" },
+    th_train_line: { en: "Line & Bound For", jp: "路線・行先", zh_tr: "路線與目的地", zh_si: "路线与目的地", ko: "노선 및 행선지" },
+    th_train_ski: { en: "Ski Stops", jp: "停車駅", zh_tr: "停靠站", zh_si: "停靠站", ko: "정차" },
     btn_train_pdf: {
       en: "📄 Joetsu & Hokuhoku Railway Guide (PDF)",
       jp: "📄 上越線・ほくほく線 ご利用案内（PDF）",
@@ -779,19 +811,19 @@
       zh_si: "滑雪场停靠站、IC卡无人车站注意事项与票价表",
       ko: "스키장 정차역, 무인역 IC카드 주의사항 및 운임표"
     },
-    btn_train_navitime: {
-      en: "Live Train Departures (Joetsu & Hokuhoku) ↗",
-      jp: "普通列車 発車時刻表（上越線・ほくほく線）↗",
-      zh_tr: "普通列車 即時發車時刻表（上越線・北北線）↗",
-      zh_si: "普通列车 实时发车时刻表（上越线・北北线）↗",
-      ko: "일반 열차 실시간 시간표 (조에츠선・호쿠호쿠선) ↗"
+    btn_train_live: {
+      en: "Live Departures (Google Maps) ↗",
+      jp: "リアルタイム運行状況（Google マップ）↗",
+      zh_tr: "即時列車動態（Google 地圖）↗",
+      zh_si: "实时列车动态（Google 地图）↗",
+      ko: "실시간 운행 정보 (Google 지도) ↗"
     },
-    desc_train_navitime: {
-      en: "Combined departures for Ishiuchi, Joetsu-Kokusai & Tokamachi",
-      jp: "石打・上越国際・十日町・長岡方面の統合時刻表（NAVITIME）",
-      zh_tr: "往石打、上越國際、十日町、長岡方向整合時刻表 (NAVITIME)",
-      zh_si: "往石打、上越国际、十日町、长冈方向整合时刻表 (NAVITIME)",
-      ko: "이시우치・조에츠코쿠사이・토카마치 방면 통합 시간표 (NAVITIME)"
+    desc_train_live: {
+      en: "Real-time platform departures in your phone's native language",
+      jp: "お使いの端末言語で発車番線や遅延情報を表示",
+      zh_tr: "自動以手機設定語言顯示發車月台與即時動態",
+      zh_si: "自动以手机设定语言显示发车月台与实时动态",
+      ko: "스마트폰 설정 언어로 출발 플랫폼 및 실시간 정보 확인"
     },
 
     // 4. Food
@@ -1117,11 +1149,6 @@
         el.textContent = I18N[key][currentLang];
       }
     });
-
-    const navitimeBtn = document.getElementById('navitimeLink');
-    if (navitimeBtn && NAVITIME_URLS[currentLang]) {
-      navitimeBtn.href = NAVITIME_URLS[currentLang];
-    }
 
     try {
       localStorage.setItem('yuzawa_lang', lang);
