@@ -230,27 +230,50 @@
     </div>
   </div>
 
-  <!-- 4. Onsen & Local Foods -->
-  <div class="section-card" id="onsen">
+  <!-- 4. Local Food & Dining Guide -->
+  <div class="section-card" id="food">
     <div class="section-title">
-      <span>♨️</span>
-      <span data-i18n="sec_onsen_title">Onsen & Local Foods</span>
+      <span>🍙</span>
+      <span data-i18n="sec_food_title">Local Food & Dining</span>
     </div>
+  
+    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4;" data-i18n="food_intro">
+      Famous for premium Minamiuonuma Koshihikari rice, Niigata sake, and fresh mountain buckwheat soba.
+    </p>
+  
     <div class="action-grid">
-      <a class="action-btn" href="https://maps.google.com/?q=Echigo+Yuzawa+day+use+onsen" target="_blank" rel="noopener">
+      <!-- In-Station: CoCoLo Yuzawa -->
+      <a class="action-btn" href="https://www.cocolo-station.jp/branch/index/yuzawa" target="_blank" rel="noopener">
         <div>
-          <div class="btn-main" data-i18n="btn_onsen_map">Walking-Distance Day Onsens</div>
-          <div class="btn-desc" data-i18n="desc_onsen_map">Komako no Yu, Yuzawa Kogen spa, public baths</div>
+          <div class="btn-main" data-i18n="btn_cocolo">Station Dining: CoCoLo Yuzawa</div>
+          <div class="btn-desc" data-i18n="desc_cocolo">Bakudan Onigiri, Ponshukan Sake Tasting & souvenirs</div>
         </div>
-        <span class="btn-icon">📍</span>
+        <span class="btn-icon">🏬</span>
       </a>
-      <a class="action-btn" href="https://www.e-yuzawa.gr.jp/" target="_blank" rel="noopener">
+  
+      <!-- Walkable Hegi Soba & Regional Dining -->
+      <a class="action-btn" href="https://www.google.com/maps/search/hegi+soba+echigo+yuzawa+station" target="_blank" rel="noopener">
         <div>
-          <div class="btn-main" data-i18n="btn_dining">Local Dining & Sake Guide</div>
-          <div class="btn-desc" data-i18n="desc_dining">Official Yuzawa Onsen Tourism dining directory</div>
+          <div class="btn-main" data-i18n="btn_hegi_soba">Hegi Soba Restaurants (Walkable)</div>
+          <div class="btn-desc" data-i18n="desc_hegi_soba">Famous local buckwheat soba served on cedar trays</div>
         </div>
-        <span class="btn-icon">↗</span>
+        <span class="btn-icon">🥢</span>
       </a>
+    </div>
+  
+    <!-- Regional Specialties Summary Box -->
+    <div style="margin-top: 14px; background: var(--btn-bg); border: 1px solid var(--border); border-radius: 8px; padding: 12px;">
+      <div style="font-weight: 700; font-size: 0.88rem; color: #fff; margin-bottom: 6px;" data-i18n="food_must_try">
+        🥢 Must-Try Regional Specialties
+      </div>
+      <ul style="margin: 0; padding-left: 18px; font-size: 0.78rem; color: #cbd5e1; line-height: 1.6;">
+        <li><strong style="color: #fbbf24;" data-i18n="food_sp1_title">Bakudan Onigiri (雪ん洞):</strong> <span data-i18n="food_sp1_desc">Giant Koshihikari rice ball made with 1 gou (cup) of freshly cooked rice and local fillings.</span></li>
+        <li><strong style="color: #fbbf24;" data-i18n="food_sp2_title">Hegi Soba (へぎそば):</strong> <span data-i18n="food_sp2_desc">Silky buckwheat noodles bound with seaweed (*funori*), served cold with crispy wild vegetable tempura.</span></li>
+        <li><strong style="color: #fbbf24;" data-i18n="food_sp3_title">Ponshukan (ぽんしゅ館):</strong> <span data-i18n="food_sp3_desc">Self-serve coin-operated sake vending machines featuring 100+ Niigata microbreweries.</span></li>
+      </ul>
+      <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; border-top: 1px solid var(--border); padding-top: 6px;" data-i18n="food_hours_note">
+        💡 Tip: Outside winter ski peaks, most town restaurants take last orders around 19:30–20:00.
+      </div>
     </div>
   </div>
 
@@ -261,6 +284,104 @@
 
 <script>
   const I18N = {
+    sec_food_title: {
+      en: "Local Food & Dining",
+      jp: "グルメ・名物料理案内",
+      zh_tr: "在地美食與餐廳導覽",
+      zh_si: "在地美食与餐厅导览",
+      ko: "지역 맛집 및 음식 안내"
+    },
+    food_intro: {
+      en: "Famous for premium Minamiuonuma Koshihikari rice, Niigata sake, and fresh mountain buckwheat soba.",
+      jp: "南魚沼産コシヒカリ、新潟の地酒、名物へぎそばなど越後湯沢の味覚をお楽しみください。",
+      zh_tr: "享受頂級南魚沼越光米、新潟地酒與傳統片木盒蕎麥麵（布海苔蕎麥麵）。",
+      zh_si: "享受顶级南鱼沼越光米、新潟地酒与传统片木盒荞麦面（布海苔荞麦面）。",
+      ko: "최고급 미나미우오누마산 고시히카리, 니가타 사케, 전통 헤기소바를 즐겨보세요."
+    },
+    btn_cocolo: {
+      en: "Station Dining: CoCoLo Yuzawa ↗",
+      jp: "駅ナカ：CoCoLo湯沢（ぽんしゅ館・がんぎ通り）↗",
+      zh_tr: "站內商場：CoCoLo湯澤（清酒博物館・美食街）↗",
+      zh_si: "站内商场：CoCoLo汤泽（清酒博物馆・美食街）↗",
+      ko: "에치고유자와역 내 상가: CoCoLo 유자와 ↗"
+    },
+    desc_cocolo: {
+      en: "Bakudan Onigiri, Ponshukan Sake Tasting & souvenirs",
+      jp: "爆弾おにぎり・利き酒越乃室・お土産処",
+      zh_tr: "炸彈飯糰、越後清酒試飲館與新潟名產",
+      zh_si: "炸弹饭团、越后清酒试饮馆与新潟名产",
+      ko: "폭탄 오니기리, 폰슈칸 사케 시음 및 기념품"
+    },
+    btn_hegi_soba: {
+      en: "Walkable Hegi Soba Spots (Map) ↗",
+      jp: "徒歩で行ける「へぎそば」店（Google Map）↗",
+      zh_tr: "步行可達的「布海苔蕎麥麵」名店地圖 ↗",
+      zh_si: "步行可达的「布海苔荞麦面」名店地图 ↗",
+      ko: "도보 이동 가능한 헤기소바 맛집 지도 ↗"
+    },
+    desc_hegi_soba: {
+      en: "Famous local buckwheat soba served on cedar trays",
+      jp: "布海苔をつなぎに使った伝統のへぎそば",
+      zh_tr: "使用海藻為黏著劑的滑順傳統片木盒蕎麥麵",
+      zh_si: "使用海藻为黏着剂的滑顺传统片木盒荞麦面",
+      ko: "해초를 넣어 쫄깃한 전통 헤기소바 전문점"
+    },
+    food_must_try: {
+      en: "🥢 Must-Try Regional Specialties",
+      jp: "🥢 越後湯沢の必食グルメ",
+      zh_tr: "🥢 越後湯澤必吃在地三大美食",
+      zh_si: "🥢 越后汤泽必吃在地三大美食",
+      ko: "🥢 꼭 맛봐야 할 유자와 3대 대표 음식"
+    },
+    food_sp1_title: {
+      en: "Bakudan Onigiri (Yukinto):",
+      jp: "爆弾おにぎり（雪ん洞）：",
+      zh_tr: "炸彈飯糰（雪ん洞）：",
+      zh_si: "炸弹饭团（雪ん洞）：",
+      ko: "폭탄 오니기리 (유킨토):"
+    },
+    food_sp1_desc: {
+      en: "Giant Koshihikari rice ball made with 1 full cup of freshly cooked rice and local fillings.",
+      jp: "南魚沼産コシヒカリを贅沢に1合使った名物大判おにぎり。",
+      zh_tr: "使用整整一合頂級南魚沼越光米現捏的巨無霸飯糰，多種內餡可選。",
+      zh_si: "使用整整一合顶级南鱼沼越光米现捏的巨无霸饭团，多种内馅可选。",
+      ko: "갓 지은 미나미우오누마산 고시히카리 쌀 1홉으로 큼직하게 쥔 명물 주먹밥."
+    },
+    food_sp2_title: {
+      en: "Hegi Soba (へぎそば):",
+      jp: "へぎそば：",
+      zh_tr: "布海苔片木盒蕎麥麵：",
+      zh_si: "布海苔片木盒荞麦面：",
+      ko: "헤기소바 (へぎそば):"
+    },
+    food_sp2_desc: {
+      en: "Silky buckwheat noodles bound with funori seaweed, served cold on cedar wood trays.",
+      jp: "布海苔（海藻）をつなぎに使ったツルツルとしたのど越しの郷土蕎麥。",
+      zh_tr: "加入天然海藻製作，口感滑順彈牙，盛裝在杉木盒中的傳統鄉土麵食。",
+      zh_si: "加入天然海藻制作，口感滑顺弹牙，盛装在杉木盒中的传统乡土面食。",
+      ko: "후노리(해초)를 반죽에 넣어 목넘김이 매끄러운 니가타 향토 메밀국수."
+    },
+    food_sp3_title: {
+      en: "Ponshukan (ぽんしゅ館):",
+      jp: "ぽんしゅ館（利き酒番所）：",
+      zh_tr: "越後清酒博物館（試飲番所）：",
+      zh_si: "越后清酒博物馆（试饮番所）：",
+      ko: "폰슈칸 사케 박물관:"
+    },
+    food_sp3_desc: {
+      en: "Self-serve token vending wall featuring over 100 varieties of Niigata sake.",
+      jp: "新潟県内全酒蔵の地酒100種類以上をコイン式サーバーで飲み比べ。",
+      zh_tr: "投幣換代幣即可自助品飲全新潟縣100多種酒造名酒的體驗館。",
+      zh_si: "投币换代币即可自助品饮全新潟县100多种酒造名酒的体验馆。",
+      ko: "코인을 넣어 니가타현 내 100여 개 양조장의 사케를 직접 골라 마시는 시음장."
+    },
+    food_hours_note: {
+      en: "💡 Tip: Outside winter peaks, most town restaurants take last orders around 19:30–20:00.",
+      jp: "💡 アドバイス：冬季スキー繁忙期を除き、町内の飲食店は19:30〜20:00頃にラストオーダーとなる店が多いのでご注意ください。",
+      zh_tr: "💡 貼心提醒：除冬季滑雪旺季外，街道多數餐館最後點餐時間偏早（約 19:30–20:00）。",
+      zh_si: "💡 贴心提醒：除冬季滑雪旺季外，街道多数餐馆最后点餐时间偏早（约 19:30–20:00）。",
+      ko: "💡 팁: 겨울 성수기를 제외하면 마을 식당들의 라스트 오더는 대체로 19:30~20:00경 마감됩니다."
+    },
     title: {
       en: "ℹ️ Visitor Services",
       jp: "ℹ️ 本日のお問い合わせ・ご案内",
