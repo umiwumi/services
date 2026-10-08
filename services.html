@@ -240,7 +240,7 @@
       color: #38bdf8;
     }
 
-    /* Bullet List Features */
+    /* Feature List */
     .feature-list {
       margin: 0;
       padding-left: 18px;
@@ -317,26 +317,26 @@
 
     <div class="alert-box alert-amber">
       <div class="alert-title">
-        <span>🎉</span>
-        <span data-i18n="lbl_ebike_camp">E-Bike Rental Campaign (Save ¥1,000!)</span>
+        <span>🚕</span>
+        <span data-i18n="lbl_taxi_plan">Kiyotsu Gorge Official Charter Taxi</span>
       </div>
-      <div data-i18n="desc_ebike_camp">
-        ¥1,000 discount campaign active through Nov 30, 2026. Closed on Wednesdays. Helmets included.
+      <div data-i18n="desc_taxi_plan">
+        Fixed-rate round-trip charter including wait time. Book at the Snow Country Tourism counter (West Exit) or call 025-785-5353.
       </div>
     </div>
 
     <div class="action-grid">
-      <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/54349340?categoryIds=7696339" target="_blank" rel="noopener">
+      <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/54349340" target="_blank" rel="noopener">
         <div>
-          <div class="btn-main" data-i18n="btn_kiyotsu_taxi">Kiyotsu Gorge Charter Taxi Plan ↗</div>
-          <div class="btn-desc" data-i18n="desc_kiyotsu_taxi">Official round-trip private charter from West Exit or local hotels</div>
+          <div class="btn-main" data-i18n="btn_kiyotsu_taxi">Taxi Plan Details & Rates ↗</div>
+          <div class="btn-desc" data-i18n="desc_kiyotsu_taxi">Official charter rates from Station West Exit or local ryokans</div>
         </div>
-        <span class="btn-icon">🚕</span>
+        <span class="btn-icon">📄</span>
       </a>
       <a class="action-btn" href="https://www.snow-country-tourism.jp/" target="_blank" rel="noopener">
         <div>
           <div class="btn-main" data-i18n="btn_ebike">Rent E-Bikes (West Exit Counter) ↗</div>
-          <div class="btn-desc" data-i18n="desc_ebike">Inquire at Snow Country Tourism Information Center</div>
+          <div class="btn-desc" data-i18n="desc_ebike">¥1,000 discount campaign through Nov 30, 2026</div>
         </div>
         <span class="btn-icon">🚴</span>
       </a>
@@ -372,7 +372,7 @@
         </div>
         <span class="btn-icon">↗</span>
       </a>
-      <!-- Dynamic Multilingual Navitime Link -->
+      <!-- Dynamic Multilingual NAVITIME Departure Board -->
       <a class="action-btn" id="navitimeLink" href="https://japantravel.navitime.com/en/area/jp/timetable/00000702/00000150?direction=down" target="_blank" rel="noopener">
         <div>
           <div class="btn-main" data-i18n="btn_train_navitime">Live Train Departures (Joetsu & Hokuhoku) ↗</div>
@@ -394,10 +394,10 @@
     </p>
 
     <div class="action-grid">
-      <a class="action-btn" href="https://jenic.jp/cocolo/?sc_name=yuzawa" target="_blank" rel="noopener">
+      <a class="action-btn" href="https://jenic.jp/cocolo/floor/?sc_name=yuzawa" target="_blank" rel="noopener">
         <div>
-          <div class="btn-main" data-i18n="btn_cocolo">Station Dining: CoCoLo Yuzawa ↗</div>
-          <div class="btn-desc" data-i18n="desc_cocolo">Bakudan Onigiri, Ponshukan Sake Tasting & souvenirs</div>
+          <div class="btn-main" data-i18n="btn_cocolo">Station Dining: CoCoLo Restaurant Guide ↗</div>
+          <div class="btn-desc" data-i18n="desc_cocolo">Floor map of Gangi-dori restaurants, soba, tonkatsu & cafes</div>
         </div>
         <span class="btn-icon">🏬</span>
       </a>
@@ -584,7 +584,7 @@
 <script>
   const NAVITIME_URLS = {
     en: "https://japantravel.navitime.com/en/area/jp/timetable/00000702/00000150?direction=down",
-    jp: "https://japantravel.navitime.com/ja/area/jp/timetable/00000702/00000150?direction=down",
+    jp: "https://www.navitime.co.jp/timetable/00000702/",
     zh_tr: "https://japantravel.navitime.com/zh-tw/area/jp/timetable/00000702/00000150?direction=down",
     zh_si: "https://japantravel.navitime.com/zh-cn/area/jp/timetable/00000702/00000150?direction=down",
     ko: "https://japantravel.navitime.com/ko/area/jp/timetable/00000702/00000150?direction=down"
@@ -693,29 +693,29 @@
       zh_si: "造访清津峡光之隧道或畅游温泉街，推荐搭乘官方包车出租车或租借电动辅助自行车。",
       ko: "키요츠쿄 '빛의 터널'과 온천가 관광에 편리한 공식 대절 택시 및 전기 자전거를 이용해 보세요."
     },
-    lbl_ebike_camp: {
-      en: "E-Bike Rental Campaign (Save ¥1,000!)",
-      jp: "E-Bike レンタル割引キャンペーン（1,000円引）",
-      zh_tr: "E-Bike 電單車租借優惠（現折 1,000 日圓！）",
-      zh_si: "E-Bike 电单车租借优惠（现折 1,000 日元！）",
-      ko: "전기 자전거(E-Bike) 렌탈 할인 캠페인 (1,000엔 할인!)"
+    lbl_taxi_plan: {
+      en: "Kiyotsu Gorge Official Charter Taxi",
+      jp: "清津峡 貸切タクシープラン（雪国観光舎）",
+      zh_tr: "清津峽 官方定額包車計程車專案",
+      zh_si: "清津峡 官方定额包车出租车方案",
+      ko: "키요츠쿄 공식 대절 택시 플랜"
     },
-    desc_ebike_camp: {
-      en: "¥1,000 discount campaign active through Nov 30, 2026. Closed on Wednesdays. Helmets included.",
-      jp: "2026年11月30日まで1,000円割引実施中。水曜定休。ヘルメット貸出無料。",
-      zh_tr: "2026年11月30日前享現折1,000日圓優惠。週三公休。免費附安全帽。",
-      zh_si: "2026年11月30日前享现折1,000日元优惠。周三公休。免费附安全帽。",
-      ko: "2026년 11월 30일까지 1,000엔 할인 적용. 수요일 휴무. 헬멧 무료 대여 포함."
+    desc_taxi_plan: {
+      en: "Fixed-rate round-trip charter including wait time. Inquire at our West Exit counter or call 025-785-5353.",
+      jp: "滞在待機時間を含む安心の往復定額制。駅西口の雪国観光舎カウンターまたはお電話（025-785-5353）で受付中。",
+      zh_tr: "包含峽谷停留等候時間之往返定額包車。可於車站西口雪國觀光舍櫃台洽詢或致電（025-785-5353）。",
+      zh_si: "包含峡谷停留等候时间之往返定额包车。可于车站西口雪国观光舍柜台洽询或致电（025-785-5353）。",
+      ko: "관람 대기 시간이 포함된 왕복 정액 플랜. 역 서쪽 출구 설국 안내소 창구 또는 전화(025-785-5353) 문의 가능."
     },
     btn_kiyotsu_taxi: {
-      en: "Kiyotsu Gorge Charter Taxi Plan ↗",
-      jp: "清津峡 貸切タクシープラン（雪国観光舎）↗",
-      zh_tr: "清津峽 官方包車計程車專案 ↗",
-      zh_si: "清津峡 官方包车出租车方案 ↗",
-      ko: "키요츠쿄 공식 대절 택시 플랜 ↗"
+      en: "Taxi Plan Details & Rates ↗",
+      jp: "タクシープラン料金詳細（雪国観光舎）↗",
+      zh_tr: "查看計程車專案收費詳情 ↗",
+      zh_si: "查看出租车方案收费详情 ↗",
+      ko: "택시 플랜 요금 상세 보기 ↗"
     },
     desc_kiyotsu_taxi: {
-      en: "Official round-trip private charter from West Exit or local hotels",
+      en: "Official charter rates from Station West Exit or local ryokans",
       jp: "駅西口の雪国観光舎または周辺ホテル発着・安心の公式往復送迎",
       zh_tr: "車站西口雪國觀光舍或周邊溫泉飯店發車・官方往返包車",
       zh_si: "车站西口雪国观光舍或周边温泉酒店发车・官方往返包车",
@@ -729,11 +729,11 @@
       ko: "전기 자전거 대여 (서쪽 출구 안내소) ↗"
     },
     desc_ebike: {
-      en: "Inquire at Snow Country Tourism Information Center",
-      jp: "駅西口すぐの案内所カウンターにて受付",
-      zh_tr: "請至車站西口雪國觀光舍櫃台洽詢",
-      zh_si: "请至车站西口雪国观光舍柜台洽询",
-      ko: "역 서쪽 출구 관광안내소 창구에서 접수"
+      en: "¥1,000 discount campaign through Nov 30, 2026",
+      jp: "2026年11月30日まで1,000円引キャンペーン中（水曜定休）",
+      zh_tr: "2026年11月30日前現折1,000日圓（週三公休）",
+      zh_si: "2026年11月30日前现折1,000日元（周三公休）",
+      ko: "2026년 11월 30일까지 1,000엔 할인 진행 중 (수요일 휴무)"
     },
 
     // 3. Railway
@@ -810,18 +810,18 @@
       ko: "최고급 미나미우오누마산 고시히카리, 니가타 사케, 전통 헤기소바를 즐겨보세요."
     },
     btn_cocolo: {
-      en: "Station Dining: CoCoLo Yuzawa ↗",
-      jp: "駅ナカ：CoCoLo湯沢（ぽんしゅ館・がんぎ通り）↗",
-      zh_tr: "站內商場：CoCoLo湯澤（清酒博物館・美食街）↗",
-      zh_si: "站内商场：CoCoLo汤泽（清酒博物馆・美食街）↗",
-      ko: "역 내 상가: CoCoLo 유자와 ↗"
+      en: "Station Dining: CoCoLo Restaurant Guide ↗",
+      jp: "駅ナカ：CoCoLo湯沢 レストラン・フロア案内 ↗",
+      zh_tr: "站內商場：CoCoLo湯澤 美食街與樓層指南 ↗",
+      zh_si: "站内商场：CoCoLo汤泽 美食街与楼层指南 ↗",
+      ko: "역 내 식당가: CoCoLo 유자와 맛집·층별 안내 ↗"
     },
     desc_cocolo: {
-      en: "Bakudan Onigiri, Ponshukan Sake Tasting & souvenirs",
-      jp: "爆弾おにぎり・利き酒越乃室・お土産処",
-      zh_tr: "炸彈飯糰、越後清酒試飲館與新潟名產",
-      zh_si: "炸弹饭团、越后清酒试饮馆与新潟名产",
-      ko: "폭탄 오니기리, 폰슈칸 사케 시음 및 기념품"
+      en: "Floor map of Gangi-dori restaurants, soba, tonkatsu & cafes",
+      jp: "がんぎ通りのお食事処、へぎそば、とんかつ、カフェMAP",
+      zh_tr: "Gangi-dori 美食街餐廳地圖、蕎麥麵、炸豬排與咖啡廳",
+      zh_si: "Gangi-dori 美食街餐厅地图、荞麦面、炸猪排与咖啡厅",
+      ko: "강기도리 식당가 지도, 헤기소바, 돈카츠, 카페 안내"
     },
     btn_hegi_soba: {
       en: "Walkable Hegi Soba Spots (Map) ↗",
