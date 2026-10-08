@@ -11,7 +11,6 @@
     :root {
       --bg: #0f172a;
       --card-bg: #1e293b;
-      --card-inner: #0f172a;
       --border: #334155;
       --text: #f8fafc;
       --text-muted: #94a3b8;
@@ -290,11 +289,13 @@
         <span data-i18n="lbl_cw_info">Facility & Pricing Info</span>
       </div>
       <div>• <span data-i18n="cw_hours">Hours: 9:00 – 17:00 (Open Daily)</span></div>
-      <div>• <span data-i18n="cw_rate">Rate: ¥330 / 30 mins</span></div>
+      <div>• <span data-i18n="cw_open_rate">Open Desk: ¥330 / 30 mins</span></div>
+      <div>• <span data-i18n="cw_private_rate">Private Office: ¥550 / 30 mins</span></div>
+      <div>• <span data-i18n="cw_coffee">Coffee Service: +¥220</span></div>
     </div>
 
     <div class="action-grid">
-      <a class="action-btn" href="https://snow-country-tourism.jp/posts/42134472/" target="_blank" rel="noopener">
+      <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/42134472/" target="_blank" rel="noopener">
         <div>
           <div class="btn-main" data-i18n="btn_cw_reserve">Reserve Desk Online ↗</div>
           <div class="btn-desc" data-i18n="desc_cw_reserve">Real-time seat availability & online reservation</div>
@@ -311,7 +312,7 @@
       <span data-i18n="sec_act_title">Activities & Local Sightseeing</span>
     </div>
     <p class="section-desc" data-i18n="act_desc">
-      Explore the Kiyotsu Gorge Tunnel of Light and town attractions via charter taxi or rental E-Bikes.
+      Explore the Kiyotsu Gorge Tunnel of Light and town attractions via official charter taxi or rental E-Bikes.
     </p>
 
     <div class="alert-box alert-amber">
@@ -325,19 +326,19 @@
     </div>
 
     <div class="action-grid">
-      <a class="action-btn" href="https://snow-country-tourism.jp/" target="_blank" rel="noopener">
+      <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/54349340?categoryIds=7696339" target="_blank" rel="noopener">
+        <div>
+          <div class="btn-main" data-i18n="btn_kiyotsu_taxi">Kiyotsu Gorge Charter Taxi Plan ↗</div>
+          <div class="btn-desc" data-i18n="desc_kiyotsu_taxi">Official round-trip private charter from West Exit or local hotels</div>
+        </div>
+        <span class="btn-icon">🚕</span>
+      </a>
+      <a class="action-btn" href="https://www.snow-country-tourism.jp/" target="_blank" rel="noopener">
         <div>
           <div class="btn-main" data-i18n="btn_ebike">Rent E-Bikes (West Exit Counter) ↗</div>
           <div class="btn-desc" data-i18n="desc_ebike">Inquire at Snow Country Tourism Information Center</div>
         </div>
         <span class="btn-icon">🚴</span>
-      </a>
-      <a class="action-btn" href="https://www.google.com/maps/search/kiyotsu+gorge+taxi+yuzawa" target="_blank" rel="noopener">
-        <div>
-          <div class="btn-main" data-i18n="btn_kiyotsu_taxi">Kiyotsu Gorge Charter Taxi ↗</div>
-          <div class="btn-desc" data-i18n="desc_kiyotsu_taxi">Fixed-rate charter return taxi from Station West Exit</div>
-        </div>
-        <span class="btn-icon">🚕</span>
       </a>
     </div>
   </div>
@@ -355,12 +356,12 @@
         <span data-i18n="train_ic_warn_title">IC Cards (Suica / PASMO) NOT Accepted at Local Stops</span>
       </div>
       <div data-i18n="train_ic_warn_desc">
-        Unmanned stations (Ishiuchi, Osawa, Joetsu-Kokusai, etc.) lack IC readers. You MUST purchase a physical paper ticket at the machine before boarding.
+        Unmanned stations (Ishiuchi, Osawa, Joetsu-Kokusai, etc.) lack IC readers. You MUST purchase a physical paper ticket before boarding.
       </div>
     </div>
 
     <p class="section-desc" data-i18n="train_freq_desc">
-      Local train service is limited (approx. 1 train every 60–90 minutes). Please verify departures in advance.
+      Local train service is limited (approx. 1 train every 60–90 min). Please verify departures in advance.
     </p>
 
     <div class="action-grid">
@@ -371,10 +372,11 @@
         </div>
         <span class="btn-icon">↗</span>
       </a>
-      <a class="action-btn" href="https://timetable.jreast.co.jp/timetable/search/train/detail/station?stationCode=285" target="_blank" rel="noopener">
+      <!-- Dynamic Multilingual Navitime Link -->
+      <a class="action-btn" id="navitimeLink" href="https://japantravel.navitime.com/en/area/jp/timetable/00000702/00000150?direction=down" target="_blank" rel="noopener">
         <div>
-          <div class="btn-main" data-i18n="btn_jr_live">JR Joetsu Line Departures (Official) ↗</div>
-          <div class="btn-desc" data-i18n="desc_jr_live">Live official timetable toward Ishiuchi & Nagaoka</div>
+          <div class="btn-main" data-i18n="btn_train_navitime">Live Train Departures (Joetsu & Hokuhoku) ↗</div>
+          <div class="btn-desc" data-i18n="desc_train_navitime">Combined departures for Ishiuchi, Joetsu-Kokusai & Tokamachi</div>
         </div>
         <span class="btn-icon">🕒</span>
       </a>
@@ -392,7 +394,7 @@
     </p>
 
     <div class="action-grid">
-      <a class="action-btn" href="https://www.cocolo-station.jp/branch/index/yuzawa" target="_blank" rel="noopener">
+      <a class="action-btn" href="https://jenic.jp/cocolo/?sc_name=yuzawa" target="_blank" rel="noopener">
         <div>
           <div class="btn-main" data-i18n="btn_cocolo">Station Dining: CoCoLo Yuzawa ↗</div>
           <div class="btn-desc" data-i18n="desc_cocolo">Bakudan Onigiri, Ponshukan Sake Tasting & souvenirs</div>
@@ -556,7 +558,7 @@
     </div>
   </div>
 
-  <!-- 7. Luggage & Practical Essentials -->
+  <!-- 7. Luggage Storage & Practical Essentials -->
   <div class="section-card" id="essentials">
     <div class="section-title">
       <span>🧳</span>
@@ -580,6 +582,14 @@
 </div>
 
 <script>
+  const NAVITIME_URLS = {
+    en: "https://japantravel.navitime.com/en/area/jp/timetable/00000702/00000150?direction=down",
+    jp: "https://japantravel.navitime.com/ja/area/jp/timetable/00000702/00000150?direction=down",
+    zh_tr: "https://japantravel.navitime.com/zh-tw/area/jp/timetable/00000702/00000150?direction=down",
+    zh_si: "https://japantravel.navitime.com/zh-cn/area/jp/timetable/00000702/00000150?direction=down",
+    ko: "https://japantravel.navitime.com/ko/area/jp/timetable/00000702/00000150?direction=down"
+  };
+
   const I18N = {
     nav_back: {
       en: "Bus & Train Schedules",
@@ -632,12 +642,26 @@
       zh_si: "营业时间：9:00〜17:00（全年无休）",
       ko: "운영 시간: 9:00 ~ 17:00 (연중무휴)"
     },
-    cw_rate: {
-      en: "Rate: ¥330 / 30 mins",
-      jp: "利用料金：30分 330円",
-      zh_tr: "使用費用：每30分鐘 330日圓",
-      zh_si: "使用费用：每30分钟 330日元",
-      ko: "이용 요금: 30분당 330엔"
+    cw_open_rate: {
+      en: "Open Desk: ¥330 / 30 mins",
+      jp: "オープンスペース：30分 330円",
+      zh_tr: "開放式座位：每30分鐘 330日圓",
+      zh_si: "开放式座位：每30分钟 330日元",
+      ko: "오픈 데스크: 30분당 330엔"
+    },
+    cw_private_rate: {
+      en: "Private Office: ¥550 / 30 mins",
+      jp: "個室ブース：30分 550円",
+      zh_tr: "獨立包廂辦公室：每30分鐘 550日圓",
+      zh_si: "独立包厢办公室：每30分钟 550日元",
+      ko: "1인 프라이빗 부스: 30분당 550엔"
+    },
+    cw_coffee: {
+      en: "Coffee Service: +¥220",
+      jp: "挽きたてコーヒー：+220円",
+      zh_tr: "現煮咖啡：+220日圓",
+      zh_si: "现煮咖啡：+220日元",
+      ko: "커피 이용: +220엔"
     },
     btn_cw_reserve: {
       en: "Reserve Desk Online ↗",
@@ -663,11 +687,11 @@
       ko: "액티비티 및 주변 관광"
     },
     act_desc: {
-      en: "Explore the Kiyotsu Gorge Tunnel of Light and town attractions via charter taxi or rental E-Bikes.",
-      jp: "清津峡「光の館」観光や温泉街めぐりに便利な定額タクシー、電動アシスト自転車をご利用ください。",
-      zh_tr: "造訪清津峽光之隧道或暢遊溫泉街，推薦搭乘定額觀光計程車或租借電動輔助自行車。",
-      zh_si: "造访清津峡光之隧道或畅游温泉街，推荐搭乘定额观光出租车或租借电动辅助自行车。",
-      ko: "키요츠쿄 '빛의 터널'과 온천가 관광에 편리한 정액 택시 및 전기 자전거를 이용해 보세요."
+      en: "Explore the Kiyotsu Gorge Tunnel of Light and town attractions via official charter taxi or rental E-Bikes.",
+      jp: "清津峡「光の館」観光や温泉街めぐりに便利な公式定額タクシー、電動アシスト自転車をご利用ください。",
+      zh_tr: "造訪清津峽光之隧道或暢遊溫泉街，推薦搭乘官方包車計程車或租借電動輔助自行車。",
+      zh_si: "造访清津峡光之隧道或畅游温泉街，推荐搭乘官方包车出租车或租借电动辅助自行车。",
+      ko: "키요츠쿄 '빛의 터널'과 온천가 관광에 편리한 공식 대절 택시 및 전기 자전거를 이용해 보세요."
     },
     lbl_ebike_camp: {
       en: "E-Bike Rental Campaign (Save ¥1,000!)",
@@ -683,6 +707,20 @@
       zh_si: "2026年11月30日前享现折1,000日元优惠。周三公休。免费附安全帽。",
       ko: "2026년 11월 30일까지 1,000엔 할인 적용. 수요일 휴무. 헬멧 무료 대여 포함."
     },
+    btn_kiyotsu_taxi: {
+      en: "Kiyotsu Gorge Charter Taxi Plan ↗",
+      jp: "清津峡 貸切タクシープラン（雪国観光舎）↗",
+      zh_tr: "清津峽 官方包車計程車專案 ↗",
+      zh_si: "清津峡 官方包车出租车方案 ↗",
+      ko: "키요츠쿄 공식 대절 택시 플랜 ↗"
+    },
+    desc_kiyotsu_taxi: {
+      en: "Official round-trip private charter from West Exit or local hotels",
+      jp: "駅西口の雪国観光舎または周辺ホテル発着・安心の公式往復送迎",
+      zh_tr: "車站西口雪國觀光舍或周邊溫泉飯店發車・官方往返包車",
+      zh_si: "车站西口雪国观光舍或周边温泉酒店发车・官方往返包车",
+      ko: "역 서쪽 출구 설국 안내소 또는 주변 호텔 출발・공식 왕복 대절"
+    },
     btn_ebike: {
       en: "Rent E-Bikes (West Exit Counter) ↗",
       jp: "E-Bike レンタル詳細（雪国観光舎）↗",
@@ -696,20 +734,6 @@
       zh_tr: "請至車站西口雪國觀光舍櫃台洽詢",
       zh_si: "请至车站西口雪国观光舍柜台洽询",
       ko: "역 서쪽 출구 관광안내소 창구에서 접수"
-    },
-    btn_kiyotsu_taxi: {
-      en: "Kiyotsu Gorge Charter Taxi ↗",
-      jp: "清津峡 定額観光タクシー案内 ↗",
-      zh_tr: "清津峽 定額觀光計程車 ↗",
-      zh_si: "清津峡 定额观光出租车 ↗",
-      ko: "키요츠쿄 정액 관광 택시 안내 ↗"
-    },
-    desc_kiyotsu_taxi: {
-      en: "Fixed-rate charter return taxi from Station West Exit",
-      jp: "越後湯沢駅西口発着の往復定額送迎タクシー",
-      zh_tr: "越後湯澤站西口出發的往返定額包車計程車",
-      zh_si: "越后汤泽站西口出发的往返定额包车出租车",
-      ko: "에치고유자와역 서쪽 출구 왕복 정액 택시"
     },
 
     // 3. Railway
@@ -755,19 +779,19 @@
       zh_si: "滑雪场停靠站、IC卡无人车站注意事项与票价表",
       ko: "스키장 정차역, 무인역 IC카드 주의사항 및 운임표"
     },
-    btn_jr_live: {
-      en: "JR Joetsu Line Departures (Official) ↗",
-      jp: "JR上越線 時刻表（JR東日本 公式）↗",
-      zh_tr: "JR上越線 發車時刻表（JR東日本官方）↗",
-      zh_si: "JR上越线 发车时刻表（JR东日本官方）↗",
-      ko: "JR 조에츠선 출발 시간표 (공식) ↗"
+    btn_train_navitime: {
+      en: "Live Train Departures (Joetsu & Hokuhoku) ↗",
+      jp: "普通列車 発車時刻表（上越線・ほくほく線）↗",
+      zh_tr: "普通列車 即時發車時刻表（上越線・北北線）↗",
+      zh_si: "普通列车 实时发车时刻表（上越线・北北线）↗",
+      ko: "일반 열차 실시간 시간표 (조에츠선・호쿠호쿠선) ↗"
     },
-    desc_jr_live: {
-      en: "Live official timetable toward Ishiuchi & Nagaoka",
-      jp: "石打・長岡方面の下り列車発車時刻案内",
-      zh_tr: "往石打・長岡方向即時官方時刻表",
-      zh_si: "往石打・长冈方向实时官方时刻表",
-      ko: "이시우치·나가오카 방면 공식 시간표"
+    desc_train_navitime: {
+      en: "Combined departures for Ishiuchi, Joetsu-Kokusai & Tokamachi",
+      jp: "石打・上越国際・十日町・長岡方面の統合時刻表（NAVITIME）",
+      zh_tr: "往石打、上越國際、十日町、長岡方向整合時刻表 (NAVITIME)",
+      zh_si: "往石打、上越国际、十日町、长冈方向整合时刻表 (NAVITIME)",
+      ko: "이시우치・조에츠코쿠사이・토카마치 방면 통합 시간표 (NAVITIME)"
     },
 
     // 4. Food
@@ -1093,6 +1117,12 @@
         el.textContent = I18N[key][currentLang];
       }
     });
+
+    const navitimeBtn = document.getElementById('navitimeLink');
+    if (navitimeBtn && NAVITIME_URLS[currentLang]) {
+      navitimeBtn.href = NAVITIME_URLS[currentLang];
+    }
+
     try {
       localStorage.setItem('yuzawa_lang', lang);
     } catch (e) {}
