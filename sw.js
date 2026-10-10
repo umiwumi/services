@@ -1,25 +1,26 @@
-const CACHE_NAME = 'yuzawa-guide-v1';
+const CACHE_NAME = 'yuzawa-guide-v2';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
+  './services.html',
   './manifest.json',
   './docs/train_info.pdf',
   './docs/onsen_map.pdf'
 ];
 
-// Install: Cache core shell and documents
+// Install: Pre-cache core shell, services guide, and PDFs
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE).catch((err) => {
-        console.warn('Cache pre-fetch warning:', err);
-      });
+      return cache.addAll(ASSETS_TO_CACHE);
+    }).catch((err) => {
+      console.warn('Cache pre-fetch warning:', err);
     })
   );
   self.skipWaiting();
 });
 
-// Activate: Clean up old caches
+// Activate: Purge older v1 caches immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -31,19 +32,39 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch: Stale-while-revalidate strategy (works 100% offline)
+// Fetch: Network-First for HTML pages, SWR for PDFs/assets
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
-  event.respondWith(
-    caches.match(event.request).then((cachedResponse) => {
-      const fetchPromise = fetch(event.request)
+  const request = event.request;
+
+  // HTML Page Navigation: Network-First (ensures freshest notices and schedules)
+  if (request.mode === 'navigate' || request.headers.get('accept')?.includes('text/html')) {
+    event.respondWith(
+      fetch(request)
         .then((networkResponse) => {
           if (networkResponse && networkResponse.status === 200) {
-            const responseClone = networkResponse.clone();
-            caches.open(CACHE_NAME).then((cache) => {
-              cache.put(event.request, responseClone);
-            });
+            const copy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          // If offline, serve cached page or fallback to main shell
+          return caches.match(request).then((cached) => cached || caches.match('./services.html') || caches.match('./index.html'));
+        })
+    );
+    return;
+  }
+
+  // Static Assets & PDFs: Stale-While-Revalidate (instant offline load + background refresh)
+  event.respondWith(
+    caches.match(request).then((cachedResponse) => {
+      const fetchPromise = fetch(request)
+        .then((networkResponse) => {
+          if (networkResponse && networkResponse.status === 200) {
+            const copy = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => cache.put(request, copy));
           }
           return networkResponse;
         })
