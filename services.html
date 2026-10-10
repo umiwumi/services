@@ -510,7 +510,7 @@
       <div>• <span data-i18n="cw_hours">Hours: 9:00 – 17:00 (Open Daily)</span></div>
       <div>• <span data-i18n="cw_open_rate">Open Desk: ¥330 / 30 mins</span></div>
       <div>• <span data-i18n="cw_private_rate">Private Office: ¥550 / 30 mins</span></div>
-      <div>• <span data-i18n="cw_coffee">Coffee Service: +¥220</span></div>
+      <div>• <sxpan data-i18n="cw_coffee">Coffee Service: +¥220</span></div>
     </div>
 
     <div class="action-grid">
@@ -647,8 +647,14 @@
         </div>
         <span class="btn-icon">🕒</span>
       </a>
+      <a class="action-btn" href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx" target="_blank" rel="noopener noreferrer">
+        <div>
+          <div class="btn-main" data-i18n="btn_train_status">⚠️ Live Train Delays / Alerts ↗</div>
+          <div class="btn-desc" data-i18n="desc_train_status">Official JR East Shin'etsu & Joetsu snow suspension status</div>
+        </div>
+        <span class="btn-icon">⚡</span>
+      </a>
     </div>
-  </div>
 
   <!-- 4. Local Food & Dining Guide -->
   <div class="section-card" id="food">
@@ -1110,7 +1116,21 @@
       zh_si: "自动以手机设定语言显示发车月台与实时动态",
       ko: "스마트폰 설정 언어로 출발 플랫폼 및 실시간 정보 확인"
     },
-
+    btn_train_status: {
+      en: "⚠️ Live Train Delays / Alerts ↗",
+      jp: "⚠️ JR東日本 リアルタイム運行情報 ↗",
+      zh_tr: "⚠️ JR東日本 即時列車運行狀況 ↗",
+      zh_si: "⚠️ JR东日本 实时列车运行状况 ↗",
+      ko: "⚠️ JR 동일본 실시간 운행 정보 ↗"
+    },
+    desc_train_status: {
+      en: "Official JR East Shin'etsu & Joetsu snow suspension status",
+      jp: "上越線・信越エリアの遅延や大雪による運転見合わせ情報",
+      zh_tr: "上越線與信越地區因大雪等天候因素造成之延誤與停駛公告",
+      zh_si: "上越线与信越地区因大雪等天气因素造成之延误与停驶公告",
+      ko: "조에츠선 및 신에츠 지역 폭설 지연/운행 중단 실시간 공지"
+    },
+    
     // 4. Food
     sec_food_title: {
       en: "Local Food & Dining",
@@ -1409,11 +1429,11 @@
       ko: "역 내 코인 로커가 가득 찼다면? (안내소 보관)"
     },
     desc_overflow_luggage: {
-      en: "If all coin lockers in the station are full, manual baggage storage is available inside the Snow Country Tourism Center (West Exit) during operating hours (9:00–17:00), subject to remaining room space.",
-      jp: "駅構内のコインロッカーに空きがない場合、駅西口「雪国観光舎」にて手荷物の一時預かりが可能です（営業時間 9:00〜17:00 / 保管スペースに空きがある場合に限ります）。",
-      zh_tr: "若車站內投幣置物櫃全數客滿，可至西口「雪國觀光舍」窗口人工寄放手荷物（營業時間 9:00〜17:00 / 依當日置物室剩餘空間而定）。",
-      zh_si: "若车站内投币行李柜全数客满，可至西口「雪国观光舍」人工寄存行李（营业时间 9:00〜17:00 / 视当天行李室空间而定）。",
-      ko: "역 내 코인 로커가 모두 찼을 경우, 서쪽 출구 '설국 관광안내소' 창구에서 수하물 보관이 가능합니다 (운영시간 9:00~17:00 / 보관실 여유 공간 내 가능)."
+      en: "If coin lockers are full, store bags at the Snow Country Tourism Center (West Exit, 9:00–17:00). Rates: Bags ¥500/day | Skis/Snowboards ¥1,000/day | Mobile Battery Rental ¥500/day. Same-day ryokan delivery cutoff is 12:00 PM.",
+      jp: "駅ロッカー満杯時は西口の雪国観光舎（9:00〜17:00）で手荷物をお預かりします。料金：普通手荷物 500円/日、スキー・スノボ 1,000円/日、モバイルバッテリー 500円/日。旅館への当日手荷物配送は12:00受付締切です。",
+      zh_tr: "若車站置物櫃客滿，可至西口雪國觀光舍（9:00〜17:00）寄放。費用：一般行李 ¥500/日、雪板裝備 ¥1,000/日、行動電源租借 ¥500/日。溫泉飯店當日行李配送服務請於中午 12:00 前完成受理。",
+      zh_si: "若车站行李柜客满，可至西口雪国观光舍（9:00〜17:00）寄存。费用：普通行李 ¥500/日、雪板装备 ¥1,000/日、充电宝租借 ¥500/日。温泉酒店当日行李配送服务请于中午 12:00 前完成受理。",
+      ko: "역 내 보관함 만석 시 서쪽 출구 설국 관광안내소(9:00~17:00)에서 짐을 보관해 드립니다. 요금: 일반 수하물 500엔/일, 스키·보드 1,000엔/일, 보조배터리 500엔/일. 숙소 당일 배송은 낮 12:00 마감입니다."
     },
     coin_lockers_title: {
       en: "Coin Lockers & Luggage Forwarding",
