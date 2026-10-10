@@ -1,14 +1,13 @@
-const CACHE_NAME = 'yuzawa-guide-v2';
+const CACHE_NAME = 'yuzawa-services-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
-  './services.html',
   './manifest.json',
   './docs/train_info.pdf',
   './docs/onsen_map.pdf'
 ];
 
-// Install: Pre-cache core shell, services guide, and PDFs
+// Install: Cache local assets
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
@@ -20,7 +19,7 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Activate: Purge older v1 caches immediately
+// Activate: Purge old caches
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) => {
@@ -32,13 +31,13 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch: Network-First for HTML pages, SWR for PDFs/assets
+// Fetch: Network-First for HTML, Stale-While-Revalidate for PDFs
 self.addEventListener('fetch', (event) => {
   if (event.request.method !== 'GET') return;
 
   const request = event.request;
 
-  // HTML Page Navigation: Network-First (ensures freshest notices and schedules)
+  // HTML navigation: Network-First
   if (request.mode === 'navigate' || request.headers.get('accept')?.includes('text/html')) {
     event.respondWith(
       fetch(request)
@@ -49,15 +48,12 @@ self.addEventListener('fetch', (event) => {
           }
           return networkResponse;
         })
-        .catch(() => {
-          // If offline, serve cached page or fallback to main shell
-          return caches.match(request).then((cached) => cached || caches.match('./services.html') || caches.match('./index.html'));
-        })
+        .catch(() => caches.match('./') || caches.match('./index.html'))
     );
     return;
   }
 
-  // Static Assets & PDFs: Stale-While-Revalidate (instant offline load + background refresh)
+  // Static Assets / PDFs: Stale-While-Revalidate
   event.respondWith(
     caches.match(request).then((cachedResponse) => {
       const fetchPromise = fetch(request)
