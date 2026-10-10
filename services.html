@@ -1309,6 +1309,28 @@
       zh_tr: "於東口1號站牌搭乘往「森町車庫」方向，於「清津峽入口」下車。⚠️注意：下車後需步行約30分鐘(2公里)上坡路段才能抵達隧道。回程班次極少，請留意時間。",
       zh_si: "于东口1号站牌搭乘往「森町车库」方向，于「清津峡入口」下车。⚠️注意：下车后需步行约30分钟(2公里)上坡路段才能抵达隧道。回程班次极少，请留意时间。",
       ko: "동쪽 출구 1번 정류장에서 '모리마치샤코'행 탑승, '키요츠쿄 입구' 하차. ⚠️주의: 버스 정류장에서 터널 입구까지 오르막길을 약 30분(2km) 걸어야 합니다. 돌아오는 버스가 매우 적으니 주의하세요."
+    }, 
+    // Dynamic Status Badges
+    badge_open: {
+      en: "🟢 Open",
+      jp: "🟢 営業中",
+      zh_tr: "🟢 營業中",
+      zh_si: "🟢 营业中",
+      ko: "🟢 영업 중"
+    },
+    badge_closing: {
+      en: "🟡 Closing Soon",
+      jp: "🟡 まもなく受付終了",
+      zh_tr: "🟡 即將結束",
+      zh_si: "🟡 即将结束",
+      ko: "🟡 마감 임박"
+    },
+    badge_closed: {
+      en: "🔴 Closed",
+      jp: "🔴 営業時間外・定休",
+      zh_tr: "🔴 休息",
+      zh_si: "🔴 休息",
+      ko: "🔴 영업 종료"
     }
   };
 
@@ -1324,6 +1346,8 @@
       }
     });
 
+    updateOperatingStatus();
+    
     try {
       localStorage.setItem('yuzawa_lang', lang);
     } catch (e) {}
@@ -1340,6 +1364,50 @@
   } else {
     applyLanguage('en');
   }
+    // --- Dynamic Operating Hours Logic ---
+  function updateOperatingStatus() {
+    // Force calculate current time in Japan (JST)
+    const jstDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Tokyo"}));
+    const day = jstDate.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
+    const dateNum = jstDate.getDate();
+    const currentMins = jstDate.getHours() * 60 + jstDate.getMinutes();
+    
+    // Egami Onsen is closed on Wednesdays AND the 3rd Tuesday of the month
+    const isThirdTuesday = (day === 2 && Math.ceil(dateNum / 7) === 3);
+
+    // Facility Database: Open/Close times in minutes from midnight
+    const facilities = {
+      'coworking': { open: 9*60, close: 17*60, last: 16*60 + 30, closedDays: [] },
+      'ponshu': { open: 10*60 + 30, close: 18*60 + 30, last: 18*60, closedDays: [] },
+      'egami': { open: 15*60, close: 22*60, last: 21*60 + 30, closedDays: [3], specialClose: isThirdTuesday }, // Wed = 3
+      'komako': { open: 10*60, close: 21*60, last: 20*60 + 30, closedDays: [4] }, // Thu = 4
+      'yama': { open: 10*60, close: 21*60, last: 20*60 + 30, closedDays: [2] } // Tue = 2
+    };
+
+    for (const [id, times] of Object.entries(facilities)) {
+      const el = document.getElementById(`status-${id}`);
+      if (!el) continue;
+
+      let status = 'open';
+      
+      // Check if it is a closed day, or outside operating hours
+      if (times.closedDays.includes(day) || times.specialClose || currentMins < times.open || currentMins >= times.close) {
+        status = 'closed';
+      } else if (currentMins >= times.last) {
+        // Between last entry and closing time
+        status = 'closing';
+      }
+
+      // Apply the correct CSS class and translated text
+      el.className = `status-badge status-${status}`;
+      el.textContent = I18N[`badge_${status}`][currentLang];
+    }
+  }
+
+  // Run immediately on load, and update every 60 seconds
+  updateOperatingStatus();
+  setInterval(updateOperatingStatus, 60000);
+
 </script>
 </body>
 </html>
