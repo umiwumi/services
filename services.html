@@ -98,6 +98,59 @@
       color: var(--accent);
       font-weight: 500;
     }
+    /* Triage Quick Navigation */
+    .triage-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-bottom: 24px;
+    }
+    .triage-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      text-align: center;
+      text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+    .triage-card:hover {
+      border-color: var(--accent);
+      background: #1e293b;
+      transform: translateY(-2px);
+    }
+    .triage-icon { font-size: 1.5rem; }
+    .triage-label { font-size: 0.8rem; font-weight: 600; }
+    
+    .triage-ai {
+      grid-column: span 2;
+      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(2, 132, 199, 0.15) 100%);
+      border: 1px solid var(--accent);
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 14px 16px;
+    }
+    .triage-ai .triage-icon { font-size: 1.8rem; }
+    .triage-ai-text {
+      text-align: left;
+      flex-grow: 1;
+      padding-left: 12px;
+    }
+    .triage-ai-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .triage-ai-sub {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
 
     /* Section Cards */
     .section-card {
@@ -272,6 +325,38 @@
     <div class="hero-title" data-i18n="portal_header">ℹ️ Station Services & Town Guide</div>
     <div class="hero-sub" data-i18n="portal_sub">Snow Country Tourism Information Center • Echigo-Yuzawa Station</div>
   </div>
+  
+  <!-- Triage Quick Navigation -->
+  <div class="triage-grid">
+    <a href="https://yzwc.odekakemobi-sakurasan.com/?utm_source=yuzawa-kanko&utm_page=btn" class="triage-card triage-ai" target="_blank" rel="noopener">
+      <div class="triage-icon">✨</div>
+      <div class="triage-ai-text">
+        <div class="triage-ai-title" data-i18n="tr_ai_title">Ask the AI Concierge</div>
+        <div class="triage-ai-sub" data-i18n="tr_ai_sub">Tap to launch instant multilingual chat</div>
+      </div>
+      <div style="color: var(--accent);">↗</div>
+    </a>
+
+    <a href="#activities" class="triage-card">
+      <div class="triage-icon">⛰️</div>
+      <div class="triage-label" data-i18n="tr_kiyotsu">Kiyotsu Gorge Access</div>
+    </a>
+
+    <a href="#onsen" class="triage-card">
+      <div class="triage-icon">♨️</div>
+      <div class="triage-label" data-i18n="tr_onsen">Find an Onsen</div>
+    </a>
+
+    <a href="#trains" class="triage-card">
+      <div class="triage-icon">🚃</div>
+      <div class="triage-label" data-i18n="tr_trains">Local Train Times</div>
+    </a>
+
+    <a href="#essentials" class="triage-card">
+      <div class="triage-icon">🧳</div>
+      <div class="triage-label" data-i18n="tr_luggage">Luggage & Lockers</div>
+    </a>
+  </div>
 
   <!-- 1. Coworking Space -->
   <div class="section-card" id="coworking">
@@ -324,7 +409,17 @@
         Fixed-rate round-trip charter including wait time. Book at the Snow Country Tourism counter (West Exit) or call 025-785-5353.
       </div>
     </div>
-
+    <div class="alert-box alert-warning" style="margin-top: 8px;">
+      <div class="alert-title">
+        <span>🚌</span>
+        <span data-i18n="lbl_bus_kiyotsu">Local Bus to Kiyotsu Gorge</span>
+      </div>
+      <div data-i18n="desc_bus_kiyotsu">
+        Take the Morimachishako Line from East Exit (Stop 1) to "Kiyotsukyo Iriguchi".<br>
+        <strong>⚠️ Critical:</strong> From the bus stop, it is a 30-minute (2km) uphill walk to the tunnel. Return buses are very limited.
+      </div>
+    </div>
+    
     <div class="action-grid">
       <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/54349340" target="_blank" rel="noopener">
         <div>
@@ -1135,6 +1230,67 @@
       zh_tr: "周邊多數公共外湯與傳統蕎麥麵店僅收現金。車站2F NewDays便利商店內設有支援海外信用卡之ATM。",
       zh_si: "周边多数公共外汤与传统荞麦面店仅收现金。车站2F NewDays便利店内设有支持境外信用卡之ATM。",
       ko: "대중탕 및 전통 식당 중 현금만 받는 곳이 많습니다. 역사 2F NewDays 편의점 내 해외 카드 출금 ATM 구비."
+    },
+        }, // <-- Make sure to add this comma!
+    
+    // Triage Navigation
+    tr_ai_title: {
+      en: "Ask the AI Concierge",
+      jp: "AIコンシェルジュに質問する",
+      zh_tr: "詢問 AI 禮賓員",
+      zh_si: "询问 AI 礼宾员",
+      ko: "AI 컨시어지에게 질문하기"
+    },
+    tr_ai_sub: {
+      en: "Tap to launch instant multilingual chat",
+      jp: "タップして多言語チャットを起動",
+      zh_tr: "點擊啟動多語系即時客服",
+      zh_si: "点击启动多语系即时客服",
+      ko: "탭하여 다국어 실시간 채팅 시작"
+    },
+    tr_kiyotsu: {
+      en: "Kiyotsu Gorge Access",
+      jp: "清津峡へのアクセス",
+      zh_tr: "清津峽交通方式",
+      zh_si: "清津峡交通方式",
+      ko: "키요츠쿄 가는 법"
+    },
+    tr_onsen: {
+      en: "Find an Onsen",
+      jp: "日帰り温泉を探す",
+      zh_tr: "尋找日歸溫泉",
+      zh_si: "寻找日归温泉",
+      ko: "당일 온천 찾기"
+    },
+    tr_trains: {
+      en: "Local Train Times",
+      jp: "普通列車の時刻",
+      zh_tr: "區間車時刻表",
+      zh_si: "区间车时刻表",
+      ko: "일반 열차 시간"
+    },
+    tr_luggage: {
+      en: "Luggage & Lockers",
+      jp: "荷物預かり・ロッカー",
+      zh_tr: "行李寄放與置物櫃",
+      zh_si: "行李寄存与行李柜",
+      ko: "수하물 및 로커"
+    },
+    
+    // Kiyotsu Gorge Bus Warning
+    lbl_bus_kiyotsu: {
+      en: "Local Bus to Kiyotsu Gorge",
+      jp: "清津峡行き 路線バス",
+      zh_tr: "前往清津峽 路線巴士",
+      zh_si: "前往清津峡 路线巴士",
+      ko: "키요츠쿄행 일반 버스"
+    },
+    desc_bus_kiyotsu: {
+      en: "Take the Morimachishako Line from East Exit (Stop 1) to 'Kiyotsukyo Iriguchi'. ⚠️ Critical: From the bus stop, it is a 30-minute (2km) uphill walk to the tunnel. Return buses are limited.",
+      jp: "東口1番乗り場より「森宮野原駅」または「森町車庫」行き乗車、「清津峡入口」下車。⚠️注意：バス停からトンネル入口まで上り坂を約30分（2km）歩きます。帰りのバス時刻に十分ご注意ください。",
+      zh_tr: "於東口1號站牌搭乘往「森町車庫」方向，於「清津峽入口」下車。⚠️注意：下車後需步行約30分鐘(2公里)上坡路段才能抵達隧道。回程班次極少，請留意時間。",
+      zh_si: "于东口1号站牌搭乘往「森町车库」方向，于「清津峡入口」下车。⚠️注意：下车后需步行约30分钟(2公里)上坡路段才能抵达隧道。回程班次极少，请留意时间。",
+      ko: "동쪽 출구 1번 정류장에서 '모리마치샤코'행 탑승, '키요츠쿄 입구' 하차. ⚠️주의: 버스 정류장에서 터널 입구까지 오르막길을 약 30분(2km) 걸어야 합니다. 돌아오는 버스가 매우 적으니 주의하세요."
     }
   };
 
