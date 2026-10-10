@@ -640,14 +640,14 @@
         </div>
         <span class="btn-icon">↗</span>
       </a>
-      <a class="action-btn" href="https://www.google.com/maps/search/?api=1&query=Echigo-Yuzawa+Station+trains" target="_blank" rel="noopener noreferrer">
+      <a class="action-btn" href="https://www.google.com/maps/search/?api=1&query=Echigo-Yuzawa+Station" target="_blank" rel="noopener noreferrer">
         <div>
           <div class="btn-main" data-i18n="btn_train_live">Live Departures (Google Maps) ↗</div>
           <div class="btn-desc" data-i18n="desc_train_live">Real-time platform departures in your phone's native language</div>
         </div>
         <span class="btn-icon">🕒</span>
       </a>
-      <a class="action-btn" href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx" target="_blank" rel="noopener noreferrer">
+      <a class="action-btn" id="link-train-status" href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx" target="_blank" rel="noopener noreferrer">
         <div>
           <div class="btn-main" data-i18n="btn_train_status">⚠️ Live Train Delays / Alerts ↗</div>
           <div class="btn-desc" data-i18n="desc_train_status">Official JR East Shin'etsu & Joetsu snow suspension status</div>
@@ -1590,7 +1590,7 @@
   const langSelect = document.getElementById('langSelect');
   let currentLang = 'en';
 
-  function applyLanguage(lang) {
+   function applyLanguage(lang) {
     currentLang = lang;
 
     // Synchronize HTML element lang tag
@@ -1603,6 +1603,19 @@
         el.textContent = I18N[key][currentLang];
       }
     });
+
+    // Dynamically route JR East status to user's selected language
+    const trainStatusUrls = {
+      en: "https://traininfo.jreast.co.jp/train_info/e/shinetsu.aspx",
+      jp: "https://traininfo.jreast.co.jp/train_info/shinetsu.aspx",
+      zh_tr: "https://traininfo.jreast.co.jp/train_info/tc/shinetsu.aspx",
+      zh_si: "https://traininfo.jreast.co.jp/train_info/sc/shinetsu.aspx",
+      ko: "https://traininfo.jreast.co.jp/train_info/k/shinetsu.aspx"
+    };
+    const trainStatusLink = document.getElementById('link-train-status');
+    if (trainStatusLink && trainStatusUrls[lang]) {
+      trainStatusLink.href = trainStatusUrls[lang];
+    }
 
     updateOperatingStatus();
     
