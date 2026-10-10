@@ -325,7 +325,7 @@
       <span>←</span>
       <span data-i18n="nav_back">Bus & Train Schedules</span>
     </a>
-    <select id="langSelect">
+    <select id="langSelect" aria-label="Select Language">
       <option value="en">English</option>
       <option value="jp">日本語</option>
       <option value="zh_tr">繁體中文</option>
@@ -599,7 +599,7 @@
           <tr>
             <td>
               <strong data-i18n="o_ponshu">Ponshukan Sake Bath</strong><br>
-              <span id="status-ponshu"></span>span><br
+              <span id="status-ponshu"></span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:30–18:30 (Last 18:00)</span>
             </td>
             <td data-i18n="o_ponshu_loc">Station 2F</td>
@@ -609,7 +609,7 @@
           <tr>
             <td>
               <strong data-i18n="o_egami">Egami Onsen</strong><br>
-              <span id="status-egami"></span>span><br>
+              <span id="status-egami"></span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">15:00–22:00 (Last 21:30)</span>
             </td>
             <td data-i18n="o_egami_loc">East Exit (3m)</td>
@@ -619,7 +619,7 @@
           <tr>
             <td>
               <strong data-i18n="o_komako">Komako-no-Yu</strong><br>
-              <span id="status-komako"></span>span><br>
+              <span id="status-komako"></span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Last 20:30)</span>
             </td>
             <td data-i18n="o_komako_loc">West Exit (20m)</td>
@@ -629,7 +629,7 @@
           <tr>
             <td>
               <strong data-i18n="o_yama">Yama-no-Yu</strong><br>
-              <span id="status-yama"></span>span><br>
+              <span id="status-yama"></span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Historic Source)</span>
             </td>
             <td data-i18n="o_yama_loc">West Exit (30m)</td>
@@ -1247,9 +1247,8 @@
       jp: "町内の公衆浴場や個人経営の蕎麦店は現金のみ対応の店舗が多くあります。駅2FのNewDays内に海外カード対応ATMがあります。",
       zh_tr: "周邊多數公共外湯與傳統蕎麥麵店僅收現金。車站2F NewDays便利商店內設有支援海外信用卡之ATM。",
       zh_si: "周边多数公共外汤与传统荞麦面店仅收现金。车站2F NewDays便利店内设有支持境外信用卡之ATM。",
-      ko: "대중탕 및 전통 식당 중 현금만 받는 곳이 많습니다. 역사 2F NewDays 편의점 내 해외 카드 출금 ATM 구비."
+      ko: "대중탕 및 전통 식당 중 현금만 받는 곳이 많습니다. 역사 2F NewDays 편의점 내 해외 카드 출금 ATM 구비."  
     },
-        }, 
     
     // Triage Navigation
     tr_ai_title: {
@@ -1338,7 +1337,10 @@
   let currentLang = 'en';
 
   function applyLanguage(lang) {
-    currentLang = lang;
+  currentLang = lang;
+  // Update html lang attribute for screen readers & browser translation tools
+  const langTagMap = { en: 'en', jp: 'ja', zh_tr: 'zh-TW', zh_si: 'zh-CN', ko: 'ko' };
+  document.documentElement.lang = langTagMap[lang] || 'en';
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (I18N[key] && I18N[key][currentLang]) {
@@ -1367,7 +1369,26 @@
     // --- Dynamic Operating Hours Logic ---
   function updateOperatingStatus() {
     // Force calculate current time in Japan (JST)
-    const jstDate = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Tokyo"}));
+    function getJSTParts() {
+  const formatter = new Intl.DateTimeFormat('en-US', {
+    timeZone: 'Asia/Tokyo',
+    hour12: false,
+    weekday: 'short',
+    day: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  });
+  const parts = Object.fromEntries(
+    formatter.formatToParts(new Date()).map(p => [p.type, p.value])
+  );
+  
+  const dayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
+  return {
+    day: dayMap[parts.weekday],
+    dateNum: parseInt(parts.day, 10),
+    currentMins: parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10)
+  };
+}
     const day = jstDate.getDay(); // 0 = Sun, 1 = Mon, ..., 6 = Sat
     const dateNum = jstDate.getDate();
     const currentMins = jstDate.getHours() * 60 + jstDate.getMinutes();
