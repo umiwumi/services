@@ -177,6 +177,19 @@
       margin-bottom: 14px;
       line-height: 1.45;
     }
+    /* Status Badges */
+    .status-badge {
+      font-size: 0.65rem;
+      padding: 3px 6px;
+      border-radius: 6px;
+      margin-left: 6px;
+      font-weight: 700;
+      white-space: nowrap;
+      vertical-align: middle;
+    }
+    .status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; }
+    .status-closing { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #f59e0b; }
+    .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #ef4444; }
 
     /* Callout & Alert Blocks */
     .alert-box {
@@ -363,6 +376,7 @@
     <div class="section-title">
       <span>💼</span>
       <span data-i18n="sec_cw_title">Coworking Space (Work & Charge)</span>
+      <span id="status-coworking"></span> 
     </div>
     <p class="section-desc" data-i18n="cw_desc">
       Located right at the Station West Exit inside the Snow Country Tourism Center. High-speed Wi-Fi, power outlets, quiet work desks.
@@ -585,6 +599,7 @@
           <tr>
             <td>
               <strong data-i18n="o_ponshu">Ponshukan Sake Bath</strong><br>
+              <span id="status-ponshu"></span>span><br
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:30–18:30 (Last 18:00)</span>
             </td>
             <td data-i18n="o_ponshu_loc">Station 2F</td>
@@ -594,6 +609,7 @@
           <tr>
             <td>
               <strong data-i18n="o_egami">Egami Onsen</strong><br>
+              <span id="status-egami"></span>span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">15:00–22:00 (Last 21:30)</span>
             </td>
             <td data-i18n="o_egami_loc">East Exit (3m)</td>
@@ -603,6 +619,7 @@
           <tr>
             <td>
               <strong data-i18n="o_komako">Komako-no-Yu</strong><br>
+              <span id="status-komako"></span>span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Last 20:30)</span>
             </td>
             <td data-i18n="o_komako_loc">West Exit (20m)</td>
@@ -612,6 +629,7 @@
           <tr>
             <td>
               <strong data-i18n="o_yama">Yama-no-Yu</strong><br>
+              <span id="status-yama"></span>span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Historic Source)</span>
             </td>
             <td data-i18n="o_yama_loc">West Exit (30m)</td>
