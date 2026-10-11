@@ -437,6 +437,8 @@
     }
     .modal-close-btn:hover {
       background: var(--accent-hover);
+    }
+
     /* Landscape Mode: Universal Wide Billboard View */
     @media (orientation: landscape) {
       .modal-backdrop {
@@ -444,7 +446,7 @@
       }
       .modal-card {
         width: 94vw !important;
-        max-width: 860px !important; /* Expands across phones, foldables, and iPads */
+        max-width: 880px !important;
         padding: 16px 24px;
         display: flex;
         flex-direction: column;
@@ -461,7 +463,6 @@
         letter-spacing: 0.05em;
         line-height: 1.3;
       }
-      /* Suppress hardcoded line breaks so the sentence can spread across the screen */
       .modal-jp-text br {
         display: inline;
         content: " ";
@@ -698,6 +699,7 @@
         <span class="btn-icon">⚡</span>
       </a>
     </div>
+  </div>
 
   <!-- 4. Local Food & Dining Guide -->
   <div class="section-card" id="food">
