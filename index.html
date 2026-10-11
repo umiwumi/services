@@ -437,41 +437,46 @@
     }
     .modal-close-btn:hover {
       background: var(--accent-hover);
-      /* Landscape Mode: Wide Billboard View for Drivers */
-    @media (orientation: landscape) and (max-height: 550px) {
+    /* Landscape Mode: Universal Wide Billboard View */
+    @media (orientation: landscape) {
       .modal-backdrop {
-        padding: 10px;
+        padding: 12px;
       }
       .modal-card {
-        max-width: 94vw; /* Unlocks the 520px width limit */
-        padding: 14px 20px;
+        width: 94vw !important;
+        max-width: 860px !important; /* Expands across phones, foldables, and iPads */
+        padding: 16px 24px;
         display: flex;
         flex-direction: column;
         justify-content: center;
       }
       .modal-instruction {
         margin-bottom: 6px;
-        font-size: 0.75rem;
+        font-size: 0.8rem;
       }
       .modal-jp-text {
-        font-size: clamp(2rem, 5vw, 2.75rem); /* Scales across wide screen */
-        padding: 14px 20px;
-        margin-bottom: 8px;
-        letter-spacing: 0.06em;
+        font-size: clamp(2rem, 4.5vw, 2.85rem) !important;
+        padding: 16px 24px;
+        margin-bottom: 10px;
+        letter-spacing: 0.05em;
+        line-height: 1.3;
+      }
+      /* Suppress hardcoded line breaks so the sentence can spread across the screen */
+      .modal-jp-text br {
+        display: inline;
+        content: " ";
       }
       .modal-meaning {
-        font-size: 0.85rem;
-        margin-bottom: 10px;
+        font-size: 0.9rem;
+        margin-bottom: 12px;
       }
       .modal-close-btn {
-        padding: 8px 16px;
-        font-size: 0.95rem;
+        padding: 10px 24px;
+        font-size: 1rem;
         width: auto;
+        min-width: 220px;
         align-self: center;
-        min-width: 200px;
       }
-    }
-
     }
   </style>
 </head>
