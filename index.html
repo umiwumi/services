@@ -373,12 +373,12 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(15, 23, 42, 0.85);
+      background: rgba(15, 23, 42, 0.9);
       backdrop-filter: blur(4px);
       z-index: 9999;
       align-items: center;
       justify-content: center;
-      padding: 20px;
+      padding: 16px;
     }
     .modal-backdrop.active {
       display: flex;
@@ -386,48 +386,51 @@
     .modal-card {
       background: #1e293b;
       border: 2px solid var(--accent);
-      border-radius: 16px;
-      max-width: 480px;
+      border-radius: 18px;
+      max-width: 520px;
       width: 100%;
-      padding: 24px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      padding: 24px 20px;
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
       text-align: center;
       position: relative;
     }
     .modal-instruction {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--accent);
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
-      margin-bottom: 16px;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
     }
     .modal-jp-text {
-      background: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 18px 16px;
-      font-size: 1.35rem;
-      font-weight: 800;
-      line-height: 1.45;
+      background: #000000;
+      border: 2px solid #38bdf8;
+      border-radius: 12px;
+      padding: 22px 16px;
+      font-size: clamp(1.85rem, 7.5vw, 2.5rem); /* Scales from ~30px on small phones to 40px */
+      font-weight: 900;
+      line-height: 1.35;
+      letter-spacing: 0.04em;
       color: #ffffff;
       margin-bottom: 16px;
-      word-break: break-word;
+      word-break: keep-all;     /* Keeps Japanese phrases intact */
+      overflow-wrap: break-word;
     }
     .modal-meaning {
-      font-size: 0.85rem;
-      color: var(--text-muted);
+      font-size: 1rem;
+      color: #94a3b8;
       margin-bottom: 20px;
-      line-height: 1.4;
+      line-height: 1.45;
+      font-weight: 500;
     }
     .modal-close-btn {
       background: var(--accent);
       color: #0f172a;
-      font-weight: 700;
-      font-size: 0.9rem;
+      font-weight: 800;
+      font-size: 1.05rem;
       border: none;
-      border-radius: 8px;
-      padding: 10px 24px;
+      border-radius: 10px;
+      padding: 14px 24px;
       cursor: pointer;
       width: 100%;
       transition: background 0.15s;
