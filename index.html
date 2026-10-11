@@ -437,6 +437,41 @@
     }
     .modal-close-btn:hover {
       background: var(--accent-hover);
+      /* Landscape Mode: Wide Billboard View for Drivers */
+    @media (orientation: landscape) and (max-height: 550px) {
+      .modal-backdrop {
+        padding: 10px;
+      }
+      .modal-card {
+        max-width: 94vw; /* Unlocks the 520px width limit */
+        padding: 14px 20px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      .modal-instruction {
+        margin-bottom: 6px;
+        font-size: 0.75rem;
+      }
+      .modal-jp-text {
+        font-size: clamp(2rem, 5vw, 2.75rem); /* Scales across wide screen */
+        padding: 14px 20px;
+        margin-bottom: 8px;
+        letter-spacing: 0.06em;
+      }
+      .modal-meaning {
+        font-size: 0.85rem;
+        margin-bottom: 10px;
+      }
+      .modal-close-btn {
+        padding: 8px 16px;
+        font-size: 0.95rem;
+        width: auto;
+        align-self: center;
+        min-width: 200px;
+      }
+    }
+
     }
   </style>
 </head>
