@@ -413,6 +413,7 @@
       letter-spacing: 0.04em;
       color: #ffffff;
       margin-bottom: 16px;
+      white-space: pre-line;
       word-break: keep-all;     /* Keeps Japanese phrases intact */
       overflow-wrap: break-word;
     }
@@ -440,7 +441,7 @@
     }
 
     /* Landscape Mode: Universal Wide Billboard View */
-    @media (orientation: landscape) {
+        @media (orientation: landscape) {
       .modal-backdrop {
         padding: 12px;
       }
@@ -457,15 +458,11 @@
         font-size: 0.8rem;
       }
       .modal-jp-text {
-        font-size: clamp(2rem, 4.5vw, 2.85rem) !important;
-        padding: 16px 24px;
+        font-size: clamp(1.8rem, 3.8vw, 2.4rem) !important;
+        padding: 14px 20px;
         margin-bottom: 10px;
         letter-spacing: 0.05em;
-        line-height: 1.3;
-      }
-      .modal-jp-text br {
-        display: inline;
-        content: " ";
+        line-height: 1.35;
       }
       .modal-meaning {
         font-size: 0.9rem;
@@ -1594,37 +1591,37 @@
   };
 
   // Offline Flashcards Dictionary (Pure Client-side, works 100% offline)
-  const FLASHCARDS = {
+    const FLASHCARDS = {
     taxi: {
-      jp: "清津峡渓谷トンネルまで往復定額タクシーをお願いします。",
+      jp: "清津峡渓谷トンネルまで\n往復定額タクシーをお願いします。",
       en: "Please take me to Kiyotsu Gorge on the fixed-rate round-trip charter plan.",
       zh_tr: "請載我前往清津峽光之隧道（往返定額包車方案）。",
       zh_si: "请载我前往清津峡光之隧道（往返定额包车方案）。",
       ko: "키요츠쿄 터널 왕복 정액 택시 플랜으로 가주세요."
     },
     bus: {
-      jp: "清津峡入口バス停に着いたら教えていただけますか？",
+      jp: "清津峡入口バス停に着いたら\n教えていただけますか？",
       en: "Could you please let me know when we arrive at the 'Kiyotsukyo Iriguchi' bus stop?",
       zh_tr: "抵達「清津峽入口」站時，可以提醒我一下嗎？",
       zh_si: "到达「清津峡入口」站时，可以提醒我一下吗？",
       ko: "'키요츠쿄 이리구치(입구)' 정류장에 도착하면 알려주실 수 있나요?"
     },
     onsen: {
-      jp: "日帰り入浴は今利用できますか？また、タトゥーがありますが入れますか？",
+      jp: "日帰り入浴は今利用できますか？\n（タトゥー・刺青がありますが入れますか？）",
       en: "Is day-use bathing available right now? Also, are tattoos allowed?",
       zh_tr: "現在可以純泡湯（日歸入浴）嗎？另外請問有刺青可以進入嗎？",
       zh_si: "现在可以纯泡汤（日归入浴）吗？另外请问有纹身可以进入吗？",
       ko: "지금 당일 온천 이용이 가능한가요? 그리고 문신이 있어도 입욕 가능한가요?"
     },
     luggage: {
-      jp: "ロッカーが空いていません。こちらで手荷物の一時預かりをお願いできますか？",
+      jp: "ロッカーが空いていません。\n手荷物の一時預かりをお願いできますか？",
       en: "The coin lockers are full. Is temporary luggage storage available here at the counter?",
       zh_tr: "車站置物櫃滿了。請問櫃台能協助人工臨時寄放行李嗎？",
       zh_si: "车站行李柜满了。请问柜台能协助人工临时寄存行李吗？",
       ko: "로커가 꽉 찼습니다. 여기서 짐을 임시로 보관할 수 있나요?"
     },
     ticket: {
-      jp: "Suicaが使えない駅に行きたいのですが、紙の切符はどこで買えますか？",
+      jp: "Suicaが使えない駅に行きたいのですが、\n紙の切符はどこで買えますか？",
       en: "I need to travel to a station where Suica is not accepted. Where can I buy a paper ticket?",
       zh_tr: "我需要前往無法使用IC卡（Suica）的車站，請問在哪裡購買紙本車票？",
       zh_si: "我需要前往无法使用IC卡（Suica）的车站，请问在哪里购买纸本车票？",
