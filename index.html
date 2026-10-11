@@ -1633,10 +1633,9 @@
   const langSelect = document.getElementById('langSelect');
   let currentLang = 'en';
 
-   function applyLanguage(lang) {
+  function applyLanguage(lang) {
     currentLang = lang;
 
-    // Synchronize HTML element lang tag
     const langTagMap = { en: 'en', jp: 'ja', zh_tr: 'zh-TW', zh_si: 'zh-CN', ko: 'ko' };
     document.documentElement.lang = langTagMap[lang] || 'en';
 
@@ -1647,7 +1646,12 @@
       }
     });
 
-    // Dynamically route JR East status to user's selected language
+    // Keep the return link synchronized with current language
+    const backBtn = document.querySelector('.nav-back-btn');
+    if (backBtn) {
+      backBtn.href = `https://umiwumi.github.io/transit-digitization/?lang=${lang}`;
+    }
+
     const trainStatusUrls = {
       en: "https://traininfo.jreast.co.jp/train_info/e/shinetsu.aspx",
       jp: "https://traininfo.jreast.co.jp/train_info/shinetsu.aspx",
@@ -1671,13 +1675,12 @@
     applyLanguage(e.target.value);
   });
 
+  const urlLang = new URLSearchParams(window.location.search).get('lang');
   const savedLang = localStorage.getItem('yuzawa_lang');
-  if (savedLang && ['en', 'jp', 'zh_tr', 'zh_si', 'ko'].includes(savedLang)) {
-    langSelect.value = savedLang;
-    applyLanguage(savedLang);
-  } else {
-    applyLanguage('en');
-  }
+  const initialLang = [urlLang, savedLang].find(l => ['en', 'jp', 'zh_tr', 'zh_si', 'ko'].includes(l)) || 'en';
+
+  langSelect.value = initialLang;
+  applyLanguage(initialLang);
 
   // --- Robust JST Calculation (Reliable across all browser locales) ---
   function getJSTTime() {
