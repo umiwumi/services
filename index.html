@@ -4,1800 +4,872 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yuzawa Station Services & Tourism Guide</title>
-  <link rel="manifest" href="manifest.json">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <style>
     :root {
-      --bg: #0f172a;
-      --card-bg: #1e293b;
-      --border: #334155;
-      --text: #f8fafc;
+      --bg: #0b1329;
+      --card-bg: rgba(15, 23, 42, 0.7);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --tile-bg: rgba(255, 255, 255, 0.03);
+      --tile-border: rgba(255, 255, 255, 0.08);
+      --tile-hover: rgba(56, 189, 248, 0.12);
+      --text-main: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #38bdf8;
-      --accent-hover: #0284c7;
-      --warning: #ef4444;
-      --warning-bg: rgba(239, 68, 68, 0.12);
-      --amber: #f59e0b;
-      --amber-bg: rgba(245, 158, 11, 0.12);
-      --emerald: #10b981;
-      --emerald-bg: rgba(16, 185, 129, 0.12);
-      --purple: #a855f7;
-      --purple-bg: rgba(168, 85, 247, 0.15);
+      --accent-dim: rgba(56, 189, 248, 0.15);
+      --warning-bg: rgba(245, 158, 11, 0.08);
+      --warning-border: rgba(245, 158, 11, 0.3);
+      --warning-text: #fbbf24;
+      --green-box-bg: rgba(16, 185, 129, 0.08);
+      --green-box-border: rgba(16, 185, 129, 0.28);
+      --green-text: #34d399;
+      --purple-accent: #a855f7;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
-
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Hiragino Kaku Gothic ProN", Meiryo, sans-serif;
       background-color: var(--bg);
-      color: var(--text);
-      padding: 16px;
+      color: var(--text-main);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       line-height: 1.5;
+      padding-bottom: 60px;
     }
 
     .container {
-      max-width: 680px;
+      max-width: 820px;
       margin: 0 auto;
-      padding-bottom: 40px;
+      padding: 16px;
     }
 
-    /* Header & Navigation */
+    /* Top Navigation Header */
     header {
-      margin-bottom: 16px;
       display: flex;
+      flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
+      padding: 12px 0 20px 0;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 20px;
     }
 
-    .nav-back-btn {
+    .back-btn {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: var(--card-bg);
       color: var(--accent);
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.85rem;
-      font-weight: 600;
       text-decoration: none;
-      transition: background 0.15s, border-color 0.15s;
-    }
-    .nav-back-btn:hover {
-      background: var(--border);
-      border-color: var(--accent);
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 6px;
+      background: var(--accent-dim);
+      border: 1px solid rgba(56, 189, 248, 0.3);
     }
 
-    select {
-      background: var(--card-bg);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 0.9rem;
+    .lang-select-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    select.lang-select {
+      background: #1e293b;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.88rem;
       outline: none;
       cursor: pointer;
     }
-    select:focus { border-color: var(--accent); }
 
-    .hero-banner {
-      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 20px;
-    }
-    .hero-title {
-      font-size: 1.25rem;
+    .page-title {
+      font-size: 1.45rem;
       font-weight: 800;
       color: #fff;
-      margin-bottom: 4px;
-    }
-    .hero-sub {
-      font-size: 0.8rem;
-      color: var(--accent);
-      font-weight: 500;
+      margin: 10px 0 4px 0;
     }
 
-    /* Triage Quick Navigation */
-    .triage-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 24px;
+    .page-subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 18px;
     }
-    .triage-card {
+
+    /* Standard Service Cards */
+    .service-card {
       background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 12px;
-      text-align: center;
-      text-decoration: none;
-      color: var(--text);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(8px);
+    }
+
+    .card-header {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
-      transition: all 0.15s ease;
+      gap: 8px;
+      margin-bottom: 6px;
     }
-    .triage-card:hover {
-      border-color: var(--accent);
-      background: #1e293b;
-      transform: translateY(-2px);
-    }
-    .triage-icon { font-size: 1.5rem; }
-    .triage-label { font-size: 0.8rem; font-weight: 600; }
-    
-    .triage-ai {
-      grid-column: span 2;
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.15) 0%, rgba(2, 132, 199, 0.15) 100%);
-      border: 1px solid var(--accent);
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 14px 16px;
-    }
-    .triage-ai .triage-icon { font-size: 1.8rem; }
-    .triage-ai-text {
-      text-align: left;
-      flex-grow: 1;
-      padding-left: 12px;
-    }
-    .triage-ai-title {
-      font-size: 0.95rem;
+
+    .card-header h2, .card-header h3 {
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--accent);
-    }
-    .triage-ai-sub {
-      font-size: 0.75rem;
-      color: var(--text-muted);
+      margin: 0;
     }
 
-    /* Section Cards */
-    .section-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
+    .card-desc {
+      color: var(--text-muted);
+      font-size: 0.88rem;
+      line-height: 1.45;
       margin-bottom: 16px;
     }
 
-    .section-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--accent);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 8px;
-    }
-
-    .section-desc {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-      line-height: 1.45;
-    }
-
-    /* Status Badges */
-    .status-badge {
-      font-size: 0.72rem;
-      padding: 3px 7px;
-      border-radius: 6px;
-      margin-left: 6px;
-      font-weight: 700;
-      white-space: nowrap;
-      vertical-align: middle;
-      display: inline-block;
-    }
-    .status-open { background: rgba(16, 185, 129, 0.15); color: #34d399; border: 1px solid #10b981; }
-    .status-closing { background: rgba(245, 158, 11, 0.15); color: #fbbf24; border: 1px solid #f59e0b; }
-    .status-closed { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid #ef4444; }
-
-    /* Tattoo Policy Badges */
-    .tattoo-badge {
-      font-size: 0.65rem;
-      padding: 2px 6px;
-      border-radius: 4px;
-      font-weight: 600;
-      display: inline-block;
-      margin-top: 3px;
-    }
-    .tattoo-ok {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.5);
-    }
-
-    /* Flashcard Trigger Buttons */
-    .flashcard-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-      background: rgba(56, 189, 248, 0.12);
-      color: var(--accent);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 0.74rem;
-      font-weight: 600;
-      cursor: pointer;
-      margin-top: 6px;
-      transition: all 0.15s ease;
-      margin-left: auto;
-    }
-    .flashcard-btn:hover {
-      background: rgba(56, 189, 248, 0.25);
-      border-color: var(--accent);
-    }
-
-    /* Callout & Alert Blocks */
-    .alert-box {
-      border-radius: 8px;
-      padding: 12px;
-      margin-bottom: 12px;
-      font-size: 0.78rem;
-      line-height: 1.45;
-    }
-    .alert-warning {
-      background: var(--warning-bg);
-      border: 1px solid var(--warning);
-      color: #fca5a5;
-    }
-    .alert-amber {
-      background: var(--amber-bg);
-      border: 1px solid var(--amber);
-      color: #fde68a;
-    }
-    .alert-emerald {
-      background: var(--emerald-bg);
-      border: 1px solid var(--emerald);
-      color: #a7f3d0;
-    }
-    .alert-purple {
-      background: var(--purple-bg);
-      border: 1px solid var(--purple);
-      color: #e9d5ff;
-    }
-    .alert-title {
-      font-weight: 700;
-      font-size: 0.85rem;
-      margin-bottom: 4px;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .alert-warning .alert-title { color: #f87171; }
-    .alert-amber .alert-title { color: #fbbf24; }
-    .alert-emerald .alert-title { color: #34d399; }
-    .alert-purple .alert-title { color: #c084fc; }
-
-    /* Action Buttons Grid */
-    .action-grid {
+    /* 2-Column Action Tiles Grid */
+    .tiles-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      gap: 8px;
-      margin-top: 10px;
-    }
-    @media (min-width: 540px) {
-      .action-grid {
-        grid-template-columns: 1fr 1fr;
-      }
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 10px;
+      margin-bottom: 14px;
     }
 
-    .action-btn {
+    .tile-link {
+      background: var(--tile-bg);
+      border: 1px solid var(--tile-border);
+      border-radius: 8px;
+      padding: 12px 14px;
+      text-decoration: none;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #0f172a;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 10px 12px;
-      text-decoration: none;
-      color: var(--text);
-      transition: border-color 0.15s, background 0.15s;
+      transition: background 0.2s, border-color 0.2s;
     }
-    .action-btn:hover {
-      border-color: var(--accent);
-      background: #1e293b;
+
+    .tile-link:hover, .tile-link:active {
+      background: var(--tile-hover);
+      border-color: rgba(56, 189, 248, 0.4);
     }
-    .btn-main {
-      font-size: 0.84rem;
+
+    .tile-text-title {
+      color: var(--text-main);
       font-weight: 600;
-      color: #fff;
+      font-size: 0.92rem;
     }
-    .btn-desc {
-      font-size: 0.72rem;
+
+    .tile-text-sub {
       color: var(--text-muted);
-      margin-top: 2px;
-      line-height: 1.3;
+      font-size: 0.78rem;
+      margin-top: 3px;
     }
-    .btn-icon {
-      font-size: 1rem;
-      margin-left: 8px;
-      color: var(--accent);
+
+    .tile-icon {
+      font-size: 1.35rem;
+      margin-left: 10px;
       flex-shrink: 0;
     }
 
-    /* Structured Tables */
-    .table-container {
-      background: #0f172a;
-      border: 1px solid var(--border);
+    /* Warning & Notice Banners */
+    .notice-banner {
       border-radius: 8px;
-      padding: 10px 12px;
-      margin-bottom: 12px;
-      overflow-x: auto;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 0.78rem;
-      text-align: left;
-    }
-    th {
-      padding: 6px 4px;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-    td {
-      padding: 8px 4px;
-      border-bottom: 1px solid rgba(51, 65, 85, 0.4);
-      color: #cbd5e1;
-    }
-    tr:last-child td { border-bottom: none; }
-    .price-col {
-      text-align: right;
-      font-weight: 700;
-      color: #38bdf8;
-    }
-
-    /* Feature List */
-    .feature-list {
-      margin: 0;
-      padding-left: 18px;
-      font-size: 0.78rem;
-      color: #cbd5e1;
-      line-height: 1.6;
-    }
-    .feature-list strong { color: #fbbf24; }
-
-    /* Flashcard Modal (Offline Card View) */
-    .modal-backdrop {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(15, 23, 42, 0.9);
-      backdrop-filter: blur(4px);
-      z-index: 9999;
-      align-items: center;
-      justify-content: center;
-      padding: 16px;
-    }
-    .modal-backdrop.active {
-      display: flex;
-    }
-    .modal-card {
-      background: #1e293b;
-      border: 2px solid var(--accent);
-      border-radius: 18px;
-      max-width: 520px;
-      width: 100%;
-      padding: 22px 14px; /* Reduced side padding from 20px to 14px to maximize text room */
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.7);
-      text-align: center;
-      position: relative;
-    }
-    .modal-instruction {
+      padding: 12px 14px;
       font-size: 0.85rem;
-      color: var(--accent);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-    }
-    .modal-jp-text {
-      background: #000000;
-      border: 2px solid #38bdf8;
-      border-radius: 12px;
-      padding: 18px 10px; /* Reduced side padding from 16px to 10px */
-      font-size: clamp(1.4rem, 5.4vw, 1.85rem); /* Tuned from 7.5vw down to 5.4vw */
-      font-weight: 900;
       line-height: 1.45;
-      letter-spacing: 0.02em;
-      color: #ffffff;
-      margin-bottom: 16px;
-      white-space: pre-line;
-      line-break: strict;
-      word-break: keep-all;
-      overflow-wrap: break-word;
-    }
-    .modal-meaning {
-      font-size: 1rem;
-      color: #94a3b8;
-      margin-bottom: 20px;
-      line-height: 1.45;
-      font-weight: 500;
-    }
-    .modal-close-btn {
-      background: var(--accent);
-      color: #0f172a;
-      font-weight: 800;
-      font-size: 1.05rem;
-      border: none;
-      border-radius: 10px;
-      padding: 14px 24px;
-      cursor: pointer;
-      width: 100%;
-      transition: background 0.15s;
-    }
-    .modal-close-btn:hover {
-      background: var(--accent-hover);
+      margin-bottom: 14px;
     }
 
-    /* Landscape Mode: Universal Wide Billboard View */
-        @media (orientation: landscape) {
-      .modal-backdrop {
-        padding: 12px;
-      }
-      .modal-card {
-        width: 94vw !important;
-        max-width: 880px !important;
-        padding: 16px 24px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .modal-instruction {
-        margin-bottom: 6px;
-        font-size: 0.8rem;
-      }
-      .modal-jp-text {
-        font-size: clamp(1.8rem, 3.8vw, 2.4rem) !important;
-        padding: 14px 20px;
-        margin-bottom: 10px;
-        letter-spacing: 0.05em;
-        line-height: 1.35;
-      }
-      .modal-meaning {
-        font-size: 0.9rem;
-        margin-bottom: 12px;
-      }
-      .modal-close-btn {
-        padding: 10px 24px;
-        font-size: 1rem;
-        width: auto;
-        min-width: 220px;
-        align-self: center;
-      }
+    .notice-warning {
+      background: var(--warning-bg);
+      border: 1px solid var(--warning-border);
+      color: var(--warning-text);
+    }
+
+    .notice-green {
+      background: var(--green-box-bg);
+      border: 1px solid var(--green-box-border);
+      color: #e2e8f0;
+    }
+
+    .notice-green h4 {
+      color: var(--green-text);
+      font-size: 0.92rem;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .spot-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      font-size: 0.84rem;
+    }
+
+    .spot-list strong {
+      color: var(--green-text);
+    }
+
+    /* Counter Badge Callout */
+    .counter-badge-card {
+      background: rgba(168, 85, 247, 0.08);
+      border: 1px solid rgba(168, 85, 247, 0.25);
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 0.86rem;
+      line-height: 1.45;
+      margin-top: 10px;
+    }
+
+    .counter-badge-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      color: #d8b4fe;
+      font-weight: 700;
+    }
+
+    .badge-pill {
+      background: #7e22ce;
+      color: #fff;
+      font-size: 0.72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <a href="https://umiwumi.github.io/transit-digitization/" class="nav-back-btn">
-      <span>←</span>
-      <span data-i18n="nav_back">Bus & Train Schedules</span>
-    </a>
-    <select id="langSelect" aria-label="Language selection">
-      <option value="en">English</option>
-      <option value="jp">日本語</option>
-      <option value="zh_tr">繁體中文</option>
-      <option value="zh_si">简体中文</option>
-      <option value="ko">한국어</option>
-    </select>
-  </header>
-
-  <div class="hero-banner">
-    <div class="hero-title" data-i18n="portal_header">ℹ️ Station Services & Town Guide</div>
-    <div class="hero-sub" data-i18n="portal_sub">Snow Country Tourism Information Center • Echigo-Yuzawa Station</div>
-  </div>
-  
-  <!-- Triage Quick Navigation -->
-  <div class="triage-grid">
-    <a href="https://yzwc.odekakemobi-sakurasan.com/?utm_source=yuzawa-kanko&utm_page=btn" class="triage-card triage-ai" target="_blank" rel="noopener noreferrer">
-      <div class="triage-icon">✨</div>
-      <div class="triage-ai-text">
-        <div class="triage-ai-title" data-i18n="tr_ai_title">Ask the AI Concierge</div>
-        <div class="triage-ai-sub" data-i18n="tr_ai_sub">Tap to launch instant multilingual chat</div>
-      </div>
-      <div style="color: var(--accent);">↗</div>
-    </a>
-
-    <a href="#activities" class="triage-card">
-      <div class="triage-icon">⛰️</div>
-      <div class="triage-label" data-i18n="tr_kiyotsu">Kiyotsu Gorge Access</div>
-    </a>
-
-    <a href="#onsen" class="triage-card">
-      <div class="triage-icon">♨️</div>
-      <div class="triage-label" data-i18n="tr_onsen">Find an Onsen</div>
-    </a>
-
-    <a href="#trains" class="triage-card">
-      <div class="triage-icon">🚃</div>
-      <div class="triage-label" data-i18n="tr_trains">Local Train Times</div>
-    </a>
-
-    <a href="#essentials" class="triage-card">
-      <div class="triage-icon">🧳</div>
-      <div class="triage-label" data-i18n="tr_luggage">Luggage & Lockers</div>
-    </a>
-  </div>
-
-  <!-- 1. Coworking Space -->
-  <div class="section-card" id="coworking">
-    <div class="section-title">
-      <span>💼</span>
-      <span data-i18n="sec_cw_title">Coworking Space (Work & Charge)</span>
-      <span id="status-coworking"></span> 
-    </div>
-    <p class="section-desc" data-i18n="cw_desc">
-      Located right at the Station West Exit inside the Snow Country Tourism Center. High-speed Wi-Fi, power outlets, quiet work desks.
-    </p>
-
-    <div class="alert-box alert-emerald">
-      <div class="alert-title">
-        <span>⚡</span>
-        <span data-i18n="lbl_cw_info">Facility & Pricing Info</span>
-      </div>
-      <div>• <span data-i18n="cw_hours">Hours: 9:00 – 17:00 (Open Daily)</span></div>
-      <div>• <span data-i18n="cw_open_rate">Open Desk: ¥330 / 30 mins</span></div>
-      <div>• <span data-i18n="cw_private_rate">Private Office: ¥550 / 30 mins</span></div>
-      <div>• <sxpan data-i18n="cw_coffee">Coffee Service: +¥220</span></div>
-    </div>
-
-    <div class="action-grid">
-      <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/42134472/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_cw_reserve">Reserve Desk Online ↗</div>
-          <div class="btn-desc" data-i18n="desc_cw_reserve">Real-time seat availability & online reservation</div>
-        </div>
-        <span class="btn-icon">💻</span>
-      </a>
-    </div>
-  </div>
-
-  
-  <!-- 2. Activities & E-Bike Rentals -->
-  <div class="section-card" id="activities">
-    <div class="section-title">
-      <span>🚲</span>
-      <span data-i18n="sec_act_title">Activities & Local Sightseeing</span>
-    </div>
-    <p class="section-desc" data-i18n="act_desc">
-      Explore the Kiyotsu Gorge Tunnel of Light and town attractions via official charter taxi or rental E-Bikes.
-    </p>
-
-    <div class="alert-box alert-amber">
-      <div class="alert-title">
-        <span>🚕 <span data-i18n="lbl_taxi_plan">Kiyotsu Gorge Official Charter Taxi</span></span>
-        <button class="flashcard-btn" onclick="openFlashcard('taxi')">🗣️ <span data-i18n="fc_btn_taxi">Show Driver</span></button>
-      </div>
-      <div data-i18n="desc_taxi_plan">
-        Fixed-rate round-trip charter including wait time. Book at the Snow Country Tourism counter (West Exit) or call 025-785-5353.
-      </div>
-    </div>
-
-    <div class="alert-box alert-warning" style="margin-top: 8px;">
-      <div class="alert-title">
-        <span>🚌 <span data-i18n="lbl_bus_kiyotsu">Local Bus to Kiyotsu Gorge</span></span>
-        <button class="flashcard-btn" onclick="openFlashcard('bus')">🗣️ <span data-i18n="fc_btn_bus">Show Bus Driver</span></button>
-      </div>
-      <div data-i18n="desc_bus_kiyotsu">
-        Take the Morimachishako Line from East Exit (Stop 1) to "Kiyotsukyo Iriguchi".<br>
-        <strong>⚠️ Critical:</strong> From the bus stop, it is a 30-minute (2km) uphill walk to the tunnel. Return buses are very limited.
-      </div>
-    </div>
+  <div class="container">
     
-    <div class="action-grid">
-      <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/54349340" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_kiyotsu_taxi">Taxi Plan Details & Rates ↗</div>
-          <div class="btn-desc" data-i18n="desc_kiyotsu_taxi">Official charter rates from Station West Exit or local ryokans</div>
-        </div>
-        <span class="btn-icon">📄</span>
+    <!-- Top Navigation -->
+    <header>
+      <a id="backTransitBtn" class="back-btn" href="../">
+        ← <span data-i18n="backToTransit">Transit Timetables</span>
       </a>
-      <a class="action-btn" href="https://www.snow-country-tourism.jp/posts/42399744?categoryIds=7696339" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_ebike">Rent E-Bikes (West Exit Counter) ↗</div>
-          <div class="btn-desc" data-i18n="desc_ebike">¥1,000 discount campaign through Nov 30, 2026</div>
-        </div>
-        <span class="btn-icon">🚴</span>
-      </a>
-    </div>
-  </div>
 
-  <!-- 3. Local Railway Guide -->
-  <div class="section-card" id="trains">
-    <div class="section-title">
-      <span>🚃</span>
-      <span data-i18n="train_title">Local Trains (JR Joetsu & Hokuhoku Line)</span>
-    </div>
-
-    <div class="alert-box alert-warning">
-      <div class="alert-title">
-        <span>⚠️ <span data-i18n="train_ic_warn_title">IC Cards (Suica / PASMO) NOT Accepted at Local Stops</span></span>
-        <button class="flashcard-btn" onclick="openFlashcard('ticket')">🗣️ <span data-i18n="fc_btn_ticket">Show Staff</span></button>
+      <div class="lang-select-wrap">
+        <label for="langSelect" style="font-size: 0.85rem; color: var(--text-muted);">🌐</label>
+        <select id="langSelect" class="lang-select">
+          <option value="en">English</option>
+          <option value="jp">日本語</option>
+          <option value="zh_tr">繁體中文</option>
+          <option value="zh_si">简体中文</option>
+          <option value="ko">한국어</option>
+        </select>
       </div>
-      <div data-i18n="train_ic_warn_desc">
-        Unmanned stations (Ishiuchi, Osawa, Joetsu-Kokusai, etc.) lack IC readers. You MUST purchase a physical paper ticket before boarding.
+    </header>
+
+    <h1 class="page-title" data-i18n="pageTitle">Echigo-Yuzawa Station Services & Tourism Guide</h1>
+    <p class="page-subtitle" data-i18n="pageSub">Station facilities, dining maps, railway transfers, day-use onsen, and luggage services.</p>
+
+    <!-- SECTION 1: RAILWAY & TRAIN TRANSFERS -->
+    <section class="service-card" id="railway-guide">
+      <div class="card-header">
+        <span>🚆</span>
+        <h2 data-i18n="railwayTitle">Railway & Train Transfers</h2>
       </div>
-    </div>
+      <p class="card-desc" data-i18n="railwayDesc">
+        JR Joetsu Shinkansen (2F), Joetsu Local Lines, and Hokuetsu Express Hokuhoku Line connections.
+      </p>
 
-    <!-- Embedded Departure Schedule -->
-    <div class="table-container" style="max-height: 260px; overflow-y: auto;">
-      <div style="font-weight: 700; font-size: 0.84rem; color: #fff; margin-bottom: 6px;" data-i18n="lbl_train_table_title">
-        🕒 Daily Departures (Northbound toward Ishiuchi, Jōkoku & Muikamachi)
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th style="width: 25%;" data-i18n="th_train_time">Time</th>
-            <th style="width: 45%;" data-i18n="th_train_line">Line & Bound For</th>
-            <th style="width: 30%; text-align: right;" data-i18n="th_train_ski">Stops</th>
-          </tr>
-        </thead>
-        <tbody style="font-size: 0.76rem;">
-          <tr><td><strong>06:34</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>07:09</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>08:02</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>08:20</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>09:03</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>09:14</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>10:30</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>10:41</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>11:41</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>12:14</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>13:14</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>13:26</strong></td><td>Hokuhoku (Saigata)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>14:16</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>15:12</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>16:10</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>17:10</strong></td><td>Hokuhoku (Saigata)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>17:18</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>18:06</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>18:51</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>20:06</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>20:33</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>21:01</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>21:34</strong></td><td>JR Joetsu (Nagaoka)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-          <tr><td><strong>22:31</strong></td><td>Hokuhoku (Naoetsu)</td><td class="price-col" style="color: #34d399;">All Stops</td></tr>
-        </tbody>
-      </table>
-    </div>
-
-    <div class="action-grid">
-      <a class="action-btn" href="docs/train_info.pdf" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_train_pdf">📄 Joetsu & Hokuhoku Railway Guide (PDF)</div>
-          <div class="btn-desc" data-i18n="desc_train_pdf">Ski stops, unmanned station IC rules & standard fares</div>
-        </div>
-        <span class="btn-icon">↗</span>
-      </a>
-      <a class="action-btn" href="https://www.google.com/maps/search/?api=1&query=Echigo-Yuzawa+Station" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_train_live">Live Departures (Google Maps) ↗</div>
-          <div class="btn-desc" data-i18n="desc_train_live">Real-time platform departures in your phone's native language</div>
-        </div>
-        <span class="btn-icon">🕒</span>
-      </a>
-      <a class="action-btn" id="link-train-status" href="https://traininfo.jreast.co.jp/train_info/shinetsu.aspx" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_train_status">⚠️ Live Train Delays / Alerts ↗</div>
-          <div class="btn-desc" data-i18n="desc_train_status">Official JR East Shin'etsu & Joetsu snow suspension status</div>
-        </div>
-        <span class="btn-icon">⚡</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- 4. Local Food & Dining Guide -->
-  <div class="section-card" id="food">
-    <div class="section-title">
-      <span>🍙</span>
-      <span data-i18n="sec_food_title">Local Food & Dining</span>
-    </div>
-    <p class="section-desc" data-i18n="food_intro">
-      Famous for premium Minamiuonuma Koshihikari rice, Niigata sake, and fresh mountain buckwheat soba.
-    </p>
-
-    <div class="action-grid">
-      <a class="action-btn" href="https://jenic.jp/cocolo/floor/?sc_name=yuzawa" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_cocolo">Station Dining: CoCoLo Restaurant Guide ↗</div>
-          <div class="btn-desc" data-i18n="desc_cocolo">Floor map of Gangi-dori restaurants, soba, tonkatsu & cafes</div>
-        </div>
-        <span class="btn-icon">🏬</span>
-      </a>
-      <a class="action-btn" href="https://www.google.com/maps/search/hegi+soba+echigo+yuzawa+station" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_hegi_soba">Walkable Hegi Soba Spots (Map) ↗</div>
-          <div class="btn-desc" data-i18n="desc_hegi_soba">Famous local buckwheat soba served on cedar trays</div>
-        </div>
-        <span class="btn-icon">🥢</span>
-      </a>
-    </div>
-
-    <div class="alert-box alert-amber" style="margin-top: 12px; margin-bottom: 0;">
-      <div class="alert-title" data-i18n="food_must_try">
-        🥢 Must-Try Regional Specialties
-      </div>
-      <ul class="feature-list">
-        <li><strong data-i18n="food_sp1_title">Bakudan Onigiri (Yukinto):</strong> <span data-i18n="food_sp1_desc">Giant Koshihikari rice ball made with 1 full cup of freshly cooked rice and local fillings.</span></li>
-        <li><strong data-i18n="food_sp2_title">Hegi Soba:</strong> <span data-i18n="food_sp2_desc">Silky buckwheat noodles bound with funori seaweed, served cold on cedar wood trays.</span></li>
-        <li><strong data-i18n="food_sp3_title">Ponshukan:</strong> <span data-i18n="food_sp3_desc">Self-serve coin-operated sake vending machines featuring 100+ Niigata microbreweries.</span></li>
-      </ul>
-      <div style="font-size: 0.72rem; color: var(--text-muted); margin-top: 8px; border-top: 1px solid var(--border); padding-top: 6px;" data-i18n="food_hours_note">
-        💡 Tip: Outside winter ski peaks, most town restaurants take last orders around 19:30–20:00.
-      </div>
-    </div>
-  </div>
-
-  <!-- 5. Day-Use Onsen Guide -->
-  <div class="section-card" id="onsen">
-    <div class="section-title">
-      <span>♨️</span>
-      <span data-i18n="sec_onsen_title">Day-Use Onsen Guide</span>
-      <button class="flashcard-btn" style="margin-left: auto;" onclick="openFlashcard('onsen')">🗣️ <span data-i18n="fc_btn_onsen">Show Bath Attendant</span></button>
-    </div>
-    <p class="section-desc" data-i18n="onsen_intro">
-      Choose between convenient in-station baths, local public bathhouses (sotoyu), or traditional ryokan open-air waters.
-    </p>
-
-    <!-- Walkable Public Baths Table -->
-    <div class="table-container">
-      <div style="font-weight: 700; font-size: 0.88rem; color: #fff; margin-bottom: 8px;" data-i18n="lbl_sotoyu_title">
-        🛁 Walkable Public Bathhouses (外湯)
-      </div>
-      <table>
-        <thead>
-          <tr>
-            <th data-i18n="th_onsen_name">Facility</th>
-            <th data-i18n="th_onsen_loc">Location</th>
-            <th class="price-col" data-i18n="th_onsen_fee">Adult</th>
-            <th style="text-align: right;" data-i18n="th_onsen_closed">Closed</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <strong data-i18n="o_ponshu">Ponshukan Sake Bath</strong><br>
-              <span id="status-ponshu"></span><br>
-              <span class="tattoo-badge tattoo-ok" data-i18n="tattoo_ok">Tattoo OK</span><br>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">10:30–18:30 (Last 18:00)</span>
-            </td>
-            <td data-i18n="o_ponshu_loc">Station 2F</td>
-            <td class="price-col">¥950</td>
-            <td style="text-align: right;" data-i18n="o_open_daily">Open Daily</td>
-          </tr>
-          <tr>
-            <td>
-              <strong data-i18n="o_egami">Egami Onsen</strong><br>
-              <span id="status-egami"></span><br>
-              <span class="tattoo-badge tattoo-ok" data-i18n="tattoo_ok">Tattoo OK</span><br>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">15:00–22:00 (Last 21:30)</span>
-            </td>
-            <td data-i18n="o_egami_loc">East Exit (3m)</td>
-            <td class="price-col">¥600</td>
-            <td style="text-align: right;" data-i18n="o_egami_closed">Wed / 3rd Tue</td>
-          </tr>
-          <tr>
-            <td>
-              <strong data-i18n="o_komako">Komako-no-Yu</strong><br>
-              <span id="status-komako"></span><br>
-              <span class="tattoo-badge tattoo-ok" data-i18n="tattoo_ok">Tattoo OK</span><br>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Last 20:30)</span>
-            </td>
-            <td data-i18n="o_komako_loc">West Exit (20m)</td>
-            <td class="price-col">¥850</td>
-            <td style="text-align: right;" data-i18n="o_thu_closed">Thursday</td>
-          </tr>
-          <tr>
-            <td>
-              <strong data-i18n="o_yama">Yama-no-Yu</strong><br>
-              <span id="status-yama"></span><br>
-              <span class="tattoo-badge tattoo-ok" data-i18n="tattoo_ok">Tattoo OK</span><br>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Historic Source)</span>
-            </td>
-            <td data-i18n="o_yama_loc">West Exit (30m)</td>
-            <td class="price-col">¥850</td>
-            <td style="text-align: right;" data-i18n="o_tue_closed">Tuesday</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-
-    <!-- Ryokan Notice with Tattoo Guidance -->
-    <div class="alert-box alert-amber">
-      <div class="alert-title">
-        <span>ℹ️</span>
-        <span data-i18n="lbl_ryokan_warn">Traditional Ryokan Day-Use (Inamoto, Takinoyu, Otowaya, Isen)</span>
-      </div>
-      <div data-i18n="desc_ryokan_warn">
-        1–7 min walk from West Exit (¥1,200–¥1,650). Availability fluctuates based on hotel bookings. Inquire at our counter or phone ahead.
-      </div>
-      <div style="margin-top: 6px; padding-top: 6px; border-top: 1px solid rgba(245, 158, 11, 0.3); font-size: 0.74rem;" data-i18n="desc_ryokan_tattoo">
-        ⚠️ <strong>Tattoo Guidance:</strong> Public bathhouses above allow tattoos. However, most traditional ryokans prohibit tattoos in communal baths. Request a private rental bath (貸切風呂 Kashikiri-buro) if available.
-      </div>
-    </div>
-
-    <div class="action-grid">
-      <a class="action-btn" href="docs/onsen_map.pdf" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_onsen_pdf">Town Onsen Map (PDF) ↗</div>
-          <div class="btn-desc" data-i18n="desc_onsen_pdf">Official illustrated map with all 12 public baths & ryokan</div>
-        </div>
-        <span class="btn-icon">📄</span>
-      </a>
-      <a class="action-btn" href="https://www.google.com/maps/search/day+use+onsen+echigo+yuzawa+station" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_onsen_gmap">Open Yuzawa Onsen Map (Google Maps) ↗</div>
-          <div class="btn-desc" data-i18n="desc_onsen_gmap">Locate public baths, ryokans & free town footbaths</div>
-        </div>
-        <span class="btn-icon">📍</span>
-      </a>
-    </div>
-  </div>
-
-  <!-- Town & Dining Map Section -->
-<section class="service-section">
-  <div class="card map-card">
-    <div class="card-header">
-      <span class="card-icon">🗺️</span>
-      <div>
-        <h3 data-i18n="townMapTitle">Yuzawa Town & Dining Map</h3>
-        <p data-i18n="townMapDesc" class="card-subtitle">
-          Interactive map for restaurants, izakayas, souvenir shops, and hot springs around Echigo-Yuzawa Station.
+      <div class="notice-banner notice-warning">
+        <strong data-i18n="icNoticeTitle">⚠️ Important: IC Cards (Suica / PASMO)</strong>
+        <p data-i18n="icNoticeBody" style="margin-top: 4px;">
+          Suica/PASMO cards are NOT supported on local conventional trains (Joetsu Line). Purchase paper tickets at the ticket machine before passing through conventional gates.
         </p>
       </div>
-    </div>
 
-    <div class="card-actions" style="margin-top: 14px; display: flex; gap: 8px; flex-wrap: wrap;">
-      <!-- Interactive Digital Map (PlatinaMaps auto-localizes) -->
-      <a href="https://platinumaps.jp/d/echigo-yuzawa" 
-         target="_blank" 
-         rel="noopener" 
-         class="btn-primary" 
-         style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 16px; background: #38bdf8; color: #0f172a; text-decoration: none; font-weight: 700; border-radius: 6px;">
-        🌐 Open Interactive Map ↗
-      </a>
+      <div class="tiles-grid">
+        <a id="railwayPdfBtn" class="tile-link" href="./assets/railway_guide_en.pdf" target="_blank" rel="noopener">
+          <div>
+            <div id="railwayBtnLabel" class="tile-text-title">Railway Guide (PDF) ↗</div>
+            <div class="tile-text-sub" data-i18n="railwayPdfSub">Tracks, Shinkansen gates & Hokuhoku Line Track 0</div>
+          </div>
+          <span class="tile-icon">📄</span>
+        </a>
 
-      <!-- Optional: Offline PDF button if you keep the static brochure -->
-      <a id="yotteketePdfBtn" 
-         href="./assets/yottekete_map_en.pdf" 
-         target="_blank" 
-         rel="noopener" 
-         class="btn-secondary" 
-         style="display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; text-decoration: none; border-radius: 6px;">
-        📄 Offline PDF
-      </a>
-    </div>
-  </div>
-</section>
-
-  <!-- 6. Town Walking & Sightseeing -->
-  <div class="section-card" id="walking">
-    <div class="section-title">
-      <span>🚶</span>
-      <span data-i18n="sec_walk_title">Town Walking & Sightseeing</span>
-    </div>
-    <p class="section-desc" data-i18n="walk_intro">
-      Stroll the historic West Exit onsen street, relax at free public footbaths, or explore local heritage sites within easy walking distance.
-    </p>
-
-    <div class="action-grid">
-      <a class="action-btn" href="https://www.google.com/maps/search/sightseeing+echigo+yuzawa+station" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_walk_map">Town Walking Map (Google Maps) ↗</div>
-          <div class="btn-desc" data-i18n="desc_walk_map">Footbaths, Yukiguni-kan Museum & scenic ropeway base</div>
+        <div class="tile-link" style="opacity: 0.95; cursor: default;">
+          <div>
+            <div class="tile-text-title" data-i18n="hokuhokuTrack">Track 0 (Hokuhoku Line)</div>
+            <div class="tile-text-sub" data-i18n="hokuhokuDesc">Ground level platform for Tokamachi & Naoetsu</div>
+          </div>
+          <span class="tile-icon">🚉</span>
         </div>
-        <span class="btn-icon">🗺️</span>
-      </a>
-      <a class="action-btn" href="https://www.yuzawakogen.com/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_kogen">Yuzawa Kogen Panorama Ropeway ↗</div>
-          <div class="btn-desc" data-i18n="desc_kogen">8-min walk from West Exit • 7-min ride to panoramic summit</div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: DAY-USE ONSEN -->
+    <section class="service-card" id="onsen-guide">
+      <div class="card-header">
+        <span>♨️</span>
+        <h2 data-i18n="onsenTitle">Day-Use Onsen & Bathhouses</h2>
+      </div>
+      <p class="card-desc" data-i18n="onsenDesc">
+        Historic hot spring bathhouses, ryokan day-use baths, and station sake hot springs.
+      </p>
+
+      <div class="notice-banner notice-warning">
+        <span data-i18n="tattooGuidance">
+          ⚠️ <strong>Tattoo Guidance:</strong> Public bathhouses allow tattoos. However, most traditional ryokans prohibit tattoos in communal baths. Request a private rental bath (貸切風呂 Kashikiri-buro) if available.
+        </span>
+      </div>
+
+      <div class="tiles-grid">
+        <a class="tile-link" href="./assets/town_onsen_map_en.pdf" target="_blank" rel="noopener">
+          <div>
+            <div class="tile-text-title" data-i18n="onsenPdfTitle">Town Onsen Map (PDF) ↗</div>
+            <div class="tile-text-sub" data-i18n="onsenPdfSub">Official illustrated map with all public baths & ryokan</div>
+          </div>
+          <span class="tile-icon">📄</span>
+        </a>
+
+        <a class="tile-link" href="https://maps.google.com/?q=Echigo-Yuzawa+Onsen" target="_blank" rel="noopener">
+          <div>
+            <div class="tile-text-title" data-i18n="onsenGmapsTitle">Open Yuzawa Onsen Map (Google Maps) ↗</div>
+            <div class="tile-text-sub" data-i18n="onsenGmapsSub">Locate public baths, ryokans & free town footbaths</div>
+          </div>
+          <span class="tile-icon">📍</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 3: YUZAWA TOWN & DINING MAP (PLATINAMAPS + PDF) -->
+    <section class="service-card" id="town-map">
+      <div class="card-header">
+        <span>🗺️</span>
+        <h2 data-i18n="townMapTitle">Yuzawa Town & Dining Map</h2>
+      </div>
+      <p class="card-desc" data-i18n="townMapDesc">
+        Interactive map for restaurants, izakayas, souvenir shops, and hot springs around Echigo-Yuzawa Station.
+      </p>
+
+      <div class="tiles-grid">
+        <!-- Interactive PlatinaMaps -->
+        <a id="digitalMapBtn" 
+           class="tile-link" 
+           href="https://platinumaps.jp/d/echigo-yuzawa?culture=en" 
+           target="_blank" 
+           rel="noopener">
+          <div>
+            <div id="digitalMapLabel" class="tile-text-title">Interactive Map (PlatinaMaps) ↗</div>
+            <div class="tile-text-sub" data-i18n="digitalMapSub">Live shops, restaurants & GPS navigation</div>
+          </div>
+          <span class="tile-icon">🌐</span>
+        </a>
+
+        <!-- Offline Yottekete PDF -->
+        <a id="yotteketePdfBtn" 
+           class="tile-link" 
+           href="./assets/yottekete_map_en.pdf" 
+           target="_blank" 
+           rel="noopener">
+          <div>
+            <div id="yotteketeBtnLabel" class="tile-text-title">Town & Dining Map (PDF) ↗</div>
+            <div class="tile-text-sub" data-i18n="yotteketeSub">Official Yottekete walking & food guide</div>
+          </div>
+          <span class="tile-icon">📄</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- SECTION 4: TOWN WALKING & SIGHTSEEING -->
+    <section class="service-card" id="walking-guide">
+      <div class="card-header">
+        <span>🚶</span>
+        <h2 data-i18n="walkingTitle">Town Walking & Sightseeing</h2>
+      </div>
+      <p class="card-desc" data-i18n="walkingDesc">
+        Stroll the historic West Exit onsen street, relax at free public footbaths, or explore local heritage sites within easy walking distance.
+      </p>
+
+      <div class="tiles-grid">
+        <a class="tile-link" href="https://maps.google.com/?q=Echigo-Yuzawa+Sightseeing" target="_blank" rel="noopener">
+          <div>
+            <div class="tile-text-title" data-i18n="walkingGmapsTitle">Town Walking Map (Google Maps) ↗</div>
+            <div class="tile-text-sub" data-i18n="walkingGmapsSub">Footbaths, Yukiguni-kan Museum & scenic ropeway base</div>
+          </div>
+          <span class="tile-icon">🗺️</span>
+        </a>
+
+        <a class="tile-link" href="https://www.yuzawakogen.com/" target="_blank" rel="noopener">
+          <div>
+            <div class="tile-text-title" data-i18n="ropewayTitle">Yuzawa Kogen Panorama Ropeway ↗</div>
+            <div class="tile-text-sub" data-i18n="ropewaySub">8-min walk from West Exit · 7-min ride to panoramic summit</div>
+          </div>
+          <span class="tile-icon">🚠</span>
+        </a>
+      </div>
+
+      <!-- Recommended Stroll Spots Callout -->
+      <div class="notice-banner notice-green">
+        <h4 data-i18n="strollSpotsTitle">🌲 Recommended Stroll Spots (West Exit)</h4>
+        <ul class="spot-list">
+          <li data-i18n="strollSpot1">
+            <strong>Free Footbaths (足湯):</strong> Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!
+          </li>
+          <li data-i18n="strollSpot2">
+            <strong>Yukiguni-kan Museum (雪国館):</strong> 7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata's literature history (¥500).
+          </li>
+          <li data-i18n="strollSpot3">
+            <strong>Suwa Shrine (諏訪神社):</strong> 15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- SECTION 5: LUGGAGE STORAGE & INTERNATIONAL ATM -->
+    <section class="service-card" id="luggage-atm">
+      <div class="card-header">
+        <span>🧳</span>
+        <h2 data-i18n="luggageTitle">Luggage Storage & International ATM</h2>
+      </div>
+      <p class="card-desc" data-i18n="luggageDesc">
+        Coin lockers, manned baggage counter storage, delivery services, and overseas cash withdrawal.
+      </p>
+
+      <div class="counter-badge-card">
+        <div class="counter-badge-header">
+          <span data-i18n="counterStorageTitle">🧳 Station Lockers Full? (Counter Storage)</span>
+          <span class="badge-pill" data-i18n="showCounterBadge">West Exit Info</span>
         </div>
-        <span class="btn-icon">🚠</span>
-      </a>
-    </div>
-
-    <div class="alert-box alert-emerald" style="margin-top: 12px; margin-bottom: 0;">
-      <div class="alert-title" data-i18n="lbl_walk_highlights">
-        🌲 Recommended Stroll Spots (West Exit)
+        <p style="color: #cbd5e1; font-size: 0.84rem; line-height: 1.4;" data-i18n="counterStorageBody">
+          If coin lockers are full, store bags at the Snow Country Tourism Center (West Exit, 9:00–17:00). Rates: Bags ¥500/day | Skis/Snowboards ¥1,000/day | Mobile Battery Rental ¥500/day. Same-day ryokan delivery cutoff is 12:00 PM.
+        </p>
       </div>
-      <ul class="feature-list">
-        <li><strong data-i18n="spot_ashiyu_title">Free Footbaths (足湯):</strong> <span data-i18n="spot_ashiyu_desc">Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!</span></li>
-        <li><strong data-i18n="spot_museum_title">Yukiguni-kan Museum (雪国館):</strong> <span data-i18n="spot_museum_desc">7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata's literature history (¥500).</span></li>
-        <li><strong data-i18n="spot_shrine_title">Suwa Shrine (諏訪神社):</strong> <span data-i18n="spot_shrine_desc">15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.</span></li>
-      </ul>
-    </div>
+
+      <div class="tiles-grid" style="margin-top: 12px;">
+        <div class="tile-link" style="opacity: 0.95; cursor: default;">
+          <div>
+            <div class="tile-text-title" data-i18n="lockersTitle">Coin Lockers</div>
+            <div class="tile-text-sub" data-i18n="lockersSub">Inside ticket gates & West/East station exits (¥400–¥1,000)</div>
+          </div>
+          <span class="tile-icon">🔒</span>
+        </div>
+
+        <div class="tile-link" style="opacity: 0.95; cursor: default;">
+          <div>
+            <div class="tile-text-title" data-i18n="atmTitle">International ATM (7-Bank / Post)</div>
+            <div class="tile-text-sub" data-i18n="atmSub">7-Eleven (East Exit) & Post Office ATM (West Exit) accept foreign cards</div>
+          </div>
+          <span class="tile-icon">🏧</span>
+        </div>
+      </div>
+    </section>
+
   </div>
 
-  <!-- 7. Luggage Storage & Practical Essentials -->
-  <div class="section-card" id="essentials">
-    <div class="section-title">
-      <span>🧳</span>
-      <span data-i18n="sec_essentials_title">Luggage Storage & International ATM</span>
-    </div>
-
-    <!-- Locker Full / Manual Storage Overflow Callout -->
-    <div class="alert-box alert-purple" style="margin-bottom: 8px;">
-      <div class="alert-title">
-        <span>🧳 <span data-i18n="lbl_overflow_title">Station Lockers Full? (Counter Storage)</span></span>
-        <button class="flashcard-btn" onclick="openFlashcard('luggage')">🗣️ <span data-i18n="fc_btn_luggage">Show Counter</span></button>
-      </div>
-      <div data-i18n="desc_overflow_luggage">
-        If all coin lockers in the station are full, manual baggage storage is available inside the Snow Country Tourism Center (West Exit) during operating hours (9:00–17:00), subject to remaining room space.
-      </div>
-    </div>
-    
-    <div class="alert-box alert-amber" style="margin-bottom: 8px;">
-      <div class="alert-title" data-i18n="coin_lockers_title">🧳 Coin Lockers & Luggage Forwarding</div>
-      <div data-i18n="coin_lockers_desc">
-        Lockers available inside Shinkansen concourse & CoCoLo (¥400–¥800). Hotel luggage forwarding is available at the Tourism Information Center (West Exit).
-      </div>
-    </div>
-
-    <div class="alert-box alert-emerald" style="margin-bottom: 0;">
-      <div class="alert-title" data-i18n="atm_title">🏧 International Cash ATM (Seven Bank)</div>
-      <div data-i18n="atm_desc">
-        Many local bathhouses and soba spots only accept cash. 24/7 International ATM inside NewDays convenience store (Station 2F concourse).
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- Offline Flashcard Modal -->
-<div id="flashcard-modal" class="modal-backdrop" onclick="closeFlashcard(event)">
-  <div class="modal-card" onclick="event.stopPropagation()">
-    <div class="modal-instruction" data-i18n="fc_modal_instruction">Show this screen to the driver / staff</div>
-    <div id="fc-jp-text" class="modal-jp-text">...</div>
-    <div id="fc-meaning" class="modal-meaning">...</div>
-    <button class="modal-close-btn" onclick="closeFlashcard()" data-i18n="fc_btn_close">Close (閉じる)</button>
-  </div>
-</div>
-
-<script>
-  // Complete Multilingual Dictionary
-  const I18N = {
-    nav_back: {
-      en: "Bus & Train Schedules",
-      jp: "バス・鉄道 時刻表へ",
-      zh_tr: "返回 巴士與鐵道時刻表",
-      zh_si: "返回 公交与铁道时刻表",
-      ko: "버스·철도 시간표로 돌아가기"
-    },
-    portal_header: {
-      en: "ℹ️ Station Services & Town Guide",
-      jp: "ℹ️ 越後湯沢駅 サービス＆観光案内",
-      zh_tr: "ℹ️ 越後湯澤站 服務與觀光指南",
-      zh_si: "ℹ️ 越后汤泽站 服务与观光指南",
-      ko: "ℹ️ 에치고유자와역 편의시설 & 관광 안내"
-    },
-    portal_sub: {
-      en: "Snow Country Tourism Information Center • Echigo-Yuzawa Station",
-      jp: "雪国観光舎 越後湯沢温泉（駅西口）",
-      zh_tr: "雪國觀光舍 越後湯澤溫泉（車站西口）",
-      zh_si: "雪国观光舍 越后汤泽温泉（车站西口）",
-      ko: "설국 관광안내소 (에치고유자와역 서쪽 출구)"
-    },
-
-    // Flashcard Trigger Buttons & Modal
-    fc_modal_instruction: {
-      en: "📱 Show this screen to the driver / staff",
-      jp: "📱 乗務員・係員にこの画面をご提示ください",
-      zh_tr: "📱 請向司機或服務人員出示此畫面",
-      zh_si: "📱 请向司机或工作人员出示此画面",
-      ko: "📱 기사님 또는 직원에게 이 화면을 보여주세요"
-    },
-    fc_btn_close: {
-      en: "Close (閉じる)",
-      jp: "閉じる",
-      zh_tr: "關閉",
-      zh_si: "关闭",
-      ko: "닫기"
-    },
-    fc_btn_taxi: { en: "Show Driver", jp: "運転手に提示", zh_tr: "出示給司機", zh_si: "出示给司机", ko: "기사님께 제시" },
-    fc_btn_bus: { en: "Show Bus Driver", jp: "運転手に提示", zh_tr: "出示給司機", zh_si: "出示给司机", ko: "기사님께 제시" },
-    fc_btn_onsen: { en: "Show Attendant", jp: "番頭に提示", zh_tr: "出示給店家", zh_si: "出示给店家", ko: "직원에게 제시" },
-    fc_btn_luggage: { en: "Show Counter", jp: "窓口に提示", zh_tr: "出示給櫃台", zh_si: "出示给柜台", ko: "창구에 제시" },
-    fc_btn_ticket: { en: "Show Staff", jp: "駅員に提示", zh_tr: "出示給站員", zh_si: "出示给站员", ko: "역무원에게 제시" },
-
-    // 1. Coworking
-    sec_cw_title: {
-      en: "Coworking Space (Work & Charge)",
-      jp: "コワーキングスペース（電源・作業）",
-      zh_tr: "共享工作空間（充電・辦公）",
-      zh_si: "共享工作空间（充电・办公）",
-      ko: "코워킹 스페이스 (작업 및 충전)"
-    },
-    cw_desc: {
-      en: "Located right at the Station West Exit inside the Snow Country Tourism Center. High-speed Wi-Fi, power outlets, quiet work desks.",
-      jp: "駅西口の雪国観光舎内に併設。高速Wi-Fi、電源コンセント、静かなワークスペースを完備しています。",
-      zh_tr: "位於車站西口雪國觀光舍內。提供高速Wi-Fi、電源插座與安靜的辦公桌面。",
-      zh_si: "位于车站西口雪国观光舍内。提供高速Wi-Fi、电源插座与安静的办公桌面。",
-      ko: "역 서쪽 출구 설국 관광안내소 내 위치. 초고속 와이파이, 콘센트, 쾌적한 업무 공간 완비."
-    },
-    lbl_cw_info: {
-      en: "Facility & Pricing Info",
-      jp: "利用案内・料金",
-      zh_tr: "設施與收費說明",
-      zh_si: "设施与收费说明",
-      ko: "시설 및 요금 안내"
-    },
-    cw_hours: {
-      en: "Hours: 9:00 – 17:00 (Open Daily)",
-      jp: "営業時間：9:00〜17:00（無休）",
-      zh_tr: "營業時間：9:00〜17:00（全年無休）",
-      zh_si: "营业时间：9:00〜17:00（全年无休）",
-      ko: "운영 시간: 9:00 ~ 17:00 (연중무휴)"
-    },
-    cw_open_rate: {
-      en: "Open Desk: ¥330 / 30 mins",
-      jp: "オープンスペース：30分 330円",
-      zh_tr: "開放式座位：每30分鐘 330日圓",
-      zh_si: "开放式座位：每30分钟 330日元",
-      ko: "오픈 데스크: 30분당 330엔"
-    },
-    cw_private_rate: {
-      en: "Private Office: ¥550 / 30 mins",
-      jp: "個室ブース：30分 550円",
-      zh_tr: "獨立包廂辦公室：每30分鐘 550日圓",
-      zh_si: "独立包厢办公室：每30分钟 550日元",
-      ko: "1인 프라이빗 부스: 30분당 550엔"
-    },
-    cw_coffee: {
-      en: "Coffee Service: +¥220",
-      jp: "挽きたてコーヒー：+220円",
-      zh_tr: "現煮咖啡：+220日圓",
-      zh_si: "现煮咖啡：+220日元",
-      ko: "커피 이용: +220엔"
-    },
-    btn_cw_reserve: {
-      en: "Reserve Desk Online ↗",
-      jp: "Webで空席確認・予約 ↗",
-      zh_tr: "線上預約座位 ↗",
-      zh_si: "在线预约座位 ↗",
-      ko: "온라인 좌석 확인 및 예약 ↗"
-    },
-    desc_cw_reserve: {
-      en: "Real-time seat availability & online reservation",
-      jp: "空席状況の確認と即時予約が可能です",
-      zh_tr: "即時確認空位並進行預約",
-      zh_si: "实时确认空位并进行预约",
-      ko: "실시간 공석 확인 및 간편 예약"
-    },
-
-    // 2. Activities
-    sec_act_title: {
-      en: "Activities & Local Sightseeing",
-      jp: "アクティビティ・観光体験",
-      zh_tr: "在地體驗與觀光行程",
-      zh_si: "在地体验与观光行程",
-      ko: "액티비티 및 주변 관광"
-    },
-    act_desc: {
-      en: "Explore the Kiyotsu Gorge Tunnel of Light and town attractions via official charter taxi or rental E-Bikes.",
-      jp: "清津峡「光の館」観光や温泉街めぐりに便利な公式定額タクシー、電動アシスト自転車をご利用ください。",
-      zh_tr: "造訪清津峽光之隧道或暢遊溫泉街，推薦搭乘官方包車計程車或租借電動輔助自行車。",
-      zh_si: "造访清津峡光之隧道或畅游温泉街，推荐搭乘官方包车出租车或租借电动辅助自行车。",
-      ko: "키요츠쿄 '빛의 터널'과 온천가 관광에 편리한 공식 대절 택시 및 전기 자전거를 이용해 보세요."
-    },
-    lbl_taxi_plan: {
-      en: "Kiyotsu Gorge Official Charter Taxi",
-      jp: "清津峡 貸切タクシープラン（雪国観光舎）",
-      zh_tr: "清津峽 官方定額包車計程車專案",
-      zh_si: "清津峡 官方定额包车出租车方案",
-      ko: "키요츠쿄 공식 대절 택시 플랜"
-    },
-    desc_taxi_plan: {
-      en: "Fixed-rate round-trip charter including wait time. Book at the Snow Country Tourism counter (West Exit) or call 025-785-5353.",
-      jp: "滞在待機時間を含む安心の往復定額制。駅西口の雪国観光舎カウンターまたはお電話（025-785-5353）で受付中。",
-      zh_tr: "包含峽谷停留等候時間之往返定額包車。可於車站西口雪國觀光舍櫃台洽詢或致電（025-785-5353）。",
-      zh_si: "包含峡谷停留等候时间之往返定额包车。可于车站西口雪国观光舍柜台洽询或致电（025-785-5353）。",
-      ko: "관람 대기 시간이 포함된 왕복 정액 플랜. 역 서쪽 출구 설국 안내소 창구 또는 전화(025-785-5353) 문의 가능."
-    },
-    btn_kiyotsu_taxi: {
-      en: "Taxi Plan Details & Rates ↗",
-      jp: "タクシープラン料金詳細（雪国観光舎）↗",
-      zh_tr: "查看計程車專案收費詳情 ↗",
-      zh_si: "查看出租车方案收费详情 ↗",
-      ko: "택시 플랜 요금 상세 보기 ↗"
-    },
-    desc_kiyotsu_taxi: {
-      en: "Official charter rates from Station West Exit or local ryokans",
-      jp: "駅西口の雪国観光舎または周辺ホテル発着・安心の公式往復送迎",
-      zh_tr: "車站西口雪國觀光舍或周邊溫泉飯店發車・官方往返包車",
-      zh_si: "车站西口雪国观光舍或周边温泉酒店发车・官方往返包车",
-      ko: "역 서쪽 출구 설국 안내소 또는 주변 호텔 출발・공식 왕복 대절"
-    },
-    btn_ebike: {
-      en: "Rent E-Bikes (West Exit Counter) ↗",
-      jp: "E-Bike レンタル詳細（雪国観光舎）↗",
-      zh_tr: "租借電動自行車（西口雪國觀光舍）↗",
-      zh_si: "租借电动自行车（西口雪国观光舍）↗",
-      ko: "전기 자전거 대여 (서쪽 출구 안내소) ↗"
-    },
-    desc_ebike: {
-      en: "¥1,000 discount campaign through Nov 30, 2026",
-      jp: "2026年11月30日まで1,000円引キャンペーン中（水曜定休）",
-      zh_tr: "2026年11月30日前現折1,000日圓（週三公休）",
-      zh_si: "2026年11月30日前现折1,000日元（周三公休）",
-      ko: "2026년 11월 30일까지 1,000엔 할인 진행 중 (수요일 휴무)"
-    },
-
-    // 3. Railway
-    train_title: {
-      en: "Local Trains (JR Joetsu & Hokuhoku Line)",
-      jp: "普通列車（JR上越線・北越急行ほくほく線）",
-      zh_tr: "普通區間列車（JR上越線・北北線）",
-      zh_si: "普通区间列车（JR上越线・北北线）",
-      ko: "일반 열차 (JR 조에츠선・호쿠호쿠선)"
-    },
-    train_ic_warn_title: {
-      en: "IC Cards (Suica / PASMO) NOT Accepted at Local Stops",
-      jp: "周辺の無人駅では交通系ICカード（Suica等）が使えません",
-      zh_tr: "周邊無人車站無法使用交通IC卡（Suica等）",
-      zh_si: "周边无人车站无法使用交通IC卡（Suica等）",
-      ko: "주변 무인역에서는 IC카드(Suica 등)를 사용할 수 없습니다"
-    },
-    train_ic_warn_desc: {
-      en: "Unmanned stations (Ishiuchi, Osawa, Joetsu-Kokusai, etc.) lack IC readers. You MUST purchase a physical paper ticket before boarding.",
-      jp: "石打、大沢、上越国際スキー場前などの無人駅にはIC改札機がありません。乗車前に券売機で必ず紙の切符をご購入ください。",
-      zh_tr: "石打、大澤、上越國際滑雪場前等無人車站未設有IC卡感應機。乘車前請務必於自動售票機購買實體紙本車票。",
-      zh_si: "石打、大泽、上越国际滑雪场前等无人车站未设有IC卡感应机。乘车前请务必在自动售票机购买实体纸本车票。",
-      ko: "이시우치, 오사와, 조에츠코쿠사이 등 무인역에는 IC 단말기가 없습니다. 탑승 전 자동발매기에서 반드시 종이 승차권을 구입해 주세요."
-    },
-    lbl_train_table_title: {
-      en: "🕒 Daily Departures (Northbound toward Ishiuchi, Jōkoku & Muikamachi)",
-      jp: "🕒 普通列車時刻表（下り：石打・上越国際・六日町・長岡方面）",
-      zh_tr: "🕒 普通區間列車發車時刻表（往石打・上越國際・六日町・長岡）",
-      zh_si: "🕒 普通区间列车发车时刻表（往石打・上越国际・六日町・长冈）",
-      ko: "🕒 일반 열차 시간표 (이시우치・조에츠코쿠사이・무이카마치 방면)"
-    },
-    th_train_time: { en: "Time", jp: "発車時刻", zh_tr: "發車時間", zh_si: "发车时间", ko: "시간" },
-    th_train_line: { en: "Line & Bound For", jp: "路線・行先", zh_tr: "路線與目的地", zh_si: "路线与目的地", ko: "노선 및 행선지" },
-    th_train_ski: { en: "Ski Stops", jp: "停車駅", zh_tr: "停靠站", zh_si: "停靠站", ko: "정차" },
-    btn_train_pdf: {
-      en: "📄 Joetsu & Hokuhoku Railway Guide (PDF)",
-      jp: "📄 上越線・ほくほく線 ご利用案内（PDF）",
-      zh_tr: "📄 上越線・北北線 搭乘指南 (PDF)",
-      zh_si: "📄 上越线・北北线 乘车指南 (PDF)",
-      ko: "📄 조에츠선・호쿠호쿠선 이용 안내 (PDF)"
-    },
-    desc_train_pdf: {
-      en: "Ski stops, unmanned station IC rules & standard fares",
-      jp: "スキー場最寄り駅・ICカード注意点・普通運賃表",
-      zh_tr: "滑雪場停靠站、IC卡無人車站注意事項與票價表",
-      zh_si: "滑雪场停靠站、IC卡无人车站注意事项与票价表",
-      ko: "스키장 정차역, 무인역 IC카드 주의사항 및 운임표"
-    },
-    btn_train_live: {
-      en: "Live Departures (Google Maps) ↗",
-      jp: "リアルタイム運行状況（Google マップ）↗",
-      zh_tr: "即時列車動態（Google 地圖）↗",
-      zh_si: "实时列车动态（Google 地图）↗",
-      ko: "실시간 운행 정보 (Google 지도) ↗"
-    },
-    desc_train_live: {
-      en: "Real-time platform departures in your phone's native language",
-      jp: "お使いの端末言語で発車番線や遅延情報を表示",
-      zh_tr: "自動以手機設定語言顯示發車月台與即時動態",
-      zh_si: "自动以手机设定语言显示发车月台与实时动态",
-      ko: "스마트폰 설정 언어로 출발 플랫폼 및 실시간 정보 확인"
-    },
-    btn_train_status: {
-      en: "⚠️ Live Train Delays / Alerts ↗",
-      jp: "⚠️ JR東日本 リアルタイム運行情報 ↗",
-      zh_tr: "⚠️ JR東日本 即時列車運行狀況 ↗",
-      zh_si: "⚠️ JR东日本 实时列车运行状况 ↗",
-      ko: "⚠️ JR 동일본 실시간 운행 정보 ↗"
-    },
-    desc_train_status: {
-      en: "Official JR East Shin'etsu & Joetsu snow suspension status",
-      jp: "上越線・信越エリアの遅延や大雪による運転見合わせ情報",
-      zh_tr: "上越線與信越地區因大雪等天候因素造成之延誤與停駛公告",
-      zh_si: "上越线与信越地区因大雪等天气因素造成之延误与停驶公告",
-      ko: "조에츠선 및 신에츠 지역 폭설 지연/운행 중단 실시간 공지"
-    },
-    
-    // 4. Food
-    sec_food_title: {
-      en: "Local Food & Dining",
-      jp: "グルメ・名物料理案内",
-      zh_tr: "在地美食與餐廳導覽",
-      zh_si: "在地美食与餐厅导览",
-      ko: "지역 맛집 및 음식 안내"
-    },
-    food_intro: {
-      en: "Famous for premium Minamiuonuma Koshihikari rice, Niigata sake, and fresh mountain buckwheat soba.",
-      jp: "南魚沼産コシヒカリ、新潟の地酒、名物へぎそばなど越後湯沢の味覚をお楽しみください。",
-      zh_tr: "享受頂級南魚沼越光米、新潟地酒與傳統片木盒蕎麥麵（布海苔蕎麥麵）。",
-      zh_si: "享受顶级南鱼沼越光米、新潟地酒与传统片木盒荞麦面（布海苔荞麦面）。",
-      ko: "최고급 미나미우오누마산 고시히카리, 니가타 사케, 전통 헤기소바를 즐겨보세요."
-    },
-    btn_cocolo: {
-      en: "Station Dining: CoCoLo Restaurant Guide ↗",
-      jp: "駅ナカ：CoCoLo湯沢 レストラン・フロア案内 ↗",
-      zh_tr: "站內商場：CoCoLo湯澤 美食街與樓層指南 ↗",
-      zh_si: "站内商场：CoCoLo汤泽 美食街与楼层指南 ↗",
-      ko: "역 내 식당가: CoCoLo 유자와 맛집·층별 안내 ↗"
-    },
-    desc_cocolo: {
-      en: "Floor map of Gangi-dori restaurants, soba, tonkatsu & cafes",
-      jp: "がんぎ通りのお食事処、へぎそば、とんかつ、カフェMAP",
-      zh_tr: "Gangi-dori 美食街餐廳地圖、蕎麥麵、炸豬排與咖啡廳",
-      zh_si: "Gangi-dori 美食街餐厅地图、荞麦面、炸猪排与咖啡厅",
-      ko: "강기도리 식당가 지도, 헤기소바, 돈카츠, 카페 안내"
-    },
-    btn_hegi_soba: {
-      en: "Walkable Hegi Soba Spots (Map) ↗",
-      jp: "徒歩で行ける「へぎそば」店（Google Map）↗",
-      zh_tr: "步行可達的「布海苔蕎麥麵」名店地圖 ↗",
-      zh_si: "步行可达的「布海苔荞麦面」名店地图 ↗",
-      ko: "도보 이동 가능한 헤기소바 맛집 지도 ↗"
-    },
-    desc_hegi_soba: {
-      en: "Famous local buckwheat soba served on cedar trays",
-      jp: "布海苔をつなぎに使った伝統のへぎそば",
-      zh_tr: "使用海藻為黏著劑的滑順傳統片木盒蕎麥麵",
-      zh_si: "使用海藻为黏着剂的滑顺传统片木盒荞麦面",
-      ko: "해초를 넣어 쫄깃한 전통 헤기소바 전문점"
-    },
-    food_must_try: {
-      en: "🥢 Must-Try Regional Specialties",
-      jp: "🥢 越後湯沢の必食グルメ",
-      zh_tr: "🥢 越後湯澤必吃在地三大美食",
-      zh_si: "🥢 越后汤泽必吃在地三大美食",
-      ko: "🥢 꼭 맛봐야 할 유자와 3대 대표 음식"
-    },
-    food_sp1_title: {
-      en: "Bakudan Onigiri (Yukinto):",
-      jp: "爆弾おにぎり（雪ん洞）：",
-      zh_tr: "炸彈飯糰（雪ん洞）：",
-      zh_si: "炸弹饭团（雪ん洞）：",
-      ko: "폭탄 오니기리 (유킨토):"
-    },
-    food_sp1_desc: {
-      en: "Giant Koshihikari rice ball made with 1 full cup of freshly cooked rice and local fillings.",
-      jp: "南魚沼産コシヒカリを贅沢に1合使った名物大判おにぎり。",
-      zh_tr: "使用整整一合頂級南魚沼越光米現捏的巨無霸飯糰，多種內餡可選。",
-      zh_si: "使用整整一合顶级南鱼沼越光米现捏的巨无霸饭团，多种内馅可选。",
-      ko: "갓 지은 미나미우오누마산 고시히카리 쌀 1홉으로 큼직하게 쥔 명물 주먹밥."
-    },
-    food_sp2_title: {
-      en: "Hegi Soba:",
-      jp: "へぎそば：",
-      zh_tr: "布海苔片木盒蕎麥麵：",
-      zh_si: "布海苔片木盒荞麦面：",
-      ko: "헤기소바:"
-    },
-    food_sp2_desc: {
-      en: "Silky buckwheat noodles bound with funori seaweed, served cold on cedar wood trays.",
-      jp: "布海苔（海藻）をつなぎに使ったツルツルとしたのど越しの郷土蕎麦。",
-      zh_tr: "加入天然海藻製作，口感滑順彈牙，盛裝在杉木盒中的傳統鄉土麵食。",
-      zh_si: "加入天然海藻制作，口感滑顺弹牙，盛装在杉木盒中的传统乡土面食。",
-      ko: "후노리(해초)를 반죽에 넣어 목넘김이 매끄러운 니가타 향토 메밀국수."
-    },
-    food_sp3_title: {
-      en: "Ponshukan:",
-      jp: "ぽんしゅ館（利き酒番所）：",
-      zh_tr: "越後清酒博物館（試飲番所）：",
-      zh_si: "越后清酒博物馆（试饮番所）：",
-      ko: "폰슈칸 사케 박물관:"
-    },
-    food_sp3_desc: {
-      en: "Self-serve token vending wall featuring over 100 varieties of Niigata sake.",
-      jp: "新潟県内全酒蔵の地酒100種類以上をコイン式サーバーで飲み比べ。",
-      zh_tr: "投幣換代幣即可自助品飲全新潟縣100多種酒造名酒的體驗館。",
-      zh_si: "投币换代币即可自助品饮全新潟县100多种酒造名酒的体验馆。",
-      ko: "코인을 넣어 니가타현 내 100여 개 양조장의 사케를 직접 골라 마시는 시음장."
-    },
-    food_hours_note: {
-      en: "💡 Tip: Outside winter peaks, most town restaurants take last orders around 19:30–20:00.",
-      jp: "💡 アドバイス：冬季スキー繁忙期を除き、町内の飲食店は19:30〜20:00頃にラストオーダーとなる店が多いのでご注意ください。",
-      zh_tr: "💡 貼心提醒：除冬季滑雪旺季外，街道多數餐館最後點餐時間偏早（約 19:30–20:00）。",
-      zh_si: "💡 贴心提醒：除冬季滑雪旺季外，街道多数餐馆最后点餐时间偏早（约 19:30–20:00）。",
-      ko: "💡 팁: 겨울 성수기를 제외하면 마을 식당들의 라스트 오더는 대체로 19:30~20:00경 마감됩니다."
-    },
-
-    // 5. Onsen
-    sec_onsen_title: {
-      en: "Day-Use Onsen Guide",
-      jp: "日帰り温泉・足湯案内",
-      zh_tr: "當日往返溫泉與足湯導覽",
-      zh_si: "当日往返温泉与足汤导览",
-      ko: "당일치기 온천 및 족욕탕 안내"
-    },
-    onsen_intro: {
-      en: "Choose between convenient in-station baths, local public bathhouses (sotoyu), or traditional ryokan open-air waters.",
-      jp: "駅ナカの酒風呂や、西口温泉街に点在する外湯（公衆浴場）で名湯をお楽しみください。",
-      zh_tr: "可在站內的特製清酒溫泉放鬆身心，或走訪西口溫泉街上歷史悠久的公共外湯。",
-      zh_si: "可在站内的特制清酒温泉放松身心，或走访西口温泉街上历史悠久的公共外汤。",
-      ko: "역 내의 사케 온천이나 서쪽 출구 온천가에 위치한 유서 깊은 대중탕에서 휴식을 즐겨보세요."
-    },
-    lbl_sotoyu_title: {
-      en: "🛁 Walkable Public Bathhouses (外湯)",
-      jp: "🛁 徒歩で行ける町営外湯・公衆浴場",
-      zh_tr: "🛁 步行可達的公眾浴場（外湯）",
-      zh_si: "🛁 步行可达的公众浴场（外汤）",
-      ko: "🛁 도보 가능한 대중 목욕탕 (외탕)"
-    },
-    th_onsen_name: { en: "Facility", jp: "施設名", zh_tr: "溫泉名稱", zh_si: "温泉名称", ko: "온천명" },
-    th_onsen_loc: { en: "Location", jp: "場所", zh_tr: "位置", zh_si: "位置", ko: "위치" },
-    th_onsen_fee: { en: "Adult", jp: "大人料金", zh_tr: "成人費用", zh_si: "成人费用", ko: "대인 요금" },
-    th_onsen_closed: { en: "Closed", jp: "定休日", zh_tr: "公休日", zh_si: "公休日", ko: "정기휴무" },
-    tattoo_ok: { en: "Tattoo OK", jp: "タトゥーOK", zh_tr: "刺青刺青OK", zh_si: "纹身刺青OK", ko: "문신/타투 OK" },
-    o_ponshu: { en: "Ponshukan Sake Bath", jp: "酒風呂 湯の沢（ぽんしゅ館）", zh_tr: "清酒溫泉 湯之澤（越後酒博物館）", zh_si: "清酒温泉 汤之泽（越后酒博物馆）", ko: "사케 온천 유노사와 (폰슈칸)" },
-    o_ponshu_loc: { en: "Station 2F", jp: "駅構内 2F", zh_tr: "車站 2F", zh_si: "车站 2F", ko: "역 구내 2F" },
-    o_egami: { en: "Egami Onsen", jp: "江神温泉浴場", zh_tr: "江神溫泉浴場", zh_si: "江神温泉浴场", ko: "에가미 온천" },
-    o_egami_loc: { en: "East Exit (3m)", jp: "東口（徒歩3分）", zh_tr: "東口（步行3分）", zh_si: "东口（步行3分）", ko: "동쪽 출구 (도보 3분)" },
-    o_egami_closed: { en: "Wed / 3rd Tue", jp: "水曜・第3火曜", zh_tr: "週三・第3週二", zh_si: "周三・第3周二", ko: "수요일 / 셋째 화요일" },
-    o_komako: { en: "Komako-no-Yu", jp: "駒子の湯", zh_tr: "駒子之湯", zh_si: "驹子之汤", ko: "코마코노유" },
-    o_komako_loc: { en: "West Exit (20m)", jp: "西口（徒歩20分）", zh_tr: "西口（步行20分）", zh_si: "西口（步行20分）", ko: "서쪽 출구 (도보 20분)" },
-    o_thu_closed: { en: "Thursday", jp: "木曜日", zh_tr: "每週四", zh_si: "每周四", ko: "목요일" },
-    o_yama: { en: "Yama-no-Yu", jp: "山の湯", zh_tr: "山之湯", zh_si: "山之汤", ko: "야마노유" },
-    o_yama_loc: { en: "West Exit (30m)", jp: "西口（徒歩30分）", zh_tr: "西口（步行30分）", zh_si: "西口（步行30分）", ko: "서쪽 출구 (도보 30분)" },
-    o_tue_closed: { en: "Tuesday", jp: "火曜日", zh_tr: "每週二", zh_si: "每周二", ko: "화요일" },
-    o_open_daily: { en: "Open Daily", jp: "無休", zh_tr: "全年無休", zh_si: "全年无休", ko: "연중무휴" },
-    lbl_ryokan_warn: {
-      en: "Traditional Ryokan Day-Use (Inamoto, Takinoyu, Otowaya, Isen)",
-      jp: "旅館・ホテルの日帰り入浴（いなもと・滝乃湯・音羽屋・井仙 等）",
-      zh_tr: "傳統溫泉旅館當日入浴（稻本、瀧之湯、音羽屋、井仙等）",
-      zh_si: "传统温泉旅馆当日入浴（稻本、泷之汤、音羽屋、井仙等）",
-      ko: "전통 료칸 당일 온천 (이나모토, 타키노유, 오토와야, 이센 등)"
-    },
-    desc_ryokan_warn: {
-      en: "1–7 min walk from West Exit (¥1,200–¥1,650). Availability fluctuates based on hotel bookings. Inquire at our counter or phone ahead.",
-      jp: "西口徒歩1〜7分（1,200円〜1,650円）。当日の混雑状況により入場制限となる場合があります。案内カウンターで確認いただくか事前電話を推奨します。",
-      zh_tr: "距西口步行1–7分鐘（¥1,200–¥1,650）。依當日住房狀況可能變更或暫停開放，請洽觀光詢問處或致電確認。",
-      zh_si: "距西口步行1–7分钟（¥1,200–¥1,650）。依当日住房状况可能变更或暂停开放，请咨询旅游问询处或致电确认。",
-      ko: "서쪽 출구 도보 1~7분 (1,200엔~1,650엔). 호텔 예약 상황에 따라 입욕이 제한될 수 있으니 인포메이션 센터 문의 또는 사전 전화 확인을 권장합니다."
-    },
-    desc_ryokan_tattoo: {
-      en: "⚠️ Tattoo Guidance: Public bathhouses above allow tattoos. However, most traditional ryokans prohibit tattoos in communal baths. Request a private rental bath (貸切風呂 Kashikiri-buro) if available.",
-      jp: "⚠️ タトゥーに関するご案内：上記の町営外湯（共同浴場）はタトゥーOKです。ただし、伝統的な温泉旅館の大浴場は原則禁止です。タトゥーがある場合は「貸切風呂」のご利用をおすすめします。",
-      zh_tr: "⚠️ 刺青規範提醒：上述公眾外湯浴場皆允許刺青入浴。但傳統日式旅館大浴場多嚴格禁止，建議預約包場「貸切風呂」（獨立私人湯屋）。",
-      zh_si: "⚠️ 纹身规范提醒：上述公众外汤浴场皆允许纹身入浴。但传统日式旅馆大浴场多严格禁止，建议预约包场「贷切风吕」（独立私人汤屋）。",
-      ko: "⚠️ 문신(타투) 안내: 상기 대중 외탕은 문신이 있어도 입욕 가능합니다. 단, 전통 료칸 대욕장은 입욕이 제한되므로 개인 전용탕(가시키리 온천) 이용을 권장합니다."
-    },
-    btn_onsen_pdf: {
-      en: "Town Onsen Map (PDF) ↗",
-      jp: "湯沢町 温泉マップ（PDF）↗",
-      zh_tr: "越後湯澤溫泉地圖 (PDF) ↗",
-      zh_si: "越后汤泽温泉地图 (PDF) ↗",
-      ko: "유자와 온천 지도 (PDF) ↗"
-    },
-    desc_onsen_pdf: {
-      en: "Official illustrated map with all 12 public baths & ryokan",
-      jp: "外湯12ヶ所・旅館の日帰り入浴案内マップ",
-      zh_tr: "全鎮12處公眾浴場與溫泉旅館詳細地圖",
-      zh_si: "全镇12处公众浴场与温泉旅馆详细地图",
-      ko: "외탕 12곳 및 료칸 당일 입욕 공식 안내 지도"
-    },
-    btn_onsen_gmap: {
-      en: "Open Yuzawa Onsen Map (Google Maps) ↗",
-      jp: "湯沢町 温泉マップを開く（Google Maps）↗",
-      zh_tr: "開啟越後湯澤溫泉地圖 (Google Maps) ↗",
-      zh_si: "开启越后汤泽温泉地图 (Google Maps) ↗",
-      ko: "유자와 온천 지도 열기 (Google Maps) ↗"
-    },
-    desc_onsen_gmap: {
-      en: "Locate public baths, ryokans & free town footbaths",
-      jp: "町内の外湯、旅館、無料足湯スポットを地図で表示",
-      zh_tr: "在地圖上查看公眾浴場、旅館與免費足湯",
-      zh_si: "在地图上查看公众浴场、旅馆与免费足汤",
-      ko: "대중 온천, 료칸 및 무료 족욕장 위치 확인"
-    },
-
-    // 6. Walking
-    sec_walk_title: {
-      en: "Town Walking & Sightseeing",
-      jp: "温泉街散策・観光案内",
-      zh_tr: "溫泉街散策與周邊觀光",
-      zh_si: "温泉街漫步与周边观光",
-      ko: "온천가 산책 및 주변 관광"
-    },
-    walk_intro: {
-      en: "Stroll the historic West Exit onsen street, relax at free public footbaths, or explore local heritage sites within easy walking distance.",
-      jp: "西口温泉街の歴史ある街並み、無料の足湯、川端康成ゆかりの名所など徒歩圏内の見どころをご案内します。",
-      zh_tr: "漫步於西口溫泉街的歷史街道，體驗免費足湯，探訪文豪川端康成筆下的雪國名勝。",
-      zh_si: "漫步于西口温泉街的历史街道，体验免费足汤，探访文豪川端康成笔下的雪国名胜。",
-      ko: "서쪽 출구 온천가의 고즈넉한 거리, 무료 족욕탕, 소설 '설국'의 배경지를 도보로 편안하게 둘러보세요."
-    },
-    btn_walk_map: {
-      en: "Town Walking Map (Google Maps) ↗",
-      jp: "周辺散策マップを開く（Google Maps）↗",
-      zh_tr: "開啟周邊散步地圖 (Google Maps) ↗",
-      zh_si: "开启周边散步地图 (Google Maps) ↗",
-      ko: "주변 산책 지도 열기 (Google Maps) ↗"
-    },
-    desc_walk_map: {
-      en: "Footbaths, Yukiguni-kan Museum & scenic ropeway base",
-      jp: "足湯スポット・雪国館・ロープウェイ山麓駅の位置案内",
-      zh_tr: "免費足湯、雪國館資料館、高空纜車山麓站地圖",
-      zh_si: "免费足汤、雪国馆资料馆、高空缆车山麓站地图",
-      ko: "족욕탕, 유키구니칸 박물관 및 로프웨이 승강장 위치"
-    },
-    btn_kogen: {
-      en: "Yuzawa Kogen Panorama Ropeway ↗",
-      jp: "湯沢高原パノラマパーク ↗",
-      zh_tr: "湯澤高原全景纜車 ↗",
-      zh_si: "汤泽高原全景缆车 ↗",
-      ko: "유자와 고원 파노라마 로프웨이 ↗"
-    },
-    desc_kogen: {
-      en: "8-min walk from West Exit • 7-min ride to panoramic summit",
-      jp: "西口より徒歩8分 • 山頂パノラマテラスへ直行",
-      zh_tr: "西口步行8分鐘 • 搭乘世界大型纜車直達山頂瞭望台",
-      zh_si: "西口步行8分钟 • 搭乘世界大型缆车直达山顶瞭望台",
-      ko: "서쪽 출구 도보 8분 • 산 정상 파노라마 테라스로 이동"
-    },
-    lbl_walk_highlights: {
-      en: "🌲 Recommended Stroll Spots (West Exit)",
-      jp: "🌲 西口周辺のおすすめ散策スポット",
-      zh_tr: "🌲 西口周邊推薦散策景點",
-      zh_si: "🌲 西口周边推荐散策景点",
-      ko: "🌲 서쪽 출구 주변 추천 산책 명소"
-    },
-    spot_ashiyu_title: {
-      en: "Free Footbaths (足湯):",
-      jp: "無料足湯スポット：",
-      zh_tr: "免費溫泉足湯：",
-      zh_si: "免费温泉足汤：",
-      ko: "무료 족욕탕 (아시유):"
-    },
-    spot_ashiyu_desc: {
-      en: "Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!",
-      jp: "西口駅前広場やロープウェイ山麓駅前に完備。タオルの持参がおすすめです。",
-      zh_tr: "西口站前廣場與纜車站前設有免費足湯，建議自備小毛巾擦拭。",
-      zh_si: "西口站前广场与缆车站前设有免费足汤，建议自备小毛巾擦拭。",
-      ko: "서쪽 출구 광장 및 로프웨이 역 앞에 위치해 있습니다. 수건 지참을 추천합니다!"
-    },
-    spot_museum_title: {
-      en: "Yukiguni-kan Museum (雪国館):",
-      jp: "歴史民俗資料館「雪国館」：",
-      zh_tr: "歷史民俗資料館「雪國館」：",
-      zh_si: "历史民俗资料馆「雪国馆」：",
-      ko: "역사 민속 자료관 '유키구니칸':"
-    },
-    spot_museum_desc: {
-      en: "7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata's literature history (¥500).",
-      jp: "西口徒歩7分。川端康成の「雪国」世界や昔の雪国暮らしの民具を展示（入館料500円）。",
-      zh_tr: "西口步行7分。展示川端康成《雪國》文學世界與昔日雪國傳統生活器具（門票500日圓）。",
-      zh_si: "西口步行7分。展示川端康成《雪国》文学世界与昔日雪国传统生活器具（门票500日元）。",
-      ko: "서쪽 출구 도보 7분. 가와바타 야스나리의 소설 '설국' 자료 및 설국 전통 민속품 전시 (입장료 500엔)."
-    },
-    spot_shrine_title: {
-      en: "Suwa Shrine (諏訪神社):",
-      jp: "諏訪神社（鎮守の森）：",
-      zh_tr: "諏訪神社（鎮守之森）：",
-      zh_si: "诹访神社（镇守之森）：",
-      ko: "스와 신사:"
-    },
-    spot_shrine_desc: {
-      en: "15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.",
-      jp: "西口徒歩15分。樹齢400年以上の御神木（大杉）に囲まれた静寂なパワースポット。",
-      zh_tr: "西口步行15分。被樹齡逾400年的神木大杉環抱，靜謐清幽的能量景點。",
-      zh_si: "西口步行15分。被树龄逾400年的神木大杉环抱，静谧清幽的能量景点。",
-      ko: "서쪽 출구 도보 15분. 400년 이상 된 거대한 삼나무 숲에 둘러싸인 고즈넉한 신사."
-    },
-
-    // 7. Essentials & Luggage Overflow Fallback
-    sec_essentials_title: {
-      en: "Luggage Storage & International ATM",
-      jp: "荷物預かり・コインロッカー・ATM案内",
-      zh_tr: "行李寄放・投幣置物櫃・外幣提款",
-      zh_si: "行李寄存・投币行李柜・外币取款",
-      ko: "짐 보관·물품보관함·해외 ATM 안내"
-    },
-    lbl_overflow_title: {
-      en: "Station Lockers Full? (Counter Storage)",
-      jp: "駅のロッカーが満杯の場合（観光舎預かり）",
-      zh_tr: "車站置物櫃客滿？（觀光舍人工寄放）",
-      zh_si: "车站行李柜客满？（观光舍人工寄存）",
-      ko: "역 내 코인 로커가 가득 찼다면? (안내소 보관)"
-    },
-    desc_overflow_luggage: {
-      en: "If coin lockers are full, store bags at the Snow Country Tourism Center (West Exit, 9:00–17:00). Rates: Bags ¥500/day | Skis/Snowboards ¥1,000/day | Mobile Battery Rental ¥500/day. Same-day ryokan delivery cutoff is 12:00 PM.",
-      jp: "駅ロッカー満杯時は西口の雪国観光舎（9:00〜17:00）で手荷物をお預かりします。料金：普通手荷物 500円/日、スキー・スノボ 1,000円/日、モバイルバッテリー 500円/日。旅館への当日手荷物配送は12:00受付締切です。",
-      zh_tr: "若車站置物櫃客滿，可至西口雪國觀光舍（9:00〜17:00）寄放。費用：一般行李 ¥500/日、雪板裝備 ¥1,000/日、行動電源租借 ¥500/日。溫泉飯店當日行李配送服務請於中午 12:00 前完成受理。",
-      zh_si: "若车站行李柜客满，可至西口雪国观光舍（9:00〜17:00）寄存。费用：普通行李 ¥500/日、雪板装备 ¥1,000/日、充电宝租借 ¥500/日。温泉酒店当日行李配送服务请于中午 12:00 前完成受理。",
-      ko: "역 내 보관함 만석 시 서쪽 출구 설국 관광안내소(9:00~17:00)에서 짐을 보관해 드립니다. 요금: 일반 수하물 500엔/일, 스키·보드 1,000엔/일, 보조배터리 500엔/일. 숙소 당일 배송은 낮 12:00 마감입니다."
-    },
-    coin_lockers_title: {
-      en: "Coin Lockers & Luggage Forwarding",
-      jp: "コインロッカー・手荷物配送サービス",
-      zh_tr: "投幣置物櫃與行李配送服務",
-      zh_si: "投币行李柜与行李配送服务",
-      ko: "코인 로커 및 호텔 수하물 배송 서비스"
-    },
-    coin_lockers_desc: {
-      en: "Lockers available inside Shinkansen concourse & CoCoLo (¥400–¥800). Hotel luggage forwarding is available at the Tourism Information Center (West Exit).",
-      jp: "新幹線改札内外およびCoCoLo内にコインロッカーあり（400円〜800円）。西口の雪国観光舎では各旅館への手荷物配送も受け付けています。",
-      zh_tr: "新幹線剪票口內外與CoCoLo商場設有投幣置物櫃（¥400〜¥800）。西口雪國觀光舍提供飯店行李當日配送服務。",
-      zh_si: "新干线剪票口内外与CoCoLo商场设有投币行李柜（¥400〜¥800）。西口雪国观光舍提供酒店行李当日配送服务。",
-      ko: "신칸센 개찰구 안팎 및 CoCoLo 상가 내 코인 로커 구비 (400엔~800엔). 서쪽 출구 관광안내소에서 숙소로의 짐 배송 서비스 이용 가능."
-    },
-    atm_title: {
-      en: "International Cash ATM (Seven Bank)",
-      jp: "海外発行カード対応 ATM（セブン銀行）",
-      zh_tr: "支援海外卡片之 ATM（Seven Bank）",
-      zh_si: "支持境外卡片之 ATM（Seven Bank）",
-      ko: "해외 카드 출금 가능 ATM (세븐은행)"
-    },
-    atm_desc: {
-      en: "Many local bathhouses and soba spots only accept cash. 24/7 International ATM inside NewDays convenience store (Station 2F concourse).",
-      jp: "町内の公衆浴場や個人経営の蕎麦店は現金のみ対応の店舗が多くあります。駅2FのNewDays内に海外カード対応ATMがあります。",
-      zh_tr: "周邊多數公共外湯與傳統蕎麥麵店僅收現金。車站2F NewDays便利商店內設有支援海外信用卡之ATM。",
-      zh_si: "周边多数公共外汤与传统荞麦面店仅收现金。车站2F NewDays便利店内设有支持境外信用卡之ATM。",
-      ko: "대중탕 및 전통 식당 중 현금만 받는 곳이 많습니다. 역사 2F NewDays 편의점 내 해외 카드 출금 ATM 구비."
-    },
-    
-    // Triage Navigation
-    tr_ai_title: {
-      en: "Ask the AI Concierge",
-      jp: "AIコンシェルジュに質問する",
-      zh_tr: "詢問 AI 禮賓員",
-      zh_si: "询问 AI 礼宾员",
-      ko: "AI 컨시어지에게 질문하기"
-    },
-    tr_ai_sub: {
-      en: "Tap to launch instant multilingual chat",
-      jp: "タップして多言語チャットを起動",
-      zh_tr: "點擊啟動多語系即時客服",
-      zh_si: "点击启动多语系即时客服",
-      ko: "탭하여 다국어 실시간 채팅 시작"
-    },
-    tr_kiyotsu: {
-      en: "Kiyotsu Gorge Access",
-      jp: "清津峡へのアクセス",
-      zh_tr: "清津峽交通方式",
-      zh_si: "清津峡交通方式",
-      ko: "키요츠쿄 가는 법"
-    },
-    tr_onsen: {
-      en: "Find an Onsen",
-      jp: "日帰り温泉を探す",
-      zh_tr: "尋找日歸溫泉",
-      zh_si: "寻找日归温泉",
-      ko: "당일 온천 찾기"
-    },
-    tr_trains: {
-      en: "Local Train Times",
-      jp: "普通列車の時刻",
-      zh_tr: "區間車時刻表",
-      zh_si: "区间车时刻表",
-      ko: "일반 열차 시간"
-    },
-    tr_luggage: {
-      en: "Luggage & Lockers",
-      jp: "荷物預かり・ロッカー",
-      zh_tr: "行李寄放與置物櫃",
-      zh_si: "行李寄存与行李柜",
-      ko: "수하물 및 로커"
-    },
-    
-    // Kiyotsu Gorge Bus Warning
-    lbl_bus_kiyotsu: {
-      en: "Local Bus to Kiyotsu Gorge",
-      jp: "清津峡行き 路線バス",
-      zh_tr: "前往清津峽 路線巴士",
-      zh_si: "前往清津峡 路线巴士",
-      ko: "키요츠쿄행 일반 버스"
-    },
-    desc_bus_kiyotsu: {
-      en: "Take the Morimachishako Line from East Exit (Stop 1) to 'Kiyotsukyo Iriguchi'. ⚠️ Critical: From the bus stop, it is a 30-minute (2km) uphill walk to the tunnel. Return buses are limited.",
-      jp: "東口1番乗り場より「森宮野原駅」または「森町車庫」行き乗車、「清津峡入口」下車。⚠️注意：バス停からトンネル入口まで上り坂を約30分（2km）歩きます。帰りのバス時刻に十分ご注意ください。",
-      zh_tr: "於東口1號站牌搭乘往「森町車庫」方向，於「清津峽入口」下車。⚠️注意：下車後需步行約30分鐘(2公里)上坡路段才能抵達隧道。回程班次極少，請留意時間。",
-      zh_si: "于东口1号站牌搭乘往「森町车库」方向，于「清津峡入口」下车。⚠️注意：下车后需步行约30分钟(2公里)上坡路段才能抵达隧道。回程班次极少，请留意时间。",
-      ko: "동쪽 출구 1번 정류장에서 '모리마치샤코'행 탑승, '키요츠쿄 입구' 하차. ⚠️주의: 버스 정류장에서 터널 입구까지 오르막길을 약 30분(2km) 걸어야 합니다. 돌아오는 버스가 매우 적으니 주의하세요."
-    }, 
-
-    // Dynamic Status Badges
-    badge_open: {
-      en: "🟢 Open",
-      jp: "🟢 営業中",
-      zh_tr: "🟢 營業中",
-      zh_si: "🟢 营业中",
-      ko: "🟢 영업 중"
-    },
-    badge_closing: {
-      en: "🟡 Closing Soon",
-      jp: "🟡 まもなく受付終了",
-      zh_tr: "🟡 即將結束",
-      zh_si: "🟡 即将结束",
-      ko: "🟡 마감 임박"
-    },
-    badge_closed: {
-      en: "🔴 Closed",
-      jp: "🔴 営業時間外・定休",
-      zh_tr: "🔴 休息",
-      zh_si: "🔴 休息",
-      ko: "🔴 영업 종료"
-    }
-  };
-
-  // Offline Flashcards Dictionary (Pure Client-side, works 100% offline)
-    const FLASHCARDS = {
-    taxi: {
-      jp: "清津峡渓谷トンネルまで\n往復定額タクシーをお願いします",
-      en: "Please take me to Kiyotsu Gorge on the fixed-rate round-trip charter plan.",
-      zh_tr: "請載我前往清津峽光之隧道（往返定額包車方案）",
-      zh_si: "请载我前往清津峡光之隧道（往返定额包车方案）",
-      ko: "키요츠쿄 터널 왕복 정액 택시 플랜으로 가주세요."
-    },
-    bus: {
-      jp: "清津峡入口バス停に着いたら\n教えていただけますか？",
-      en: "Could you please let me know when we arrive at the 'Kiyotsukyo Iriguchi' bus stop?",
-      zh_tr: "抵達「清津峽入口」站時，可以提醒我一下嗎？",
-      zh_si: "到达「清津峡入口」站时，可以提醒我一下吗？",
-      ko: "'키요츠쿄 이리구치(입구)' 정류장에 도착하면 알려주실 수 있나요?"
-    },
-    onsen: {
-      jp: "日帰り入浴は今利用できますか？\n（タトゥー・刺青がありますが入れますか？）",
-      en: "Is day-use bathing available right now? Also, are tattoos allowed?",
-      zh_tr: "現在可以純泡湯（日歸入浴）嗎？另外請問有刺青可以進入嗎？",
-      zh_si: "现在可以纯泡汤（日归入浴）吗？另外请问有纹身可以进入吗？",
-      ko: "지금 당일 온천 이용이 가능한가요? 그리고 문신이 있어도 입욕 가능한가요?"
-    },
-    luggage: {
-      jp: "ロッカーが空いていません。\n手荷物の一時預かりをお願いできますか？",
-      en: "The coin lockers are full. Is temporary luggage storage available here at the counter?",
-      zh_tr: "車站置物櫃滿了。請問櫃台能協助人工臨時寄放行李嗎？",
-      zh_si: "车站行李柜满了。请问柜台能协助人工临时寄存行李吗？",
-      ko: "로커가 꽉 찼습니다. 여기서 짐을 임시로 보관할 수 있나요?"
-    },
-    ticket: {
-      jp: "Suicaが使えない駅に行きたいのですが、\n紙の切符はどこで買えますか？",
-      en: "I need to travel to a station where Suica is not accepted. Where can I buy a paper ticket?",
-      zh_tr: "我需要前往無法使用IC卡（Suica）的車站，請問在哪裡購買紙本車票？",
-      zh_si: "我需要前往无法使用IC卡（Suica）的车站，请问在哪里购买纸本车票？",
-      ko: "Suica를 쓸 수 없는 역으로 가려 합니다. 종이 승차권은 어디서 구매하나요?"
-    }
-  };
-
-  const langSelect = document.getElementById('langSelect');
-  let currentLang = 'en';
-
-  function applyLanguage(lang) {
-    currentLang = lang;
-
-    const langTagMap = { en: 'en', jp: 'ja', zh_tr: 'zh-TW', zh_si: 'zh-CN', ko: 'ko' };
-    document.documentElement.lang = langTagMap[lang] || 'en';
-
-    document.querySelectorAll('[data-i18n]').forEach(el => {
-      const key = el.getAttribute('data-i18n');
-      if (I18N[key] && I18N[key][currentLang]) {
-        el.textContent = I18N[key][currentLang];
+  <script>
+    // -------------------------------------------------------------
+    // Multilingual Translation Dictionary
+    // -------------------------------------------------------------
+    const I18N = {
+      backToTransit: {
+        en: 'Transit Timetables',
+        jp: '時刻表・バス一覧へ',
+        zh_tr: '返回 公車時刻表',
+        zh_si: '返回 公交时刻表',
+        ko: '대중교통 시간표로'
+      },
+      pageTitle: {
+        en: 'Echigo-Yuzawa Station Services & Tourism Guide',
+        jp: '越後湯沢駅 サービス＆観光案内',
+        zh_tr: '越後湯澤站 設施服務與觀光指南',
+        zh_si: '越后汤泽站 设施服务与观光指南',
+        ko: '에치고유자와역 시설 및 관광 안내'
+      },
+      pageSub: {
+        en: 'Station facilities, dining maps, railway transfers, day-use onsen, and luggage services.',
+        jp: '駅構内施設・散策グルメマップ・鉄道乗り換え・日帰り温泉・手荷物預かり。',
+        zh_tr: '車站設施、美食地圖、鐵路轉乘、當日溫泉與行李寄存服務。',
+        zh_si: '车站设施、美食地图、铁路换乘、日归温泉与行李寄存服务。',
+        ko: '역내 시설, 맛집 지도, 철도 환승, 당일 온천, 수하물 보관 서비스.'
+      },
+      railwayTitle: {
+        en: 'Railway & Train Transfers',
+        jp: '鉄道・乗り換え案内',
+        zh_tr: '鐵路與轉乘指南',
+        zh_si: '铁路与换乘指南',
+        ko: '철도 및 환승 안내'
+      },
+      railwayDesc: {
+        en: 'JR Joetsu Shinkansen (2F), Joetsu Local Lines, and Hokuetsu Express Hokuhoku Line connections.',
+        jp: 'JR上越新幹線（2階）、上越線在来線、および北越急行ほくほく線への接続案内。',
+        zh_tr: 'JR上越新幹線（2樓）、上越線在來線及北越急行北北線轉乘。',
+        zh_si: 'JR上越新干线（2楼）、上越线普通列车及北越急行北北线换乘。',
+        ko: 'JR 조에츠 신칸센(2층), 조에츠선 일반 열차, 호쿠에츠 급행 호쿠호쿠선 안내.'
+      },
+      icNoticeTitle: {
+        en: '⚠️ Important: IC Cards (Suica / PASMO)',
+        jp: '⚠️ ICカード（Suica・PASMO等）のご利用について',
+        zh_tr: '⚠️ 重要注意事項：IC卡（Suica / PASMO）',
+        zh_si: '⚠️ 重要注意事项：交通IC卡（Suica / PASMO）',
+        ko: '⚠️ 주의: 교통 IC 카드 (Suica / PASMO) 이용'
+      },
+      icNoticeBody: {
+        en: 'Suica/PASMO cards are NOT supported on local conventional trains (Joetsu Line). Purchase paper tickets at the ticket machine before passing through conventional gates.',
+        jp: '上越線の普通列車（在来線）ではSuica等のICカードはご利用いただけません。乗車前に券売機で切符をご購入ください。',
+        zh_tr: '在來線（上越線普通列車）無法使用Suica等IC卡感應進站。乘車前請務必於售票機購買實體車票。',
+        zh_si: '普通列车（上越线）无法刷Suica等IC卡进站乘车。乘车前请务必在自动售票机购买纸质车票。',
+        ko: '일반 로컬 열차(조에츠선)에서는 Suica 등 교통 IC 카드를 사용할 수 없습니다. 탑승 전 자동발매기에서 종이 승차권을 구매해 주세요.'
+      },
+      railwayPdfSub: {
+        en: 'Tracks, Shinkansen gates & Hokuhoku Line Track 0',
+        jp: '番線案内・新幹線改札・ほくほく線0番ホーム',
+        zh_tr: '月台導覽・新幹線剪票口・北北線0號月台',
+        zh_si: '站台导览・新干线检票口・北北线0号站台',
+        ko: '승강장 안내, 신칸센 개찰구 및 호쿠호쿠선 0번 홈'
+      },
+      hokuhokuTrack: {
+        en: 'Track 0 (Hokuhoku Line)',
+        jp: '0番線ホーム（ほくほく線）',
+        zh_tr: '0號月台（北北線）',
+        zh_si: '0号站台（北北线）',
+        ko: '0번 승강장 (호쿠호쿠선)'
+      },
+      hokuhokuDesc: {
+        en: 'Ground level platform for Tokamachi & Naoetsu',
+        jp: '十日町・まつだい・直江津方面の直通列車',
+        zh_tr: '地面層月台，直達十日町、松代及直江津方向',
+        zh_si: '地面层站台，开往十日町、松代及直江津方向',
+        ko: '지상층 승강장, 토카마치 및 나오에츠 방면'
+      },
+      onsenTitle: {
+        en: 'Day-Use Onsen & Bathhouses',
+        jp: '日帰り温泉・外湯巡り',
+        zh_tr: '當日往返溫泉與公共浴場',
+        zh_si: '日归温泉与公共浴场',
+        ko: '당일 온천 및 대중목욕탕'
+      },
+      onsenDesc: {
+        en: 'Historic hot spring bathhouses, ryokan day-use baths, and station sake hot springs.',
+        jp: '歴史ある外湯（共同浴場）、旅館の日帰り入浴、および駅ナカの酒風呂。',
+        zh_tr: '歷史悠久的公共外湯、溫泉旅館日歸入浴與站內酒溫泉。',
+        zh_si: '历史悠久的公共外汤、温泉旅馆日归入浴与站内酒温泉。',
+        ko: '유서 깊은 공중온천, 료칸 당일 온천, 역내 사케 온천.'
+      },
+      tattooGuidance: {
+        en: '⚠️ <strong>Tattoo Guidance:</strong> Public bathhouses allow tattoos. However, most traditional ryokans prohibit tattoos in communal baths. Request a private rental bath (貸切風呂 Kashikiri-buro) if available.',
+        jp: '⚠️ <strong>タトゥーについて：</strong> 町営の外湯（共同浴場）はタトゥー入浴可能です。一般的な温泉旅館では大浴場へのタトゥー露出が禁止されている場合が多いため、貸切風呂をご利用ください。',
+        zh_tr: '⚠️ <strong>刺青規範：</strong> 鎮營外湯（公共浴場）允許刺青者入浴。然而大部分傳統溫泉旅館之大浴場嚴禁刺青，請預約「貸切風呂（私人包廂溫泉）」。',
+        zh_si: '⚠️ <strong>纹身须知：</strong> 镇营外汤（公共浴场）允许纹身入浴。但多数传统温泉旅馆的大浴场严禁纹身，建议预约“贷切风吕（私人包厢温泉）”。',
+        ko: '⚠️ <strong>문신 규정:</strong> 마을 공중온천은 문신이 있어도 이용 가능합니다. 단, 대부분의 전통 료칸 대욕장은 문신이 제한되므로 대여 온천(카시키리부로)을 이용하시기 바랍니다.'
+      },
+      onsenPdfTitle: {
+        en: 'Town Onsen Map (PDF) ↗',
+        jp: '湯沢外湯めぐりマップ (PDF) ↗',
+        zh_tr: '湯澤溫泉地圖 (PDF) ↗',
+        zh_si: '汤泽温泉地图 (PDF) ↗',
+        ko: '유자와 온천 지도 (PDF) ↗'
+      },
+      onsenPdfSub: {
+        en: 'Official illustrated map with all public baths & ryokan',
+        jp: '外湯・旅館の場所と入浴料金の一覧',
+        zh_tr: '全區公共外湯與溫泉旅館詳細地圖',
+        zh_si: '全区公共外汤与温泉旅馆详细地图',
+        ko: '공중 온천 및 료칸 위치・입욕료 안내'
+      },
+      onsenGmapsTitle: {
+        en: 'Open Yuzawa Onsen Map (Google Maps) ↗',
+        jp: 'Google マップで温泉を探す ↗',
+        zh_tr: '開啟溫泉地圖 (Google Maps) ↗',
+        zh_si: '打开温泉地图 (Google Maps) ↗',
+        ko: '온천 지도 열기 (Google Maps) ↗'
+      },
+      onsenGmapsSub: {
+        en: 'Locate public baths, ryokans & free town footbaths',
+        jp: '外湯・日帰り温泉・無料足湯の現在地検索',
+        zh_tr: '即時定位溫泉、旅館與免費足湯',
+        zh_si: '实时定位温泉、旅馆与免费足汤',
+        ko: '당일 온천, 료칸 및 무료 족욕탕 위치 찾기'
+      },
+      townMapTitle: {
+        en: 'Yuzawa Town & Dining Map',
+        jp: '湯沢よってけてマップ（散策・飲食店）',
+        zh_tr: '湯澤順道走走 美食與散策指南',
+        zh_si: '汤泽顺道走走 美食与散步指南',
+        ko: '유자와 요테케테 맛집 & 산책 지도'
+      },
+      townMapDesc: {
+        en: 'Interactive map for restaurants, izakayas, souvenir shops, and hot springs around Echigo-Yuzawa Station.',
+        jp: '越後湯沢駅周辺（西口温泉街・東口）の飲食店、居酒屋、外湯巡り、お土産店の観光案内。',
+        zh_tr: '越後湯澤車站周邊（西口溫泉街・東口）美食餐廳、居酒屋、溫泉與伴手禮店指南。',
+        zh_si: '越后汤泽车站周边（西口温泉街・东口）美食餐厅、居酒屋、温泉与伴手礼店指南。',
+        ko: '에치고유자와역 주변(서쪽 출구 온천가・동쪽 출구) 음식점, 이자카야, 온천, 기념품점 안내.'
+      },
+      digitalMapSub: {
+        en: 'Live shops, restaurants & GPS navigation',
+        jp: '店舗情報・営業時間・GPSルート案内',
+        zh_tr: '店家營業資訊、即時菜單與GPS導航',
+        zh_si: '店家营业资讯、实时菜单与GPS导航',
+        ko: '상점 정보, 영업시간 및 GPS 위치 안내'
+      },
+      yotteketeSub: {
+        en: 'Official Yottekete walking & food guide',
+        jp: '公式「よってけてマップ」PDF版',
+        zh_tr: '官方「順道走走地圖」PDF版',
+        zh_si: '官方“顺道走走地图”PDF版',
+        ko: '공식 요테케테 맛집 지도 PDF'
+      },
+      walkingTitle: {
+        en: 'Town Walking & Sightseeing',
+        jp: '駅周辺の街歩き・観光スポット',
+        zh_tr: '車站周邊散策與觀光景點',
+        zh_si: '车站周边散步与观光景点',
+        ko: '역 주변 산책 및 관광 명소'
+      },
+      walkingDesc: {
+        en: 'Stroll the historic West Exit onsen street, relax at free public footbaths, or explore local heritage sites within easy walking distance.',
+        jp: '西口温泉街の散策、無料の足湯、歴史ある文化施設やロープウェイへのアクセス。',
+        zh_tr: '漫步西口溫泉街、享受免費足湯，或在步行距離內探訪歷史文化景點。',
+        zh_si: '漫步西口温泉街、享受免费足汤，或在步行距离内探访历史文化景点。',
+        ko: '서쪽 출구 온천가 산책, 무료 족욕탕, 역사 명소 및 로프웨이.'
+      },
+      walkingGmapsTitle: {
+        en: 'Town Walking Map (Google Maps) ↗',
+        jp: '街歩きマップ (Google Maps) ↗',
+        zh_tr: '散策地圖 (Google Maps) ↗',
+        zh_si: '散步地图 (Google Maps) ↗',
+        ko: '산책 지도 (Google Maps) ↗'
+      },
+      walkingGmapsSub: {
+        en: 'Footbaths, Yukiguni-kan Museum & scenic ropeway base',
+        jp: '足湯・雪国館・ロープウェイ山麓駅へのルート',
+        zh_tr: '足湯、雪國館及湯澤高原纜車站路線',
+        zh_si: '足汤、雪国馆及汤泽高原缆车站路线',
+        ko: '족욕탕, 유키구니칸 박물관, 로프웨이 승강장'
+      },
+      ropewayTitle: {
+        en: 'Yuzawa Kogen Panorama Ropeway ↗',
+        jp: '湯沢高原パノラマロープウェイ ↗',
+        zh_tr: '湯澤高原全景纜車 ↗',
+        zh_si: '汤泽高原全景缆车 ↗',
+        ko: '유자와 고원 파노라마 로프웨이 ↗'
+      },
+      ropewaySub: {
+        en: '8-min walk from West Exit · 7-min ride to panoramic summit',
+        jp: '西口から徒歩8分・山頂パノラマステーションまで乗車7分',
+        zh_tr: '西口步行約8分鐘・搭乘纜車7分鐘直達山頂全景平台',
+        zh_si: '西口步行约8分钟・搭乘缆车7分钟直达山顶全景平台',
+        ko: '서쪽 출구에서 도보 8분 · 정상까지 로프웨이로 7분 소요'
+      },
+      strollSpotsTitle: {
+        en: '🌲 Recommended Stroll Spots (West Exit)',
+        jp: '🌲 おすすめ散策スポット（西口）',
+        zh_tr: '🌲 西口推薦散策景點',
+        zh_si: '🌲 西口推荐散步景点',
+        ko: '🌲 서쪽 출구 추천 산책 명소'
+      },
+      strollSpot1: {
+        en: '<strong>Free Footbaths (足湯):</strong> Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!',
+        jp: '<strong>無料の足湯：</strong> 西口駅前広場やロープウェイ山麓駅前に無料の足湯があります。タオルをご持参ください。',
+        zh_tr: '<strong>免費足湯：</strong> 西口車站廣場與纜車站外設有免費足湯。請自備擦腳毛巾！',
+        zh_si: '<strong>免费足汤：</strong> 西口车站广场与缆车站外设有免费足汤。请自备毛巾！',
+        ko: '<strong>무료 족욕탕 (足湯):</strong> 서쪽 출구 광장 및 로프웨이 역 앞에 무료 족욕탕이 있습니다. 수건을 지참하세요!'
+      },
+      strollSpot2: {
+        en: '<strong>Yukiguni-kan Museum (雪国館):</strong> 7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata\'s literature history (¥500).',
+        jp: '<strong>湯沢町歴史民俗資料館「雪国館」：</strong> 西口徒歩7分。川端康成『雪国』の世界や湯沢の伝統的な暮らしを展示（500円）。',
+        zh_tr: '<strong>雪國館（歷史民俗資料館）：</strong> 西口步行7分鐘。展示川端康成名著《雪國》世界與湯澤雪國傳統生活（500日圓）。',
+        zh_si: '<strong>雪国馆（历史民俗资料馆）：</strong> 西口步行7分钟。展示川端康成名著《雪国》世界与汤泽传统生活（500日元）。',
+        ko: '<strong>유키구니칸 박물관 (雪国館):</strong> 서쪽 출구 도보 7분. 가와바타 야스나리의 소설 《설국》 세계관과 전통 생활 전시 (¥500).'
+      },
+      strollSpot3: {
+        en: '<strong>Suwa Shrine (諏訪神社):</strong> 15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.',
+        jp: '<strong>諏訪神社：</strong> 西口徒歩15分。樹齢400年を超える大杉に囲まれた静寂な歴史の杜。',
+        zh_tr: '<strong>諏訪神社：</strong> 西口步行15分鐘。被400年神木巨大杉樹環繞的寧靜森林神社。',
+        zh_si: '<strong>诹访神社：</strong> 西口步行15分钟。被400年树龄古杉环绕的清幽森林神社。',
+        ko: '<strong>스와 신사 (諏訪神社):</strong> 서쪽 출구 도보 15분. 수령 400년이 넘는 거대한 삼나무 숲에 둘러싸인 고요한 신사.'
+      },
+      luggageTitle: {
+        en: 'Luggage Storage & International ATM',
+        jp: '手荷物預かり・コインロッカー・ATM',
+        zh_tr: '行李寄存・投幣置物櫃・外幣ATM',
+        zh_si: '行李寄存・投币储物柜・外币ATM',
+        ko: '수하물 보관・코인 락커・해외 카드 ATM'
+      },
+      luggageDesc: {
+        en: 'Coin lockers, manned baggage counter storage, delivery services, and overseas cash withdrawal.',
+        jp: '駅構内ロッカー・観光協会窓口での一時預かり・手荷物配送・海外対応ATM。',
+        zh_tr: '車站置物櫃、觀光中心人工行李寄放、當日飯店配送與國際提款服務。',
+        zh_si: '车站储物柜、观光中心人工行李寄存、当日旅馆配送与国际取款服务。',
+        ko: '역내 코인 락커, 관광안내소 수하물 보관, 료칸 당일 배송 및 해외 카드 ATM.'
+      },
+      counterStorageTitle: {
+        en: '🧳 Station Lockers Full? (Counter Storage)',
+        jp: '🧳 ロッカー満室時はこちら（窓口手荷物預かり）',
+        zh_tr: '🧳 置物櫃額滿時？（人工櫃檯行李寄放）',
+        zh_si: '🧳 储物柜客满时？（人工柜台行李寄存）',
+        ko: '🧳 코인 락커가 꽉 찼을 때 (안내소 짐 보관)'
+      },
+      showCounterBadge: {
+        en: 'West Exit Info',
+        jp: '西口観光案内所',
+        zh_tr: '西口旅遊中心',
+        zh_si: '西口旅游中心',
+        ko: '서쪽출구 안내소'
+      },
+      counterStorageBody: {
+        en: 'If coin lockers are full, store bags at the Snow Country Tourism Center (West Exit, 9:00–17:00). Rates: Bags ¥500/day | Skis/Snowboards ¥1,000/day | Mobile Battery Rental ¥500/day. Same-day ryokan delivery cutoff is 12:00 PM.',
+        jp: 'ロッカーが満室の場合、西口「雪国観光配送センター（9:00〜17:00）」にて一時預かりが可能です。手荷物: 500円/日 | スキー・スノボ: 1,000円/日 | モバイルバッテリー貸出: 500円/日。宿泊先への当日配送受付は12:00まで。',
+        zh_tr: '若投幣置物櫃客滿，可至西口「雪國觀光中心（9:00〜17:00）」寄放。一般行李: 500日圓/日 | 滑雪板: 1,000日圓/日 | 行動電源租借: 500日圓/日。當日飯店行李配送截單時間為 12:00。',
+        zh_si: '若投币储物柜客满，可至西口“雪国观光中心（9:00〜17:00）”寄存。一般行李: 500日元/日 | 滑雪板: 1,000日元/日 | 充电宝租赁: 500日元/日。当日旅馆行李配送截止时间为 12:00。',
+        ko: '코인 락커가 가득 찬 경우, 서쪽 출구 "설국 관광안내센터(9:00~17:00)"에서 수하물 보관이 가능합니다. 일반 짐: ¥500/일 | 스키·스노보드: ¥1,000/일 | 보조배터리 대여: ¥500/일. 당일 료칸 배송 마감은 12:00입니다.'
+      },
+      lockersTitle: {
+        en: 'Coin Lockers',
+        jp: 'コインロッカー',
+        zh_tr: '投幣式置物櫃',
+        zh_si: '投币式储物柜',
+        ko: '코인 락커'
+      },
+      lockersSub: {
+        en: 'Inside ticket gates & West/East station exits (¥400–¥1,000)',
+        jp: '改札内および東西各出口付近（400円〜1,000円）',
+        zh_tr: '剪票口內及東西出口兩側（400〜1,000日圓）',
+        zh_si: '检票口内及东西出口两侧（400〜1,000日元）',
+        ko: '개찰구 안쪽 및 동/서쪽 출구 부근 (¥400~¥1,000)'
+      },
+      atmTitle: {
+        en: 'International ATM (7-Bank / Post)',
+        jp: '海外カード対応ATM（セブン銀行・郵便局）',
+        zh_tr: '國際金融卡ATM（7-Bank / 郵局）',
+        zh_si: '国际银行卡ATM（7-Bank / 邮政）',
+        ko: '해외 카드 가능 ATM (세븐은행 / 우체국)'
+      },
+      atmSub: {
+        en: '7-Eleven (East Exit) & Post Office ATM (West Exit) accept foreign cards',
+        jp: '東口セブンイレブンおよび西口郵便局ATMで海外カード利用可',
+        zh_tr: '東口7-Eleven及西口郵局ATM支援海外信用卡/提款卡提現',
+        zh_si: '东口7-Eleven及西口邮局ATM支持境外信用卡/银联卡取现',
+        ko: '동쪽 출구 세븐일레븐 및 서쪽 출구 우체국 ATM에서 해외 카드 인출 가능'
       }
-    });
-
-    // Keep the return link synchronized with current language
-    const backBtn = document.querySelector('.nav-back-btn');
-    if (backBtn) {
-      backBtn.href = `https://umiwumi.github.io/transit-digitization/?lang=${lang}`;
-    }
-
-    const trainStatusUrls = {
-      en: "https://traininfo.jreast.co.jp/train_info/e/shinetsu.aspx",
-      jp: "https://traininfo.jreast.co.jp/train_info/shinetsu.aspx",
-      zh_tr: "https://traininfo.jreast.co.jp/train_info/tc/shinetsu.aspx",
-      zh_si: "https://traininfo.jreast.co.jp/train_info/sc/shinetsu.aspx",
-      ko: "https://traininfo.jreast.co.jp/train_info/k/shinetsu.aspx"
     };
-    const trainStatusLink = document.getElementById('link-train-status');
-    if (trainStatusLink && trainStatusUrls[lang]) {
-      trainStatusLink.href = trainStatusUrls[lang];
-    }
 
-    updateOperatingStatus();
-    
-    try {
+    // PlatinaMaps culture param mapping
+    const PLATINAMAPS_CULTURE = {
+      en: 'en',
+      jp: 'ja',
+      zh_tr: 'zh-TW',
+      zh_si: 'zh-TW', // Map Simplified Chinese visitors to Traditional Chinese
+      ko: 'ko'
+    };
+
+    // PDF Asset Mapping
+    const RAILWAY_PDF_MAP = {
+      en: './assets/railway_guide_en.pdf',
+      jp: './assets/railway_guide_jp.pdf',
+      zh_tr: './assets/railway_guide_zh_tr.pdf',
+      zh_si: './assets/railway_guide_zh_tr.pdf',
+      ko: './assets/railway_guide_ko.pdf'
+    };
+
+    const YOTTEKETE_PDF_MAP = {
+      en: './assets/yottekete_map_en.pdf',
+      jp: './assets/yottekete_map_jp.pdf',
+      zh_tr: './assets/yottekete_map_zh_tr.pdf',
+      zh_si: './assets/yottekete_map_zh_tr.pdf',
+      ko: './assets/yottekete_map_ko.pdf'
+    };
+
+    const PDF_LABELS = {
+      railway: {
+        en: 'Railway Guide (PDF) ↗',
+        jp: '鉄道案内を見る (PDF) ↗',
+        zh_tr: '查看鐵路指南 (PDF) ↗',
+        zh_si: '查看铁路指南 (PDF) ↗',
+        ko: '철도 가이드 보기 (PDF) ↗'
+      },
+      yottekete: {
+        en: 'Town & Dining Map (PDF) ↗',
+        jp: 'マップを開く (PDF) ↗',
+        zh_tr: '開啟散策地圖 (PDF) ↗',
+        zh_si: '打开散步地图 (PDF) ↗',
+        ko: '지도 열기 (PDF) ↗'
+      },
+      digital: {
+        en: 'Interactive Map (PlatinaMaps) ↗',
+        jp: 'デジタルマップを開く ↗',
+        zh_tr: '開啟數位互動地圖 ↗',
+        zh_si: '打开数字互动地图 ↗',
+        ko: '디지털 지도 열기 ↗'
+      }
+    };
+
+    // -------------------------------------------------------------
+    // Core Engine
+    // -------------------------------------------------------------
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialLang = urlParams.get('lang') || localStorage.getItem('yuzawa_lang') || 'en';
+    const validLang = ['en', 'jp', 'zh_tr', 'zh_si', 'ko'].includes(initialLang) ? initialLang : 'en';
+
+    function setLanguage(lang) {
       localStorage.setItem('yuzawa_lang', lang);
-    } catch (e) {}
-  }
 
-  langSelect.addEventListener('change', (e) => {
-    applyLanguage(e.target.value);
-  });
+      // 1. Text Node Replacements
+      document.querySelectorAll('[data-i18n]').forEach(el => {
+        const key = el.getAttribute('data-i18n');
+        if (I18N[key]) {
+          const text = I18N[key][lang] || I18N[key]['en'];
+          el.innerHTML = text;
+        }
+      });
 
-  const urlLang = new URLSearchParams(window.location.search).get('lang');
-  const savedLang = localStorage.getItem('yuzawa_lang');
-  const initialLang = [urlLang, savedLang].find(l => ['en', 'jp', 'zh_tr', 'zh_si', 'ko'].includes(l)) || 'en';
-
-  langSelect.value = initialLang;
-  applyLanguage(initialLang);
-
-  // --- Robust JST Calculation (Reliable across all browser locales) ---
-  function getJSTTime() {
-    const formatter = new Intl.DateTimeFormat('en-US', {
-      timeZone: 'Asia/Tokyo',
-      weekday: 'short',
-      day: 'numeric',
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: false
-    });
-    const parts = Object.fromEntries(
-      formatter.formatToParts(new Date()).map(p => [p.type, p.value])
-    );
-    const dayMap = { Sun: 0, Mon: 1, Tue: 2, Wed: 3, Thu: 4, Fri: 5, Sat: 6 };
-    return {
-      day: dayMap[parts.weekday] ?? 0,
-      dateNum: parseInt(parts.day, 10),
-      currentMins: parseInt(parts.hour, 10) * 60 + parseInt(parts.minute, 10)
-    };
-  }
-
-  // --- Dynamic Operating Hours Logic ---
-  function updateOperatingStatus() {
-    const { day, dateNum, currentMins } = getJSTTime();
-    
-    // Egami Onsen is closed on Wednesdays AND the 3rd Tuesday of the month
-    const isThirdTuesday = (day === 2 && Math.ceil(dateNum / 7) === 3);
-
-    // Facility Database: Open/Close times in minutes from midnight
-    const facilities = {
-      'coworking': { open: 9*60, close: 17*60, last: 16*60 + 30, closedDays: [] },
-      'ponshu': { open: 10*60 + 30, close: 18*60 + 30, last: 18*60, closedDays: [] },
-      'egami': { open: 15*60, close: 22*60, last: 21*60 + 30, closedDays: [3], specialClose: isThirdTuesday },
-      'komako': { open: 10*60, close: 21*60, last: 20*60 + 30, closedDays: [4] },
-      'yama': { open: 10*60, close: 21*60, last: 20*60 + 30, closedDays: [2] }
-    };
-
-    for (const [id, times] of Object.entries(facilities)) {
-      const el = document.getElementById(`status-${id}`);
-      if (!el) continue;
-
-      let status = 'open';
-      
-      if (times.closedDays.includes(day) || times.specialClose || currentMins < times.open || currentMins >= times.close) {
-        status = 'closed';
-      } else if (currentMins >= times.last) {
-        status = 'closing';
+      // 2. Sync Back Button URL
+      const backBtn = document.getElementById('backTransitBtn');
+      if (backBtn) {
+        backBtn.href = `../?lang=${lang}`;
       }
 
-      el.className = `status-badge status-${status}`;
-      el.textContent = I18N[`badge_${status}`][currentLang];
+      // 3. Dynamic PlatinaMaps Link
+      const digitalBtn = document.getElementById('digitalMapBtn');
+      const digitalLabel = document.getElementById('digitalMapLabel');
+      const culture = PLATINAMAPS_CULTURE[lang] || 'en';
+      if (digitalBtn) {
+        digitalBtn.href = `https://platinumaps.jp/d/echigo-yuzawa?culture=${culture}`;
+      }
+      if (digitalLabel && PDF_LABELS.digital) {
+        digitalLabel.textContent = PDF_LABELS.digital[lang] || PDF_LABELS.digital.en;
+      }
+
+      // 4. Dynamic PDF Fallback Links
+      const railwayBtn = document.getElementById('railwayPdfBtn');
+      const railwayLabel = document.getElementById('railwayBtnLabel');
+      if (railwayBtn) {
+        railwayBtn.href = RAILWAY_PDF_MAP[lang] || RAILWAY_PDF_MAP.en || RAILWAY_PDF_MAP.jp;
+      }
+      if (railwayLabel && PDF_LABELS.railway) {
+        railwayLabel.textContent = PDF_LABELS.railway[lang] || PDF_LABELS.railway.en;
+      }
+
+      const yotteketeBtn = document.getElementById('yotteketePdfBtn');
+      const yotteketeLabel = document.getElementById('yotteketeBtnLabel');
+      if (yotteketeBtn) {
+        yotteketeBtn.href = YOTTEKETE_PDF_MAP[lang] || YOTTEKETE_PDF_MAP.en || YOTTEKETE_PDF_MAP.jp;
+      }
+      if (yotteketeLabel && PDF_LABELS.yottekete) {
+        yotteketeLabel.textContent = PDF_LABELS.yottekete[lang] || PDF_LABELS.yottekete.en;
+      }
+
+      // 5. Sync Dropdown Value
+      const langSelect = document.getElementById('langSelect');
+      if (langSelect) {
+        langSelect.value = lang;
+      }
     }
-  }
 
-  // Run immediately on load, and update every 60 seconds
-  updateOperatingStatus();
-  setInterval(updateOperatingStatus, 60000);
+    // Initialize
+    document.addEventListener('DOMContentLoaded', () => {
+      setLanguage(validLang);
 
-  // --- Offline Flashcard Modal Controller ---
-  function openFlashcard(key) {
-    const card = FLASHCARDS[key];
-    if (!card) return;
-    document.getElementById('fc-jp-text').textContent = card.jp;
-    document.getElementById('fc-meaning').textContent = card[currentLang] || card.en;
-    document.getElementById('flashcard-modal').classList.add('active');
-  }
-
-  function closeFlashcard(e) {
-    document.getElementById('flashcard-modal').classList.remove('active');
-  }
-
-  // Register Offline Service Worker (PWA caching)
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').catch((err) => {
-        console.log('SW registration note:', err);
+      document.getElementById('langSelect').addEventListener('change', (e) => {
+        setLanguage(e.target.value);
       });
     });
-  }
-</script>
+  </script>
 </body>
 </html>
