@@ -14,7 +14,7 @@
  */
 
 const CACHE_PREFIX = 'yuzawa-services-';
-const CACHE_VERSION = 'v2';
+const CACHE_VERSION = 'v2.1';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 
 // Each file is saved on its own. A file that does not exist yet (for example a PDF that
