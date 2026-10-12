@@ -873,7 +873,7 @@
 
     <div class="action-grid">
       <!-- Interactive map -->
-      <a class="action-btn" href="https://platinumaps.jp/d/echigo-yuzawa" target="_blank" rel="noopener noreferrer">
+      <a id="btn-platina-link" class="action-btn" href="https://platinumaps.jp/d/echigo-yuzawa" target="_blank" rel="noopener noreferrer">
         <div>
           <div class="btn-main" data-i18n="btn_platina">Town & Dining Map (PlatinaMaps) ↗</div>
           <div class="btn-desc" data-i18n="desc_platina">Live shops, izakayas, footbaths & GPS navigation</div>
@@ -1711,19 +1711,34 @@
     const langTagMap = { en: 'en', jp: 'ja', zh_tr: 'zh-TW', zh_si: 'zh-CN', ko: 'ko' };
     document.documentElement.lang = langTagMap[lang] || 'en';
 
+    // 1. Render translations with HTML support (fixes raw <strong> and <br> tags)
     document.querySelectorAll('[data-i18n]').forEach(el => {
       const key = el.getAttribute('data-i18n');
       if (I18N[key] && I18N[key][currentLang]) {
-        el.textContent = I18N[key][currentLang];
+        el.innerHTML = I18N[key][currentLang];
       }
     });
 
-    // Keep the return link synchronized with current language
+    // 2. Synchronize navigation return link
     const backBtn = document.querySelector('.nav-back-btn');
     if (backBtn) {
       backBtn.href = `https://umiwumi.github.io/transit-digitization/?lang=${lang}`;
     }
 
+    // 3. Synchronize PlatinaMaps culture parameter
+    const platinaCultures = {
+      en: 'en',
+      jp: 'ja',
+      zh_tr: 'zh-TW',
+      zh_si: 'zh-TW',
+      ko: 'ko'
+    };
+    const platinaBtn = document.getElementById('btn-platina-link');
+    if (platinaBtn) {
+      platinaBtn.href = `https://platinumaps.jp/d/echigo-yuzawa?culture=${platinaCultures[lang] || 'en'}`;
+    }
+
+    // 4. Synchronize JR East delay status links
     const trainStatusUrls = {
       en: "https://traininfo.jreast.co.jp/train_info/e/shinetsu.aspx",
       jp: "https://traininfo.jreast.co.jp/train_info/shinetsu.aspx",
