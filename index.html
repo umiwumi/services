@@ -847,44 +847,83 @@
       </a>
     </div>
   </div>
-<!-- Yuzawa Town & Dining Map Card -->
-<div class="card" style="margin: 20px 0; background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 12px; padding: 20px;">
+  
+<!-- Town Walking & Dining Guide (Combined Section) -->
+<section class="card service-card">
   <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-    <span style="font-size: 1.25rem;">🗺️</span>
+    <span style="font-size: 1.25rem;">🚶</span>
     <h3 style="color: #38bdf8; margin: 0; font-size: 1.15rem; font-weight: 700;">
-      Yuzawa Town & Dining Map
+      Town Walking & Dining Guide
     </h3>
   </div>
 
   <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.45; margin: 0 0 16px 0;">
-    Interactive map for restaurants, izakayas, souvenir shops, and hot springs around Echigo-Yuzawa Station.
+    Stroll the historic West Exit onsen street, explore local restaurants & izakayas, or visit heritage sites and footbaths.
   </p>
 
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px;">
-    <!-- PlatinaMaps Tile -->
+  <!-- 2x2 Action Tiles Grid -->
+  <div class="tiles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-bottom: 14px;">
+    
+    <!-- 1. Interactive PlatinaMaps -->
     <a href="https://platinumaps.jp/d/echigo-yuzawa" 
        target="_blank" 
        rel="noopener" 
+       class="tile-link"
        style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
       <div>
         <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
-          Interactive Map (PlatinaMaps) ↗
+          Town & Dining Map (PlatinaMaps) ↗
         </div>
         <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
-          Live shops, restaurants & GPS navigation
+          Live shops, izakayas, footbaths & GPS navigation
         </div>
       </div>
       <span style="font-size: 1.35rem; margin-left: 10px;">🌐</span>
     </a>
 
-    <!-- Offline PDF Tile -->
-    <a href="./assets/yottekete_map_en.pdf" 
+    <!-- 2. Panorama Ropeway -->
+    <a href="https://www.yuzawakogen.com/" 
        target="_blank" 
        rel="noopener" 
+       class="tile-link"
        style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
       <div>
         <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
-          Town & Dining Map (PDF) ↗
+          Yuzawa Kogen Panorama Ropeway ↗
+        </div>
+        <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
+          8-min walk from West Exit · 7-min ride to summit
+        </div>
+      </div>
+      <span style="font-size: 1.35rem; margin-left: 10px;">🚠</span>
+    </a>
+
+    <!-- 3. Town Walking Map (Google Maps) -->
+    <a href="https://maps.google.com/?q=Echigo-Yuzawa+Sightseeing" 
+       target="_blank" 
+       rel="noopener" 
+       class="tile-link"
+       style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
+          Town Walking Map (Google Maps) ↗
+        </div>
+        <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
+          Footbaths, Yukiguni-kan Museum & scenic route
+        </div>
+      </div>
+      <span style="font-size: 1.35rem; margin-left: 10px;">🗺️</span>
+    </a>
+
+    <!-- 4. Yottekete PDF Map -->
+    <a href="./assets/yottekete_map_en.pdf" 
+       target="_blank" 
+       rel="noopener" 
+       class="tile-link"
+       style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
+          Yottekete Town Map (PDF) ↗
         </div>
         <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
           Official Yottekete walking & food guide
@@ -892,47 +931,27 @@
       </div>
       <span style="font-size: 1.35rem; margin-left: 10px;">📄</span>
     </a>
-  </div>
-</div>
-  
-  <!-- 6. Town Walking & Sightseeing -->
-  <div class="section-card" id="walking">
-    <div class="section-title">
-      <span>🚶</span>
-      <span data-i18n="sec_walk_title">Town Walking & Sightseeing</span>
-    </div>
-    <p class="section-desc" data-i18n="walk_intro">
-      Stroll the historic West Exit onsen street, relax at free public footbaths, or explore local heritage sites within easy walking distance.
-    </p>
 
-    <div class="action-grid">
-      <a class="action-btn" href="https://www.google.com/maps/search/sightseeing+echigo+yuzawa+station" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_walk_map">Town Walking Map (Google Maps) ↗</div>
-          <div class="btn-desc" data-i18n="desc_walk_map">Footbaths, Yukiguni-kan Museum & scenic ropeway base</div>
-        </div>
-        <span class="btn-icon">🗺️</span>
-      </a>
-      <a class="action-btn" href="https://www.yuzawakogen.com/" target="_blank" rel="noopener noreferrer">
-        <div>
-          <div class="btn-main" data-i18n="btn_kogen">Yuzawa Kogen Panorama Ropeway ↗</div>
-          <div class="btn-desc" data-i18n="desc_kogen">8-min walk from West Exit • 7-min ride to panoramic summit</div>
-        </div>
-        <span class="btn-icon">🚠</span>
-      </a>
-    </div>
-
-    <div class="alert-box alert-emerald" style="margin-top: 12px; margin-bottom: 0;">
-      <div class="alert-title" data-i18n="lbl_walk_highlights">
-        🌲 Recommended Stroll Spots (West Exit)
-      </div>
-      <ul class="feature-list">
-        <li><strong data-i18n="spot_ashiyu_title">Free Footbaths (足湯):</strong> <span data-i18n="spot_ashiyu_desc">Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!</span></li>
-        <li><strong data-i18n="spot_museum_title">Yukiguni-kan Museum (雪国館):</strong> <span data-i18n="spot_museum_desc">7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata's literature history (¥500).</span></li>
-        <li><strong data-i18n="spot_shrine_title">Suwa Shrine (諏訪神社):</strong> <span data-i18n="spot_shrine_desc">15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.</span></li>
-      </ul>
-    </div>
   </div>
+
+  <!-- Recommended Stroll Spots Callout Banner -->
+  <div class="notice-banner notice-green" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.28); border-radius: 8px; padding: 12px 14px;">
+    <h4 style="color: #34d399; font-size: 0.92rem; margin: 0 0 8px 0; display: flex; align-items: center; gap: 6px;">
+      🌲 Recommended Stroll Spots (West Exit)
+    </h4>
+    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; color: #e2e8f0;">
+      <li>
+        <strong style="color: #34d399;">Free Footbaths (足湯):</strong> Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!
+      </li>
+      <li>
+        <strong style="color: #34d399;">Yukiguni-kan Museum (雪国館):</strong> 7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata's literature history (¥500).
+      </li>
+      <li>
+        <strong style="color: #34d399;">Suwa Shrine (諏訪神社):</strong> 15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.
+      </li>
+    </ul>
+  </div>
+</section>
 
   <!-- 7. Luggage Storage & Practical Essentials -->
   <div class="section-card" id="essentials">
