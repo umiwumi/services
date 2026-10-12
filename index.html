@@ -477,6 +477,19 @@
         align-self: center;
       }
     }
+
+    /* Recommended Stroll Spots: green box (uses .alert-box .alert-emerald) inside the standard Town Walking card */
+    .stroll-block { margin: 14px 0 0 0; }
+    .stroll-block .alert-title { margin-bottom: 8px; }
+    .stroll-block .feature-list {
+      list-style: none;
+      padding-left: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      color: #e2e8f0;
+    }
+    .stroll-block .feature-list strong { color: #34d399; }
   </style>
 </head>
 <body>
@@ -552,7 +565,7 @@
       <div>• <span data-i18n="cw_hours">Hours: 9:00 – 17:00 (Open Daily)</span></div>
       <div>• <span data-i18n="cw_open_rate">Open Desk: ¥330 / 30 mins</span></div>
       <div>• <span data-i18n="cw_private_rate">Private Office: ¥550 / 30 mins</span></div>
-      <div>• <sxpan data-i18n="cw_coffee">Coffee Service: +¥220</span></div>
+      <div>• <span data-i18n="cw_coffee">Coffee Service: +¥220</span></div>
     </div>
 
     <div class="action-grid">
@@ -786,7 +799,7 @@
               <span class="tattoo-badge tattoo-ok" data-i18n="tattoo_ok">Tattoo OK</span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">15:00–22:00 (Last 21:30)</span>
             </td>
-            <td data-i18n="o_egami_loc">East Exit (3m)</td>
+            <td data-i18n="o_egami_loc">East Exit (3 min walk)</td>
             <td class="price-col">¥600</td>
             <td style="text-align: right;" data-i18n="o_egami_closed">Wed / 3rd Tue</td>
           </tr>
@@ -797,7 +810,7 @@
               <span class="tattoo-badge tattoo-ok" data-i18n="tattoo_ok">Tattoo OK</span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Last 20:30)</span>
             </td>
-            <td data-i18n="o_komako_loc">West Exit (20m)</td>
+            <td data-i18n="o_komako_loc">West Exit (20 min walk)</td>
             <td class="price-col">¥850</td>
             <td style="text-align: right;" data-i18n="o_thu_closed">Thursday</td>
           </tr>
@@ -808,7 +821,7 @@
               <span class="tattoo-badge tattoo-ok" data-i18n="tattoo_ok">Tattoo OK</span><br>
               <span style="font-size: 0.7rem; color: var(--text-muted);">10:00–21:00 (Historic Source)</span>
             </td>
-            <td data-i18n="o_yama_loc">West Exit (30m)</td>
+            <td data-i18n="o_yama_loc">West Exit (20 min walk)</td>
             <td class="price-col">¥850</td>
             <td style="text-align: right;" data-i18n="o_tue_closed">Tuesday</td>
           </tr>
@@ -848,110 +861,58 @@
     </div>
   </div>
   
-<!-- Town Walking & Dining Guide (Combined Section) -->
-<section class="card service-card">
-  <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px;">
-    <span style="font-size: 1.25rem;">🚶</span>
-    <h3 style="color: #38bdf8; margin: 0; font-size: 1.15rem; font-weight: 700;">
-      Town Walking & Dining Guide
-    </h3>
+  <!-- 6. Town Walking & Dining Guide (standard card; only the Recommended Stroll Spots box is green) -->
+  <div class="section-card" id="walking">
+    <div class="section-title">
+      <span>🚶</span>
+      <span data-i18n="sec_walkdine_title">Town Walking & Dining Guide</span>
+    </div>
+    <p class="section-desc" data-i18n="walkdine_intro">
+      Stroll the historic West Exit onsen street, explore local restaurants & izakayas, or visit heritage sites and footbaths.
+    </p>
+
+    <div class="action-grid">
+      <!-- Interactive map -->
+      <a class="action-btn" href="https://platinumaps.jp/d/echigo-yuzawa" target="_blank" rel="noopener noreferrer">
+        <div>
+          <div class="btn-main" data-i18n="btn_platina">Town & Dining Map (PlatinaMaps) ↗</div>
+          <div class="btn-desc" data-i18n="desc_platina">Live shops, izakayas, footbaths & GPS navigation</div>
+        </div>
+        <span class="btn-icon">🌐</span>
+      </a>
+      <a class="action-btn" href="https://www.yuzawakogen.com/" target="_blank" rel="noopener noreferrer">
+        <div>
+          <div class="btn-main" data-i18n="btn_kogen">Yuzawa Kogen Panorama Ropeway ↗</div>
+          <div class="btn-desc" data-i18n="desc_kogen">8-min walk from West Exit • 7-min ride to panoramic summit</div>
+        </div>
+        <span class="btn-icon">🚠</span>
+      </a>
+      <a class="action-btn" href="https://maps.google.com/?q=Echigo-Yuzawa+Sightseeing" target="_blank" rel="noopener noreferrer">
+        <div>
+          <div class="btn-main" data-i18n="btn_walk_map">Town Walking Map (Google Maps) ↗</div>
+          <div class="btn-desc" data-i18n="desc_walk_map">Footbaths, Yukiguni-kan Museum & scenic ropeway base</div>
+        </div>
+        <span class="btn-icon">🗺️</span>
+      </a>
+      <a class="action-btn" href="./assets/yottekete_map_en.pdf" target="_blank" rel="noopener noreferrer">
+        <div>
+          <div class="btn-main" data-i18n="btn_yottekete">Yottekete Town Map (PDF) ↗</div>
+          <div class="btn-desc" data-i18n="desc_yottekete">Official Yottekete walking & food guide</div>
+        </div>
+        <span class="btn-icon">📄</span>
+      </a>
+    </div>
+
+    <!-- Recommended stroll spots: the green box -->
+    <div class="alert-box alert-emerald stroll-block">
+      <div class="alert-title" data-i18n="lbl_walk_highlights">🌲 Recommended Stroll Spots (West Exit)</div>
+      <ul class="feature-list">
+        <li><strong data-i18n="spot_ashiyu_title">Free Footbaths (足湯):</strong> <span data-i18n="spot_ashiyu_desc">Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!</span></li>
+        <li><strong data-i18n="spot_museum_title">Yukiguni-kan Museum (雪国館):</strong> <span data-i18n="spot_museum_desc">7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata's literature history (¥500).</span></li>
+        <li><strong data-i18n="spot_shrine_title">Suwa Shrine (諏訪神社):</strong> <span data-i18n="spot_shrine_desc">15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.</span></li>
+      </ul>
+    </div>
   </div>
-
-  <p style="color: #94a3b8; font-size: 0.88rem; line-height: 1.45; margin: 0 0 16px 0;">
-    Stroll the historic West Exit onsen street, explore local restaurants & izakayas, or visit heritage sites and footbaths.
-  </p>
-
-  <!-- 2x2 Action Tiles Grid -->
-  <div class="tiles-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 10px; margin-bottom: 14px;">
-    
-    <!-- 1. Interactive PlatinaMaps -->
-    <a href="https://platinumaps.jp/d/echigo-yuzawa" 
-       target="_blank" 
-       rel="noopener" 
-       class="tile-link"
-       style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
-          Town & Dining Map (PlatinaMaps) ↗
-        </div>
-        <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
-          Live shops, izakayas, footbaths & GPS navigation
-        </div>
-      </div>
-      <span style="font-size: 1.35rem; margin-left: 10px;">🌐</span>
-    </a>
-
-    <!-- 2. Panorama Ropeway -->
-    <a href="https://www.yuzawakogen.com/" 
-       target="_blank" 
-       rel="noopener" 
-       class="tile-link"
-       style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
-          Yuzawa Kogen Panorama Ropeway ↗
-        </div>
-        <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
-          8-min walk from West Exit · 7-min ride to summit
-        </div>
-      </div>
-      <span style="font-size: 1.35rem; margin-left: 10px;">🚠</span>
-    </a>
-
-    <!-- 3. Town Walking Map (Google Maps) -->
-    <a href="https://maps.google.com/?q=Echigo-Yuzawa+Sightseeing" 
-       target="_blank" 
-       rel="noopener" 
-       class="tile-link"
-       style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
-          Town Walking Map (Google Maps) ↗
-        </div>
-        <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
-          Footbaths, Yukiguni-kan Museum & scenic route
-        </div>
-      </div>
-      <span style="font-size: 1.35rem; margin-left: 10px;">🗺️</span>
-    </a>
-
-    <!-- 4. Yottekete PDF Map -->
-    <a href="./assets/yottekete_map_en.pdf" 
-       target="_blank" 
-       rel="noopener" 
-       class="tile-link"
-       style="background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 8px; padding: 12px 14px; text-decoration: none; display: flex; justify-content: space-between; align-items: center;">
-      <div>
-        <div style="color: #f8fafc; font-weight: 600; font-size: 0.92rem;">
-          Yottekete Town Map (PDF) ↗
-        </div>
-        <div style="color: #94a3b8; font-size: 0.78rem; margin-top: 3px;">
-          Official Yottekete walking & food guide
-        </div>
-      </div>
-      <span style="font-size: 1.35rem; margin-left: 10px;">📄</span>
-    </a>
-
-  </div>
-
-  <!-- Recommended Stroll Spots Callout Banner -->
-  <div class="notice-banner notice-green" style="background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.28); border-radius: 8px; padding: 12px 14px;">
-    <h4 style="color: #34d399; font-size: 0.92rem; margin: 0 0 8px 0; display: flex; align-items: center; gap: 6px;">
-      🌲 Recommended Stroll Spots (West Exit)
-    </h4>
-    <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 8px; font-size: 0.84rem; color: #e2e8f0;">
-      <li>
-        <strong style="color: #34d399;">Free Footbaths (足湯):</strong> Soak your feet for free at the station West Exit plaza or outside the Ropeway station. Bring a towel!
-      </li>
-      <li>
-        <strong style="color: #34d399;">Yukiguni-kan Museum (雪国館):</strong> 7-min walk. Explore traditional lifestyle exhibits and Yasunari Kawabata's literature history (¥500).
-      </li>
-      <li>
-        <strong style="color: #34d399;">Suwa Shrine (諏訪神社):</strong> 15-min walk. Peaceful forest sanctuary home to massive sacred cedars over 400 years old.
-      </li>
-    </ul>
-  </div>
-</section>
 
   <!-- 7. Luggage Storage & Practical Essentials -->
   <div class="section-card" id="essentials">
@@ -989,7 +950,7 @@
 
 <!-- Offline Flashcard Modal -->
 <div id="flashcard-modal" class="modal-backdrop" onclick="closeFlashcard(event)">
-  <div class="modal-card" onclick="event.stopPropagation()">
+  <div class="modal-card" role="dialog" aria-modal="true" onclick="event.stopPropagation()">
     <div class="modal-instruction" data-i18n="fc_modal_instruction">Show this screen to the driver / staff</div>
     <div id="fc-jp-text" class="modal-jp-text">...</div>
     <div id="fc-meaning" class="modal-meaning">...</div>
@@ -1197,7 +1158,7 @@
     },
     th_train_time: { en: "Time", jp: "発車時刻", zh_tr: "發車時間", zh_si: "发车时间", ko: "시간" },
     th_train_line: { en: "Line & Bound For", jp: "路線・行先", zh_tr: "路線與目的地", zh_si: "路线与目的地", ko: "노선 및 행선지" },
-    th_train_ski: { en: "Ski Stops", jp: "停車駅", zh_tr: "停靠站", zh_si: "停靠站", ko: "정차" },
+    th_train_ski: { en: "Stops", jp: "停車駅", zh_tr: "停靠站", zh_si: "停靠站", ko: "정차" },
     btn_train_pdf: {
       en: "📄 Joetsu & Hokuhoku Railway Guide (PDF)",
       jp: "📄 上越線・ほくほく線 ご利用案内（PDF）",
@@ -1371,13 +1332,13 @@
     o_ponshu: { en: "Ponshukan Sake Bath", jp: "酒風呂 湯の沢（ぽんしゅ館）", zh_tr: "清酒溫泉 湯之澤（越後酒博物館）", zh_si: "清酒温泉 汤之泽（越后酒博物馆）", ko: "사케 온천 유노사와 (폰슈칸)" },
     o_ponshu_loc: { en: "Station 2F", jp: "駅構内 2F", zh_tr: "車站 2F", zh_si: "车站 2F", ko: "역 구내 2F" },
     o_egami: { en: "Egami Onsen", jp: "江神温泉浴場", zh_tr: "江神溫泉浴場", zh_si: "江神温泉浴场", ko: "에가미 온천" },
-    o_egami_loc: { en: "East Exit (3m)", jp: "東口（徒歩3分）", zh_tr: "東口（步行3分）", zh_si: "东口（步行3分）", ko: "동쪽 출구 (도보 3분)" },
+    o_egami_loc: { en: "East Exit (3 min walk)", jp: "東口（徒歩3分）", zh_tr: "東口（步行3分）", zh_si: "东口（步行3分）", ko: "동쪽 출구 (도보 3분)" },
     o_egami_closed: { en: "Wed / 3rd Tue", jp: "水曜・第3火曜", zh_tr: "週三・第3週二", zh_si: "周三・第3周二", ko: "수요일 / 셋째 화요일" },
     o_komako: { en: "Komako-no-Yu", jp: "駒子の湯", zh_tr: "駒子之湯", zh_si: "驹子之汤", ko: "코마코노유" },
-    o_komako_loc: { en: "West Exit (20m)", jp: "西口（徒歩20分）", zh_tr: "西口（步行20分）", zh_si: "西口（步行20分）", ko: "서쪽 출구 (도보 20분)" },
+    o_komako_loc: { en: "West Exit (20 min walk)", jp: "西口（徒歩20分）", zh_tr: "西口（步行20分）", zh_si: "西口（步行20分）", ko: "서쪽 출구 (도보 20분)" },
     o_thu_closed: { en: "Thursday", jp: "木曜日", zh_tr: "每週四", zh_si: "每周四", ko: "목요일" },
     o_yama: { en: "Yama-no-Yu", jp: "山の湯", zh_tr: "山之湯", zh_si: "山之汤", ko: "야마노유" },
-    o_yama_loc: { en: "West Exit (30m)", jp: "西口（徒歩30分）", zh_tr: "西口（步行30分）", zh_si: "西口（步行30分）", ko: "서쪽 출구 (도보 30분)" },
+    o_yama_loc: { en: "West Exit (20 min walk)", jp: "西口（徒歩20分）", zh_tr: "西口（步行20分）", zh_si: "西口（步行20分）", ko: "서쪽 출구 (도보 20분)" },
     o_tue_closed: { en: "Tuesday", jp: "火曜日", zh_tr: "每週二", zh_si: "每周二", ko: "화요일" },
     o_open_daily: { en: "Open Daily", jp: "無休", zh_tr: "全年無休", zh_si: "全年无休", ko: "연중무휴" },
     lbl_ryokan_warn: {
@@ -1521,6 +1482,50 @@
       zh_tr: "西口步行15分。被樹齡逾400年的神木大杉環抱，靜謐清幽的能量景點。",
       zh_si: "西口步行15分。被树龄逾400年的神木大杉环抱，静谧清幽的能量景点。",
       ko: "서쪽 출구 도보 15분. 400년 이상 된 거대한 삼나무 숲에 둘러싸인 고즈넉한 신사."
+    },
+
+    // 6b. Walking & Dining (combined card)
+    sec_walkdine_title: {
+      en: "Town Walking & Dining Guide",
+      jp: "温泉街散策・グルメ案内",
+      zh_tr: "溫泉街散策與美食導覽",
+      zh_si: "温泉街漫步与美食导览",
+      ko: "온천가 산책 및 맛집 안내"
+    },
+    walkdine_intro: {
+      en: "Stroll the historic West Exit onsen street, explore local restaurants & izakayas, or visit heritage sites and footbaths.",
+      jp: "西口温泉街の歴史ある街並み散策、地元の飲食店・居酒屋めぐり、名所や足湯をお楽しみください。",
+      zh_tr: "漫步於西口溫泉街的歷史街道，探訪在地餐廳與居酒屋，或參觀名勝古蹟與免費足湯。",
+      zh_si: "漫步于西口温泉街的历史街道，探访在地餐厅与居酒屋，或参观名胜古迹与免费足汤。",
+      ko: "서쪽 출구 온천가의 고즈넉한 거리를 거닐고, 현지 식당과 이자카야를 둘러보고, 명소와 족욕탕도 즐겨보세요."
+    },
+    btn_platina: {
+      en: "Town & Dining Map (PlatinaMaps) ↗",
+      jp: "街歩き・グルメマップ（PlatinaMaps）↗",
+      zh_tr: "城鎮與美食地圖 (PlatinaMaps) ↗",
+      zh_si: "城镇与美食地图 (PlatinaMaps) ↗",
+      ko: "타운 & 맛집 지도 (PlatinaMaps) ↗"
+    },
+    desc_platina: {
+      en: "Live shops, izakayas, footbaths & GPS navigation",
+      jp: "営業中の店舗・居酒屋・足湯をGPSで案内",
+      zh_tr: "即時店家、居酒屋、足湯位置與GPS導航",
+      zh_si: "实时店铺、居酒屋、足汤位置与GPS导航",
+      ko: "영업 중인 상점, 이자카야, 족욕탕 및 GPS 길안내"
+    },
+    btn_yottekete: {
+      en: "Yottekete Town Map (PDF) ↗",
+      jp: "Yottekete 町歩きマップ（PDF）↗",
+      zh_tr: "Yottekete 城鎮地圖 (PDF) ↗",
+      zh_si: "Yottekete 城镇地图 (PDF) ↗",
+      ko: "Yottekete 타운 맵 (PDF) ↗"
+    },
+    desc_yottekete: {
+      en: "Official Yottekete walking & food guide",
+      jp: "公式の散策・グルメガイド",
+      zh_tr: "官方散步與美食指南",
+      zh_si: "官方散步与美食指南",
+      ko: "공식 산책 및 맛집 가이드"
     },
 
     // 7. Essentials & Luggage Overflow Fallback
@@ -1743,7 +1748,8 @@
   });
 
   const urlLang = new URLSearchParams(window.location.search).get('lang');
-  const savedLang = localStorage.getItem('yuzawa_lang');
+  let savedLang = null;
+  try { savedLang = localStorage.getItem('yuzawa_lang'); } catch (e) {}  // blocked in some private modes
   const initialLang = [urlLang, savedLang].find(l => ['en', 'jp', 'zh_tr', 'zh_si', 'ko'].includes(l)) || 'en';
 
   langSelect.value = initialLang;
@@ -1757,7 +1763,7 @@
       day: 'numeric',
       hour: 'numeric',
       minute: 'numeric',
-      hour12: false
+      hourCycle: 'h23'   // avoids "24" at midnight
     });
     const parts = Object.fromEntries(
       formatter.formatToParts(new Date()).map(p => [p.type, p.value])
@@ -1819,6 +1825,11 @@
   function closeFlashcard(e) {
     document.getElementById('flashcard-modal').classList.remove('active');
   }
+
+  // Escape key closes the flashcard (keyboard / accessibility)
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeFlashcard();
+  });
 
   // Register Offline Service Worker (PWA caching)
   if ('serviceWorker' in navigator) {
