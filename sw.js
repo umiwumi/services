@@ -14,7 +14,7 @@
  */
 
 const CACHE_PREFIX = 'yuzawa-services-';
-const CACHE_VERSION = 'v2.1';
+const CACHE_VERSION = 'v2.2';
 const CACHE_NAME = CACHE_PREFIX + CACHE_VERSION;
 
 // Each file is saved on its own. A file that does not exist yet (for example a PDF that
@@ -23,8 +23,12 @@ const PRECACHE = [
   './',
   './index.html',
   './manifest.json',
-  './docs/train_info.pdf',
-  './docs/onsen_map.pdf'
+  './docs/train_info_en.pdf',
+  './docs/onsen_map.pdf',
+  './docs/train_info_jp.pdf',
+  './docs/train_info_ko.pdf',
+  './docs/train_info_zh_tr.pdf',
+  './docs/train_info_zh_si.pdf'
 ];
 
 // Files staff edit: try the network first (short wait), then the saved copy.
