@@ -689,7 +689,7 @@
     </div>
 
     <div class="action-grid">
-      <a class="action-btn" href="docs/train_info.pdf" target="_blank" rel="noopener noreferrer">
+      <a class="action-btn" id="link-train-pdf" href="docs/train_info_en.pdf" target="_blank" rel="noopener noreferrer">
         <div>
           <div class="btn-main" data-i18n="btn_train_pdf">📄 Joetsu & Hokuhoku Railway Guide (PDF)</div>
           <div class="btn-desc" data-i18n="desc_train_pdf">Ski stops, unmanned station IC rules & standard fares</div>
@@ -1751,6 +1751,19 @@
       trainStatusLink.href = trainStatusUrls[lang];
     }
 
+    // 5. Synchronize Railway Guide PDF download links
+    const trainPdfUrls = {
+      en: "docs/train_info_en.pdf",
+      jp: "docs/train_info_jp.pdf",
+      zh_tr: "docs/train_info_zh_tr.pdf",
+      zh_si: "docs/train_info_zh_si.pdf",
+      ko: "docs/train_info_ko.pdf"
+    };
+    const trainPdfLink = document.getElementById('link-train-pdf');
+    if (trainPdfLink && trainPdfUrls[lang]) {
+      trainPdfLink.href = trainPdfUrls[lang];
+    }
+  
     updateOperatingStatus();
     
     try {
